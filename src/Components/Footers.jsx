@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export function Footers() {
+function Footers() {
   return (
     <footer>
     <h1>Quick Links</h1>
