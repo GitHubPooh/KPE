@@ -1,0 +1,48 @@
+const testimonial = [
+  {
+    id: 1,
+    title: "Delightful!",
+    rating: 5,
+    text: "Pure milk made a world of difference for me! Since I began enjoying it, my stomach feels better, and I rarely get sick. Plus, its taste is simply delightful",
+    author: "Sachin Mahawar",
+    location: "Bhopal",
+    image: "/images/media/img_54.jpg",
+  },
+  {
+    id: 2,
+    title: "Fresh and Healthy!",
+    rating: 5,
+    text: "I'm hooked on natural milk for its freshness and delicious flavor. It's like sipping straight from the cow! I feel invigorated and healthy every time I indulge.",
+    author: "Mahesh Loya",
+    location: "Bhopal",
+    image: "/images/media/img_55.jpg",
+  },
+  {
+    id: 3,
+    title: "No lactose intolerance",
+    rating: 5,
+    text: "Untreated milk is my saving grace. Unlike regular milk, it doesn't upset my stomach. Now, I can relish dairy without any discomfort!",
+    author: "Ganesh Kathare",
+    location: "Bhopal",
+    image: "/images/media/img_54.jpg",
+  },
+  {
+    id: 4,
+    title: "Our fuel for day",
+    rating: 5,
+    text: "Unprocessed milk is my workout companion! It fuels me with energy and strength, and its taste is unmatched. I'm thrilled that it's both nutritious and delicious!",
+    author: "Chandan Jhunjhunwala",
+    location: "Bhopal",
+    image: "/images/media/img_55.jpg",
+  },
+  {
+    id: 5,
+    title: "Nurture my kids,family",
+    rating: 5,
+    text: "As a parent, I prioritize my family's health. Fresh milk is our go-to choice—it's nutritious and loved by my kids. It's the key to their growth and vitality!",
+    author: "Ranjan Ghate",
+    location: "Claifornia",
+    image: "/images/media/img_55.jpg",
+  },
+];
+export default testimonial;
