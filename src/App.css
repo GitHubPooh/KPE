@@ -1,0 +1,30 @@
+.navbar-brand {
+    text-decoration: none; /* Ensures no underline */
+  }
+  
+  .company-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0;
+  }
+  
+  .tagline {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0;
+  }
+    
+  .top-bar {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .phone-number {
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .social-icons a {
+    font-size: 1.2rem;
+  }
+  
