@@ -27,10 +27,7 @@ function App() {
         <Route path="/">
           <Route index element={<PersonalPortfolio />} />
 
-          <Route
-            path="home/personal-portfolio"
-            element={<PersonalPortfolio />}
-          />
+          <Route path="home/personal-portfolio"element={<PersonalPortfolio />}/>
 
           <Route path="login" element={<LogIn />} />
           <Route path="signup" element={<SignUp />} />

@@ -59,7 +59,7 @@ const PersonalPortfolio = () => {
               
               </div>
               <h2 className="title fw-500 tx-dark">
-               fsdfgsdg
+               {/* fsdfgsdg
                sg
                ds
                gds
@@ -67,9 +67,8 @@ const PersonalPortfolio = () => {
                fadegdf
                gdsfd
                xdf
-               ds
-               <fieldset><fieldset><dfn>ds
-                f</dfn></fieldset></fieldset>
+               ds */}
+               <fieldset><fieldset><dfn>        </dfn></fieldset></fieldset>
               </h2>
             </div>
           </div>
