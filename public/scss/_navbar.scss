@@ -65,8 +65,15 @@
   color: #000;
   padding: 13px 0;
   margin: 0 26px;
-  position: relative;
+  margin-left: 0px;
+  width: 100%;
+  position: left;
   transition: all 0.3s ease-in-out;
+}
+.navbar-nav{
+  width: 100%;
+  margin-left: 0%;
+  display: flex;
 }
 .theme-main-menu.theme-menu-nine .navbar .navbar-nav .nav-link {
   @media (min-width: 1400px) and (max-width: 1700px) {
@@ -163,11 +170,11 @@
 }
 
 .navbar .dropdown-menu .dropdown-item {
-  font-size: 16px;
+  font-size: 14px;
   padding: 0 15px;
   letter-spacing: 0px;
   text-transform: capitalize;
-  line-height: 44px;
+  line-height: 40px;
   color: #000;
   background: transparent;
   display: inline-block;
@@ -320,7 +327,7 @@
     padding: 0;
   }
   .navbar-collapse .logo {
-    margin-bottom: 8vh;
+    margin-bottom: vh;
   }
   .navbar .dropdown-toggle::after {
     right: 0;

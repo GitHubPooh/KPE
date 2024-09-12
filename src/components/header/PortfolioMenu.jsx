@@ -17,7 +17,7 @@ const PortfolioMenu = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg order-lg-2">
+    <nav className="navbar navbar-expand-lg ">
       <button
         className="navbar-toggler d-block d-lg-none"
         type="button"
@@ -26,6 +26,10 @@ const PortfolioMenu = () => {
         aria-controls="one-page-nav"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        align navItems= "right"
+        position= "absolute"
+        right= "0"
+        top= "0"
       >
         <span />
       </button>
@@ -36,21 +40,23 @@ const PortfolioMenu = () => {
           style={{
             backgroundColor: "orange", 
             width: "100%", 
-            display: "flex", 
-            justifyContent: "flex-start", 
-            paddingLeft: "0", 
+            display: "d-flex", 
+            justifyContent: "flex-end",
+            alignItems: "right end", 
+            paddingLeft: "10px", 
             margin: "0",
+            padding : "0"
           }}
         >
           <li className="d-block d-lg-none">
             <div className="logo">
               <Link to="/" className="d-block">
-                <img src="https://kpenggs.com/assets/images/logoimg.jfif" alt="logo" />
+                <img src="https://kpenggs.com/assets/images/logoimg.jfif" alt="logo" style={{ marginLeft: "auto" }} />
               </Link>
             </div>
           </li>
           {navItems.map((navItem, i) => (
-            <li key={i} className="nav-item" style={{ marginRight: "10px" }}>
+            <li key={i} className="nav-item" style={{ marginRight: "20px" }} >
               <a
                 className={`nav-link ${activeLink === i ? "active" : ""}`}
                 href={navItem.href}
