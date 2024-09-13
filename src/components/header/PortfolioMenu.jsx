@@ -34,17 +34,18 @@ const PortfolioMenu = () => {
         <span />
       </button>
       <div className="collapse navbar-collapse" id="one-page-nav">
-        {/* Set the whole row's background color to orange and align items to the left */}
         <ul
           className="navbar-nav"
           style={{
-            backgroundColor: "orange", 
-            width: "100%", 
+            backgroundColor: "#f88f4a", 
+            width: "160%", 
             display: "d-flex", 
             justifyContent: "flex-end",
             alignItems: "right end", 
             paddingLeft: "10px", 
-            margin: "0",
+            marginLeft: "-35px",
+            marginRight:"-30px",
+            marginTop: "0px",
             padding : "0"
           }}
         >

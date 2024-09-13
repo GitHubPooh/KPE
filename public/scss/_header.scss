@@ -1,11 +1,19 @@
 .top_heading1 {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 26px ;
+    font-style:normal;
+    font-weight: 700;
+    padding-left: 10px;
+    padding-top: 0px;
+    color: #0303039a;
+    margin-top: 0px;
   }
   
-  .top_heading_design1 {
+  .top_heading_design {
     font-size: 16px;
-    font-style: italic;
+    font-style:normal;
+    font-weight: bold;
+    padding-left: 10px;
+    color: #0303039a;
   }
   
   .navbar-nav .staticmenu {
@@ -15,7 +23,8 @@
   
   .btn-sm-square {
     border-radius: 0;
-    padding: 5px;
+    padding: 12px;
+
   }
   
   .bg-light {
@@ -23,6 +32,7 @@
   }
   
   .navbar-toggler {
-    background-color: #343a40;
+    background-color: #383e44;
+    padding-top: 0%;
   }
   

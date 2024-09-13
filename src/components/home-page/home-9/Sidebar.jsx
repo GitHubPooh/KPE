@@ -7,7 +7,7 @@ const Sidebar = () => {
     { icon: "fab fa-twitter", url: "#" },
     { icon: "fab fa-linkedin-in", url: "#" },
   ];
-
+  
   return (
     <div
       className="offcanvas offcanvas-end sidebar-nav d-flex flex-column"
