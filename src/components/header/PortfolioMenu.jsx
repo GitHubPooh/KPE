@@ -2,11 +2,11 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const navItems = [
-  { title: "HOME", href: "#s1" },
-  { title: "ABOUT US", href: "#s2" },
-  { title: "PROJECTS", href: "#s3" },
-  { title: "SERVICES", href: "#s4" },
-  { title: "CONTACT US", href: "#s5" },
+  { title: "About me", href: "#s1" },
+  { title: "Services", href: "#s2" },
+  { title: "Portfolio", href: "#s3" },
+  { title: "Skill", href: "#s4" },
+  { title: "Contact", href: "#s5" },
 ];
 
 const PortfolioMenu = () => {
@@ -17,7 +17,8 @@ const PortfolioMenu = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg ">
+    <nav className="navbar navbar-expand-lg order-lg-2"  style={{
+            backgroundColor: "orange"}}>
       <button
         className="navbar-toggler d-block d-lg-none"
         type="button"
@@ -26,43 +27,25 @@ const PortfolioMenu = () => {
         aria-controls="one-page-nav"
         aria-expanded="false"
         aria-label="Toggle navigation"
-        align navItems= "right"
-        position= "absolute"
-        right= "0"
-        top= "0"
       >
         <span />
       </button>
-      <div className="collapse navbar-collapse" id="one-page-nav">
-        <ul
-          className="navbar-nav"
-          style={{
-            backgroundColor: "#f88f4a", 
-            width: "160%", 
-            display: "d-flex", 
-            justifyContent: "flex-end",
-            alignItems: "right end", 
-            paddingLeft: "10px", 
-            marginLeft: "-35px",
-            marginRight:"-30px",
-            marginTop: "0px",
-            padding : "0"
-          }}
-        >
+      <div className="collapse navbar-collapse" style={{
+            backgroundColor: "orange"}} id="one-page-nav">
+        <ul className="navbar-nav">
           <li className="d-block d-lg-none">
             <div className="logo">
               <Link to="/" className="d-block">
-                <img src="https://kpenggs.com/assets/images/logoimg.jfif" alt="logo" style={{ marginLeft: "auto" }} />
+                <img src="/images/logo/logo_04.png" alt="logo" />
               </Link>
             </div>
           </li>
           {navItems.map((navItem, i) => (
-            <li key={i} className="nav-item" style={{ marginRight: "20px" }} >
+            <li key={i} className="nav-item">
               <a
                 className={`nav-link ${activeLink === i ? "active" : ""}`}
                 href={navItem.href}
                 onClick={() => handleLinkClick(i)}
-                style={{ color: "white" }} // Text color for better contrast
               >
                 {navItem.title}
               </a>
