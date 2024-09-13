@@ -31,8 +31,8 @@ export default function ScrollToTop() {
     <>
       {isVisible && (
         <>
-          <div className="scroll-top" onClick={scrollToTop}>
-            <i className="bi bi-arrow-up-short"></i>
+          <div className="scroll-top btn btn-lg btn-lg-square" style={{backgroundColor: "#f88f4a", display: "inline-table"}} onClick={scrollToTop}>
+            <i className="bi bi-arrow-up align-center" style={{color: "white"}}></i>
           </div>
         </>
       )}

@@ -13,3 +13,19 @@
 @import "./scss/header";
 @import "./scss/custom-next";
 @import "./scss/responsive";
+
+.navbar-custom {
+    background-color: #f88f4a;
+    height: 50px; /* Adjust height */
+  }
+  
+  .navbar-custom .nav-link {
+    font-size: 14px; /* Adjust font size */
+    color: white; /* Set font color to white */
+    padding: 0.5rem; /* Adjust padding to reduce navbar height further */
+  }
+  
+  .navbar-custom .nav-link:hover {
+    color: #ddd; /* Change color on hover */
+  }
+  

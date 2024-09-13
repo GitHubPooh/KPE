@@ -1,3 +1,19 @@
+.navbar-custom {
+  background-color: #f88f4a;
+  height: 50px; /* Adjust height */
+}
+
+.navbar-custom .nav-link {
+  font-size: 14px; /* Adjust font size */
+  color: white; /* Set font color to white */
+  padding: 0.5rem; /* Adjust padding to reduce navbar height further */
+}
+
+.navbar-custom .nav-link:hover {
+  color: #ddd; /* Change color on hover */
+}
+
+
 .navbar-toggler {
   width: 44px;
   height: 38px;
@@ -62,7 +78,7 @@
   font-weight: 500;
   font-size: 18px;
   line-height: initial;
-  color: #000;
+  color: #f7f7f6;
   padding: 13px 0;
   margin: 0 26px;
   margin-left: 0px;
@@ -411,4 +427,20 @@
     padding-bottom: 0;
   }
 }
+
+.navbar .navbar-custom {
+  background-color: #f88f4a !important;
+  height: 50px; /* Adjust height */
+}
+
+.navbar .navbar-custom .nav-link {
+  font-size: 14px; /* Adjust font size */
+  color: white !important; /* Set font color to white */
+  padding: 0.5rem; /* Adjust padding to reduce navbar height further */
+}
+
+.navbar .navbar-custom .nav-link:hover {
+  color: #ddd !important; /* Change color on hover */
+}
+
 /*(max-width: 991px)*/

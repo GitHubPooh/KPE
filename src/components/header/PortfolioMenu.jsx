@@ -17,7 +17,7 @@ const PortfolioMenu = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg order-lg-2"  style={{
+    <nav className="navbar align-right navbar-expand-lg order-lg-2"  style={{
             backgroundColor: "orange"}}>
       <button
         className="navbar-toggler d-block d-lg-none"
@@ -58,3 +58,5 @@ const PortfolioMenu = () => {
 };
 
 export default PortfolioMenu;
+
+
