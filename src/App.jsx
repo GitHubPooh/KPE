@@ -7,12 +7,10 @@ import "bootstrap/dist/js/bootstrap";
 
 import { Route, Routes } from "react-router-dom";
 
-import LogIn from "./pages/login";
-import SignUp from "./pages/signup";
 import NotFound from "./pages/404";
 
 import ScrollTopBehaviour from "./components/common/ScrollTopBehavier";
-import Landing from "./pages/home/landing";
+import Landing from "./pages/landing";
 function App() {
   useEffect(() => {
     Aos.init({
@@ -25,10 +23,7 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<Landing />} />
-          <Route path="login" element={<LogIn />} />
-          <Route path="signup" element={<SignUp />} />
           <Route path="404" element={<NotFound />} />
-
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

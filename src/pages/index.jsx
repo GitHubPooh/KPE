@@ -1,10 +1,10 @@
 import Wrapper from "../layout/wrapper";
-import Insurance from "./home/insurance";
+import Landing from "./landing";
 
 const MainRoot = () => {
   return (
     <Wrapper>
-      <Insurance />
+      <Landing />
     </Wrapper>
   );
 };
