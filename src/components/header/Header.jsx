@@ -71,13 +71,19 @@ const NavbarComponent = ({ isFixed }) => {
         {/* Aligning menu items to the right */}
         <ul className="navbar-nav ms-auto justify-content-end" style={{ backgroundColor: '#f88f4a !important' }}>
           <li className="nav-item">
-            <a className="nav-link" href="#" style={{ color: 'white' }}>Home</a>
+            <a className="nav-link" href="#" style={{ color: 'white' }}>HOME</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" style={{ color: 'white' }}>Features</a>
+            <a className="nav-link" href="#" style={{ color: 'white' }}>ABOUT US</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" style={{ color: 'white' }}>Pricing</a>
+            <a className="nav-link" href="#" style={{ color: 'white' }}>PROJECT</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#" style={{ color: 'white' }}>SERVICES</a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#" style={{ color: 'white' }}>CONTACT US</a>
           </li>
         </ul>
       </div>

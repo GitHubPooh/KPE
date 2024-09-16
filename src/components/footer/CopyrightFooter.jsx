@@ -59,7 +59,7 @@ const CopyrightFooter = () => {
           
           <div className="col-lg-6 order-lg-1 mt-15">
             <p className="copyright text-center m0">
-              Copyright © {new Date().getFullYear()}{" "}
+               © {new Date().getFullYear()}{" "}
               <a
                 style={{ color: "inherit" }}
                 href="#"

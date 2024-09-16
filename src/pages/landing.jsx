@@ -3,6 +3,7 @@ import Seo from "../components/common/Seo";
 import Header from "../components/header/Header";
 import { Link } from "react-router-dom";
 import CopyrightFooter from "@/components/footer/CopyrightFooter";
+import ImageSlider from "./ImageSlider";
 
 
 const Landing = () => {
@@ -10,19 +11,23 @@ const Landing = () => {
     <>
       <Seo pageTitle="KPE Engineering" />
 
-
       {/* <!--  =============================================
         Theme Header4 Menu
         ============================================== 	--> */}
       <Header />
-
+      <ImageSlider />
+      {/* Other content */}
+      <div className="content">
+        <h1 className="mt-5"></h1>
+        <p></p>
+        {/* More content */}
+      </div>
       {/* <!-- 
 			=============================================
 				Theme Hero Banner
 			============================================== 
 			--> */}
       {/* <Hero /> */}
-
       {/* 
 			=============================================
 				Feature Section Twelve
@@ -30,62 +35,45 @@ const Landing = () => {
 			*/}
       <div
         className="fancy-feature-twelve position-relative mt-300 xl-mt-200 md-mt-120"
-        id="s2"
-      >
+        id="s2">
         <div className="container">
           <div className="row">
             <div
               className="col-xl-2 col-lg-3 text-center"
               data-aos="fade-right"
             >
-              <div className="main-count">
-              
+              <div className="main-count">  
               </div>
               <div className="content" style={{ height: '2000px', paddingTop: '80px' }}>
         <h1 className="mt-5">Page Content</h1>
         <p>Scroll down to see the effect in action.</p>
         {/* Other components and content here */}
       </div>
-    
             </div>
           </div>
           {/* End .row */}
-
-
           {/* /.block-wrapper */}
         </div>
         {/* /.container */}
       </div>
-
       {/* 
 			=============================================
 				Portfolio 
 			============================================== 
 			*/}
-     
-
       {/* 
 			=============================================
 				Feature 
 			============================================== 
 			*/}
-      
-
-     
-
-    
       {/*
 			=====================================================
 				Fancy Short Banner
 			=====================================================
 			*/}
-     
-
-
       {/*
 			=====================================================
 				Footer
-			
        <footer>
    <div  data-wow-delay="0.1s" class="container-fluid bg-dark text-light footer wow fadeIn">
       <div  class="container py-2">
@@ -157,13 +145,8 @@ const Landing = () => {
    </div>
 </footer>    =====================================================
 			*/}
-
-
-
        {/* <div className="footer-style-nine theme-basic-footer zn2 position-relative">
           <div className="bg-wrapper"> */}
-          
-
             <div className="footer-style-four text-light theme-basic-footer position-relative">
         <div >
         <div className="container-fluid bg-dark text-light footer wow fadeIn">
@@ -178,8 +161,6 @@ const Landing = () => {
           </div>
         </div>
         {/* /.bg-wrapper */}
-
- 
       </> 
   );
 };

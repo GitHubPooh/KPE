@@ -5,14 +5,19 @@ import Social from "../common/Social";
 const Footer = () => {
   const footerLinks = [
     {
-      title: "Links",
+      title: "Quick Links",
       links: [
-        { label: "Home", href: "/" },
-        { label: "Pricing", href: "/pages-menu/pricing" },
-       
+        { label: "About Us", href: "/" },
+        { label: "Contact Us", href: "/pages-menu/pricing" },
+      ],
+      title1: "Services",
+      links1: [
+        { label: "Services", href: "/" },
+        { label: "Projects", href: "/pages-menu/pricing" },
       ],
       classes: "col-lg-3 col-sm-4 ms-auto mb-30",
     },
+  
     // {
     //   title: "Help & Support",
     //   links: [
@@ -34,7 +39,7 @@ const Footer = () => {
    <i  class="fa fa-map-marker-alt me-2"></i>Office No, 3 &amp; 4 Nanded City
 </p>
 <p>Sinhgad Road, opposite Celebram IT Park,</p>
-<p  >Nanded City, Pune, Maharashtra 411068</p>
+<p>Nanded City, Pune, Maharashtra 411068</p>
 <p ><i  class="fa fa-phone-alt me-2"></i>+91 8856032610</p>
 <p ><i  class="fa fa-envelope me-2"></i>pemb@kpenggs.com</p>
 <p ><i  class="fa fa-envelope me-2"></i>info@kpenggs.com</p>
@@ -51,9 +56,9 @@ const Footer = () => {
             ))}
           </ul>
 
-          <h5 className="footer-title tx-dark fw-500 text-light">{link.title}</h5>
+          <h5 className="footer-title tx-dark fw-500 text-light">{link.title1}</h5>
           <ul className="footer-nav-link style-none text-light">
-            {link.links.map((linkItem, index) => (
+            {link.links1.map((linkItem, index) => (
               <li key={index}>
                 <Link to={linkItem.href}>{linkItem.label}</Link>
               </li>
@@ -67,7 +72,7 @@ const Footer = () => {
       <div className="col-xl-3 text-light">
         <div className="logo fs-20 mt-20 mb-30" style={{textAlignLast: "center"}}>
           <Link to="/">
-            <img src="https://kpenggs.com/assets/images/logoimg.jfif" alt="" width={95} />
+            <img src="https://kpenggs.com/assets/images/logoimg.jfif" alt="" width={115} />
           </Link>
         </div>
         

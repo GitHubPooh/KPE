@@ -4,13 +4,14 @@ import "aos/dist/aos.css";
 import "./styles/index.scss";
 import ScrollToTop from "./components/common/ScrollTop";
 import "bootstrap/dist/js/bootstrap";
-
 import { Route, Routes } from "react-router-dom";
-
 import NotFound from "./pages/404";
-
 import ScrollTopBehaviour from "./components/common/ScrollTopBehavier";
 import Landing from "./pages/landing";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+
+
 function App() {
   useEffect(() => {
     Aos.init({
@@ -28,7 +29,6 @@ function App() {
         </Route>
       </Routes>
       <ScrollTopBehaviour />
-
       <ScrollToTop />
     </div>
   );
