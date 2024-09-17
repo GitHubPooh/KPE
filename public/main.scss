@@ -34,3 +34,15 @@
     width: 80%; /* 10% margin on each side */
     margin: 20px auto; /* Centered with top and bottom margin */
 }
+
+.custom-carousel {
+  width: 100%; /* Adjust width as needed */
+  height: 400px; /* Fixed height for the carousel */
+  overflow: hidden; /* Hide overflow to maintain fixed size */
+}
+
+.custom-carousel .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire container */
+}
