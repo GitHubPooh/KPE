@@ -2,15 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const NoticeBar = () => {
 return (
-<div  className="container-fluid p-0 bg-light d-none d-lg-block">
+<div  className="container-fluid p-0 bg-light d-lg-block">
    <div  className="row gx-0 d-lg-flex">
       <div  className="col-lg-6 col-sm-12 col-md-4 px-0 text-start">
          <div  className="h-100 d-inline-flex align-items-center py-0 me-0">
-            <a  href="/index.html" className="navbar-brand d-flex sticky-top px-4 px-lg-2"> <img src="https://kpenggs.com/assets/images/logoimg.jfif" alt="Logo" style={{ height: '80px', width: '115px' }} /> </a> 
+            <a  href="/index.html" className="navbar-brand d-flex sticky-top px-4 px-lg-2"> <img src="https://kpenggs.com/assets/images/logoimg.jfif" 
+                     alt="Logo" style={{ height: '80px', width: '115px' }} /> </a> 
             <div>
                <div >
-                  <h5  className="top_heading1 mt-5">KP Engineering Services</h5>
-                  <h6  className="top_heading_design1">Knowledgeable &amp; Professional </h6>
+                  <h5  className="top_heading1 mt-4" style={{ margin :"10px" }}>KP Engineering Services</h5>
+                  <h6  className="top_heading_design1" style={{ margin :"10px" }}>Knowledgeable &amp; Professional </h6>
                </div>
             </div>
          </div>
@@ -53,7 +54,7 @@ const NavbarComponent = ({ isFixed }) => {
     >
       {/* Mobile menu toggle button */}
       <button 
-        className="navbar-toggler ms-auto justify-content-end" 
+        className="navbar-toggler ms-auto" 
         type="button" 
         onClick={toggleMenu} 
         aria-controls="navbarSupportedContent" 
@@ -67,7 +68,8 @@ const NavbarComponent = ({ isFixed }) => {
         className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`} 
         id="navbarSupportedContent"
         style={{ backgroundColor: '#f88f4a' }} // Orange background for mobile menu
-      >
+        >
+        
         {/* Aligning menu items to the right */}
         <ul className="navbar-nav ms-auto justify-content-end" style={{ backgroundColor: '#f88f4a !important' }}>
           <li className="nav-item">

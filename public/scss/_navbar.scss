@@ -19,10 +19,10 @@
   height: 38px;
   padding: 0;
   box-shadow: none;
-  position: relative;
   z-index: 99;
   border: none;
   background: var(--prime-one);
+  
 }
 
 .navbar-toggler:focus {
@@ -76,15 +76,15 @@
 }
 .navbar .navbar-nav .nav-link {
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: initial;
   color: #f7f7f6;
-  padding: 13px 0;
-  margin: 0 26px;
+  padding: 10px 0;
+  margin: 0 18px;
   margin-left: 0px;
   width: 100%;
   position: left;
-  transition: all 0.3s ease-in-out;
+
 }
 .navbar-nav{
   width: 100%;
@@ -352,15 +352,14 @@
   }
   .navbar-collapse {
     position: fixed;
-    top: 0;
+    top: 100px;
     background-color: #ffffff;
     left: 0;
-    height: 100vh;
+    height: 35vh;
     max-height: 100vh;
     overflow-y: auto;
     clear: both;
-    width: 320px;
-    max-width: calc(100vw - 60px);
+    width: 100%;
     z-index: 9999;
     transform: translateX(-100%);
     display: block !important;
