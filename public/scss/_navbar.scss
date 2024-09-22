@@ -18,6 +18,7 @@
   height: 38px;
   padding: 0;
   box-shadow: none;
+  position: relative;
   z-index: 99;
   border: none;
   background: var(--prime-one);
@@ -350,7 +351,6 @@
     font-size: 15px;
   }
   .navbar-collapse {
-    position: fixed;
     top: 100px;
     background-color: #ffffff;
     left: 0;

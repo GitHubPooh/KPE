@@ -40,7 +40,6 @@
   width: 100%; /* Adjust width as needed */
   height: 650px; /* Fixed height for the carousel */
   max-width: 100%;
-  margin: 0 auto;
   overflow: hidden; /* Hide overflow to maintain fixed size */
 }
 
@@ -65,7 +64,6 @@
 }
 
 .image-text-container {
-  position: relative; /* Reset position for mobile view */
   display:column; /* Stack image and text vertically */
   width: 100%; /* Ensure image-text container takes full width */
   justify-content: center; /* Center content horizontally */  
@@ -73,8 +71,8 @@
 
 .image-text-container img {
   width: 90%; /* Make image take full width of container */
-  border: 5px solid white; /* Remove border for better appearance on mobile */
-  border-radius: 0; /* Remove border-radius for mobile view */
+
+
 }
 .text-overlay {
   position: absolute; /* Reset position */

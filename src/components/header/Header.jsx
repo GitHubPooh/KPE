@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const NoticeBar = () => {
 return (
-<div  className="container-fluid p-0 bg-light d-lg-block">
+<div  className="container-fluid p-0 bg-light d-none d-lg-block">
    <div  className="row gx-0 d-lg-flex">
       <div  className="col-lg-6 col-sm-12 col-md-4 px-0 text-start">
          <div  className="h-100 d-inline-flex align-items-center py-0 me-0">
@@ -55,7 +55,7 @@ const NavbarComponent = ({ isFixed }) => {
     >
       {/* Mobile menu toggle button */}
       <button 
-        className="navbar-toggler ms-auto" 
+        className="navbar-toggler ms-auto  justify-content-end" 
         type="button" 
         onClick={toggleMenu} 
         aria-controls="navbarSupportedContent" 
