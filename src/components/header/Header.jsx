@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 const NoticeBar = () => {
 return (
 <div  className="container-fluid p-0 bg-light d-lg-block">
@@ -50,7 +51,7 @@ const NavbarComponent = ({ isFixed }) => {
   return (
     <nav 
       className={`navbar navbar-expand-sm justify-content-end ${isFixed ? 'fixed-top' : ''} navbar-custom`} 
-      style={{ backgroundColor: '#f88f4a !important' }}
+      style={{ backgroundColor: '#f8f9fa !important' }}
     >
       {/* Mobile menu toggle button */}
       <button 

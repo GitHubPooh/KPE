@@ -14,6 +14,7 @@
 @import "./scss/custom-next";
 @import "./scss/responsive";
 
+
 .navbar-custom {
     background-color: #f88f4a;
     height: 50px; /* Adjust height */
@@ -53,7 +54,66 @@
   height: 400px;
   object-fit:cover; /* Ensure the image covers the entire container */
 }
+// grid image css
+.row gy-3 my-3{
+  flex-direction:row; /* Arrange columns vertically on mobile */
+  gap: 0; /* Remove space between columns on mobile */
+}
 
+.column {
+  width: 100%; /* Ensure columns take full width */ 
+}
+
+.image-text-container {
+  position: relative; /* Reset position for mobile view */
+  display:column; /* Stack image and text vertically */
+  width: 100%; /* Ensure image-text container takes full width */
+  justify-content: center; /* Center content horizontally */  
+}
+
+.image-text-container img {
+  width: 90%; /* Make image take full width of container */
+  border: 5px solid white; /* Remove border for better appearance on mobile */
+  border-radius: 0; /* Remove border-radius for mobile view */
+}
+.text-overlay {
+  position: absolute; /* Reset position */
+  top: 70%; /* Reset position for mobile */
+  right: -18%; /* Reset position for mobile */
+  background: white; /* Ensure background is visible */
+  padding: 5px; /* Adjust padding for mobile view */
+  font-size: 18px; /* Adjust font size for mobile view */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add box shadow */
+  color:black; /* Text color */
+  width: 50%; /* Adjust width of the overlay */
+  transform: translateX(-50%);
+  transition: right 0.3s ease-in-out; /* Smooth sliding transition */
+}
+
+.image-text-container:hover .text-overlay {
+right:0;
+transition: right 0.3s ease-in-out; 
+background: orange; /*  Change background color on hover */
+}
+.carousel-wrapper img {
+  width: 100%;
+  height: 650px;
+  object-fit: cover;
+}
+
+/* For tablets and smaller screens */
+@media (max-width: 768px) {
+  .carousel-wrapper img {
+    height: 350px;
+  }
+}
+
+/* For mobile devices */
+@media (max-width: 576px) {
+  .carousel-wrapper img {
+    height: 50px;
+  }
+}
 @media (max-width: 912px){
   .custom-carousel .carousel-item img{
     width: 100%;
