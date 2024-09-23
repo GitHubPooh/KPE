@@ -53,70 +53,66 @@
   height: 400px;
   object-fit:cover; /* Ensure the image covers the entire container */
 }
-// grid image css
-.row gy-3 my-3{
-  flex-direction:row; /* Arrange columns vertically on mobile */
-  gap: 0; /* Remove space between columns on mobile */
+// grid image css ish
+.row1 {
+  display: flex; 
+  justify-content: space-between;
+  gap: -20px ; 
+  margin-top: 20px;
 }
-
 .column {
-  width: 100%; /* Ensure columns take full width */ 
+  flex: 1;
 }
-
+@media only screen and (max-width: 768px) {
+  .row1 {
+    flex:100%;
+    flex-direction: column;
+    margin-top: -50px;
+}
+}
 .image-text-container {
-  display:column; /* Stack image and text vertically */
-  width: 100%; /* Ensure image-text container takes full width */
-  justify-content: center; /* Center content horizontally */  
+  position: relative;
+  align-items: center;
+  margin-left: 30px;
 }
-
 .image-text-container img {
-  width: 90%; /* Make image take full width of container */
-
+  width: 90%; 
+  height:300px;
+  display: inline-block;
+  border: 15px solid white; /* Add a thick white border around the image */
+  border-radius: 5px; /* Optional: Add rounded corners to the border */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Add a box shadow */
+  gap:0px;
 
 }
 .text-overlay {
-  position: absolute; /* Reset position */
-  top: 70%; /* Reset position for mobile */
-  right: -18%; /* Reset position for mobile */
-  background: white; /* Ensure background is visible */
-  padding: 5px; /* Adjust padding for mobile view */
-  font-size: 18px; /* Adjust font size for mobile view */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Add box shadow */
-  color:black; /* Text color */
-  width: 50%; /* Adjust width of the overlay */
-  transform: translateX(-50%);
-  transition: right 0.3s ease-in-out; /* Smooth sliding transition */
+  position: absolute;
+  left: 61px;
+  top: 70%;
+  transform: translateX(50%);
+  background: white;  /*Semi-transparent background */
+  color: black;
+  width:235px;
+  padding: 12px 29px; /* Increase padding for a larger white area */
+  font-family: Roboto, sans-serif;
+  font-size: 24px;  /*Adjust font size as needed */
+  font-weight: bold;
+  white-space: nowrap; /* Prevent text wrapping */
+  transition: background-color .5s ease-in-out, right .3s ease-in-out, color .3s ease-in-out;
+  box-shadow: blue;
 }
 
-.image-text-container:hover .text-overlay {
-right:0;
-transition: right 0.3s ease-in-out; 
-background: orange; /*  Change background color on hover */
-}
 .carousel-wrapper img {
   width: 100%;
   height: 650px;
   object-fit: cover;
 }
 
-/* For tablets and smaller screens */
-@media (max-width: 768px) {
-  .carousel-wrapper img {
-    height: 350px;
-  }
-}
-
-/* For mobile devices */
-@media (max-width: 576px) {
-  .carousel-wrapper img {
-    height: 50px;
-  }
-}
 @media (max-width: 912px){
   .custom-carousel .carousel-item img{
     width: 100%;
     height: 400px;
-    object-fit:cover; /* Ensure the image covers the entire container */
+    object-fit:cover;
   }
   .carousel-control-prev-icon{
     margin-bottom: 325px;

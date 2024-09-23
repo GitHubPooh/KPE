@@ -13,50 +13,30 @@ const Landing = () => {
       <Seo pageTitle="KPE Engineering" />
       <Header />
       <ImageSlider />
-      <div className="content-fluid">
-        <div className="content container">
-          <div className="row gy-3 my-3">
-            <div className="col-lg">
-              <div className="card h-100">
-                <div className="row">
-                  <div className="col-lg-12 col-md-12 col-sm-12">
-                    <div className="image-text-container">
-                      <img src="https://kpenggs.com/assets/images/kp1.jpg" alt="Grid 1" className="img-fluid"/>
-                        <div className="text-overlay">Pre-Metal</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg">
-              <div className="card h-100">
-                <div className="row">
-                  <div className="col-lg-12 col-md-12 col-sm-12">
-                    <div className="image-text-container">
-                      <img src="https://kpenggs.com/assets/images/kp2.jpg" alt="Grid 2" className="img-fluid" />
-                        <div className="text-overlay">Hybrid pre-Metal</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg">
-              <div className="card h-100">
-                <div className="row">
-                  <div className="col-lg-12 col-md-12 col-sm-12">
-                    <div className="image-text-container">
-                      <img src="https://kpenggs.com/assets/images/kp3.jpg" alt="Grid 3" className="img-fluid" />
-                        <div className="text-overlay">Approval Drawing</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-     
+    
+  <div class="row1">
+    <div class="column">
+      <div class="image-text-container">
+        <img src="https://kpenggs.com/assets/images/kp1.jpg" alt="Grid 1"/>
+        <div class="text-overlay">Pre-Metal</div>
       </div>
+    </div>
+  
+    <div class="column">
+      <div class="image-text-container">
+        <img src="https://kpenggs.com/assets/images/kp2.jpg" alt="Grid 2"/>
+        <div class="text-overlay">Hybrid Pre-Metal</div>
+      </div>
+    </div>
+  
+    <div class="column">
+      <div class="image-text-container">
+        <img src="https://kpenggs.com/assets/images/kp3.jpg" alt="Grid 3"/>
+        <div class="text-overlay">Approval Drawing</div>
+      </div>
+  </div>
+</div> 
+      
       {/* 
 			=============================================
 				Feature Section Twelve
