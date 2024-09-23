@@ -31,14 +31,9 @@ const Landing = () => {
               <div className="main-count">  
               </div>
             <div className="content" style={{ height: '2000px', paddingTop: '80px' }}>
-              
-
-                
-        
-       
-            </div>
-            </div>
           </div>
+        </div>
+      </div>
           {/* End .row */}
           {/* /.block-wrapper */}
           </div>

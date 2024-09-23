@@ -17,7 +17,7 @@
     font-size: 1.2em;
     transition: background-color 0.5s ease-in-out, right 0.5s ease-in-out, color 0.5s ease-in-out;
   }
-  
+
   @keyframes _fadeInRight {
     0% {
       transform: translate(100%);
@@ -83,7 +83,17 @@
     max-height: 300px;
     object-fit: contain;
   }
+  @media (max-width: 768px) {
+    .row {
+      margin-top: -100px; /* For tablet and smaller screens */
+    }
+  }
   
+  @media (max-width: 576px) {
+    .row {
+      margin-top: -50px; /* For mobile screens */
+    }
+  }
   @media screen and (max-width: 600px) {
     .column {
       width: 100%;
