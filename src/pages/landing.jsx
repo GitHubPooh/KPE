@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import CopyrightFooter from "@/components/footer/CopyrightFooter";
 import ImageSlider from "./ImageSlider";
 import "bootstrap/dist/js/bootstrap";
+import CustomCards from "./CustomCards";
 
 
 const Landing = () => {
@@ -14,28 +15,7 @@ const Landing = () => {
       <Header />
       <ImageSlider />
     
-  <div class="row1">
-    <div class="column">
-      <div class="image-text-container">
-        <img src="https://kpenggs.com/assets/images/kp1.jpg" alt="Grid 1"/>
-        <div class="text-overlay">Pre-Metal</div>
-      </div>
-    </div>
-  
-    <div class="column">
-      <div class="image-text-container">
-        <img src="https://kpenggs.com/assets/images/kp2.jpg" alt="Grid 2"/>
-        <div class="text-overlay">Hybrid Pre-Metal</div>
-      </div>
-    </div>
-  
-    <div class="column">
-      <div class="image-text-container">
-        <img src="https://kpenggs.com/assets/images/kp3.jpg" alt="Grid 3"/>
-        <div class="text-overlay">Approval Drawing</div>
-      </div>
-  </div>
-</div> 
+  <CustomCards/>
       
       {/* 
 			=============================================
