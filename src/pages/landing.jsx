@@ -15,7 +15,9 @@ const Landing = () => {
       <Header />
       <ImageSlider />
       <CustomCards/>
+
       {/* image with title and paragraph section after customcards, css added in main*/}
+
       <section className="image-text-section py-4">
         <div className="container">
           <div className="row">
@@ -34,14 +36,68 @@ const Landing = () => {
           </div>
         </div>
       </section>
+
       {/* Heading with underline and workflow chart, css added in main.scss */}
+
       <section className="text-center py-4">
       <h2 className="workflow heading">KP Engineering Services Work Flow & Procedure</h2>
       <br />
       <img src="https://kpenggs.com/assets/images/workflowkp.png" alt="Description of image"  
       className="workflow-image w-100 h-100" />
       </section>
-      
+
+      {/* Request a quote form : LHS and RHS , css added in main.scss */}
+
+      <div className="container2 quote px-lg-0">
+        <div className="row">
+        {/* Left Side: Statistics */}
+          <div className="col-md-6 left-side">
+            <div className="icon">
+              <img src="https://kpenggs.com/assets/images/civil.png" alt="Icon Image" className="img-fluid" />
+            </div>
+              <h1>25+</h1>
+              <p>Engineers</p>
+            <div className="icon" style={{ marginTop: '40px' }}>
+            <img src="https://kpenggs.com/assets/images/civil1.png" alt="Icon Image" className="img-fluid" />
+            </div>
+              <h1>450+</h1>
+              <p>Successful Projects</p>
+          </div>
+        {/* Right Side: Form */}
+        <div className="col-md-6 right-side">
+          <br />
+          <br />
+          <h1>Request a Quote</h1>
+          <p> Do you have questions on Metal Building OR Storage Building Detailing? Send us
+            your query to infokpenggs.com. Our professionals will always be there to assist with your queries.
+          </p>
+          <form>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="name"></label>
+                <textarea id="name" className="form-control" placeholder="Your Name" rows="2" required/>
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="mobile"></label>
+                <textarea id="mobile" className="form-control" placeholder="Your Mobile" rows="2" required />
+              </div>
+            </div>
+            
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="email"></label>
+                <textarea id="email" className="form-control" placeholder="Your Email" rows="2" required />
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="note"></label>
+                <textarea id="note" className="form-control" placeholder="Special Note" rows="2"/>
+              </div>
+            </div>
+                <button type="submit" className="btn btn-submit btn-block">Submit</button>
+          </form>
+         </div>
+       </div>
+      </div>
 
 
       <div className="fancy-feature-twelve position-relative mt-300 xl-mt-200 md-mt-120" id="s2">
