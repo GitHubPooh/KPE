@@ -11,6 +11,32 @@
   font-weight:bold;
   color: #555555;
 }
+
+@media (max-width :912px) {
+  .navbar-brand {
+    vertical-align: middle;
+    height: 85px;
+    margin-left: -10px;
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    width: 30%;
+  }
+  .top_heading1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #555555;
+    font-display: bold;
+    margin-bottom: 27px;
+  }
+  
+  .top_heading_design1 {
+    font-size: 14px;
+    font-weight: 700;
+    font-weight:bold;
+    color: #555555;
+    margin-bottom: 23px;
+  }
+}
 .navbar-nav .staticmenu {
   font-size: 18px;
   text-transform: uppercase;

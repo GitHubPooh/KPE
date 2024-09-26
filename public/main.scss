@@ -17,4 +17,51 @@
 @import "./scss/customcards";
 @import "./scss/ImageSlider";
 
-  
+// image with title and paragraph section after customcards, css here, html in landing page
+.image-text-section {
+    margin-top: 40px;
+  }
+.img-fluid {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    margin-right: 30px;
+  }
+.custom-heading {
+    font-size: 40px; 
+    font-weight: bold;
+    color:#f88f4a; 
+    margin-top: -10px;
+  }
+  @media (max-width: 768px) {
+    .custom-heading {
+        font-size: 30px; 
+        margin-top: 8px;
+    }
+}
+.custom-paragraph {
+    font-size: 21px; 
+    line-height: 36px; 
+    color: #333; 
+    font-weight: 500;
+    text-align: justify;
+  }
+
+//Heading with underline and workflow chart, html in landing page
+.workflow{
+    font-weight: 650;
+    color:#f88f4a;
+    font-size: calc(1.375rem + 1.5vw); 
+    text-decoration-line: underline;
+    text-align: center;
+  }
+
+.workflow-image{
+    padding: 10%;
+    margin-top: -80px;
+}
+@media (max-width: 768px) {
+    .workflow-image{
+        margin-top: -10px;
+    }
+}

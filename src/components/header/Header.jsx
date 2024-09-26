@@ -19,8 +19,7 @@ const NoticeBar = () => {
             </div>
           </div>
         </div>
-        
-        <div className="col-lg-6 d-flex justify-content-end">
+        <div className="col-lg-6 social-icons d-flex justify-content-end d-none d-lg-flex">
           <div className="h-100 d-inline-flex align-items-center py-0 me-3">
             <small className="fa fa-phone-alt" style={{ color: "#f88f4a" }}></small>
             <small style={{ color: "black", fontSize: "14px" }}>+91 8856032610</small>

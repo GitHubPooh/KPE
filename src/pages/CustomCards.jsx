@@ -1,8 +1,9 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CustomCards = () => {
   return (
-    <div className="container my-0" >
+    <div className="container-fluid my-0" >
       <div className="row mt-3" >
         <div className="col-md-4">
           <div className="card__three card zoomOut">
