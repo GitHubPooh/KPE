@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import CopyrightFooter from "@/components/footer/CopyrightFooter";
 import ImageSlider from "./ImageSlider";
 import "bootstrap/dist/js/bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap"
 import CustomCards from "./CustomCards";
 
 
@@ -57,10 +59,10 @@ const Landing = () => {
             </div>
               <h1>25+</h1>
               <p>Engineers</p>
-            <div className="icon" style={{ marginTop: '40px' }}>
+            <div className="icon">
             <img src="https://kpenggs.com/assets/images/civil1.png" alt="Icon Image" className="img-fluid" />
             </div>
-              <h1>450+</h1>
+              <h1>400+</h1>
               <p>Successful Projects</p>
           </div>
         {/* Right Side: Form */}
@@ -72,7 +74,7 @@ const Landing = () => {
             your query to infokpenggs.com. Our professionals will always be there to assist with your queries.
           </p>
           <form>
-            <div className="form-row">
+            <div className="form-row g-3">
               <div className="form-group col-md-6">
                 <label htmlFor="name"></label>
                 <textarea id="name" className="form-control" placeholder="Your Name" rows="2" required/>
@@ -83,7 +85,7 @@ const Landing = () => {
               </div>
             </div>
             
-            <div className="form-row">
+            <div className="form-row g-3">
               <div className="form-group col-md-6">
                 <label htmlFor="email"></label>
                 <textarea id="email" className="form-control" placeholder="Your Email" rows="2" required />
@@ -99,8 +101,7 @@ const Landing = () => {
        </div>
       </div>
 
-
-      <div className="fancy-feature-twelve position-relative mt-300 xl-mt-200 md-mt-120" id="s2">
+      {/* <div className="fancy-feature-twelve position-relative mt-300 xl-mt-200 md-mt-120" id="s2">
         <div className="container">
           <div className="row">
             <div className="col-xl-2 col-lg-3 text-center" data-aos="fade-right">
@@ -109,8 +110,7 @@ const Landing = () => {
             </div>
           </div>
         </div>
-      </div>
-
+      </div> */}
 
           <div className="footer-style-four text-light theme-basic-footer position-relative"><div >
             <div className="container-fluid bg-dark text-light footer wow fadeIn">

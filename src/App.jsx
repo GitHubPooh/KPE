@@ -10,6 +10,8 @@ import ScrollTopBehaviour from "./components/common/ScrollTopBehavier";
 import Landing from "./pages/landing";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import "bootstrap/dist/js/bootstrap.bundle.min";
+
 
 
 function App() {
