@@ -128,86 +128,49 @@
     font-weight: 600;
     margin-left: 22px;
   }
-  
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-  
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
+
   .btn-submit {
     background-color: #f88f4a;
-    border: none;
-  }
-  
-  .hero {
-    background-color: #f4f4f4;
-    text-align: center;
-    padding: 50px 0;
-  }
-  .hero h1 {
-    margin: 0;
-    font-size: 2.5em;
-  }
-  
-  .hero p {
-    font-size: 1.2em;
-  }
-  
-  .cta-button {
     display: inline-block;
     padding: 10px 20px;
     color: white;
-    background-color: orangered;
     text-decoration: none;
     border-radius: 5px;
   }
-  .cta-button:hover {
-    background-color:orangered;
-  } 
-  .form-row {
-    margin-bottom: 15px;
-  }
   
-  .form-group {
-    margin-bottom: 15px;
-  }
+//   .cta-button {
+//     display: inline-block;
+//     padding: 10px 20px;
+//     color: white;
+//     background-color: #f88f4a;
+//     text-decoration: none;
+//     border-radius: 5px;
+//   }
+//   .btn-button:hover {
+//     background-color:#f88f4a;
+//   } 
+//   .form-row {
+//     margin-bottom: 15px;
+//   }
   
-  /* Remove the border from the textarea elements */
-  textarea.form-control {
-    border: none;
-    box-shadow: none; /* Remove any shadow */
-    background-color: white; /* Optional: make background transparent */
-    resize: none; /* Optional: prevent resizing */
-  }
+//   .form-group {
+//     margin-bottom: 15px;
+//   }
   
-  /* Optional: Add some padding for better appearance */
-  textarea.form-control {
-    padding: 10px;
-  }
-/* Optional: Change focus state to remove outline */
-textarea.form-control:focus {
-    outline: none;
-    border-color: transparent;
-  }
+//   /* Remove the border from the textarea elements */
+//   textarea.form-control {
+//     border: none;
+//     box-shadow: none; /* Remove any shadow */
+//     background-color: white; /* Optional: make background transparent */
+//     resize: none; /* Optional: prevent resizing */
+//   }
   
-  
-  /* Features Section */
-  .features {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-  }
-  
-  .feature {
-    text-align: center;
-    flex: 1;
-    margin: 0 10px;
-  }
-  
-  .feature h2 {
-    font-size:1.5em;
-}
+//   /* Optional: Add some padding for better appearance */
+//   textarea.form-control {
+//     padding: 10px;
+//   }
+// /* Optional: Change focus state to remove outline */
+// textarea.form-control:focus {
+//     outline: none;
+//     border-color: transparent;
+//   }

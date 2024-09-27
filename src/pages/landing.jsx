@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import CopyrightFooter from "@/components/footer/CopyrightFooter";
 import ImageSlider from "./ImageSlider";
 import "bootstrap/dist/js/bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap"
 import CustomCards from "./CustomCards";
 
 
@@ -50,7 +48,7 @@ const Landing = () => {
 
       {/* Request a quote form : LHS and RHS , css added in main.scss */}
 
-      <div className="container2 quote px-lg-0">
+      <div className="container2 fluid quote px-lg-0">
         <div className="row">
         {/* Left Side: Statistics */}
           <div className="col-md-6 left-side">
@@ -74,28 +72,28 @@ const Landing = () => {
             your query to infokpenggs.com. Our professionals will always be there to assist with your queries.
           </p>
           <form>
-            <div className="form-row g-3">
+            <div className="form-row ">
               <div className="form-group col-md-6">
                 <label htmlFor="name"></label>
-                <textarea id="name" className="form-control" placeholder="Your Name" rows="2" required/>
+                <textarea id="name" className="form-control" placeholder="Your Name"  required/>
               </div>
-              <div className="form-group col-md-6">
+              <div className="form-group col-md-6" >
                 <label htmlFor="mobile"></label>
-                <textarea id="mobile" className="form-control" placeholder="Your Mobile" rows="2" required />
+                <textarea id="mobile" className="form-control" placeholder="Your Mobile"  required />
               </div>
             </div>
             
-            <div className="form-row g-3">
-              <div className="form-group col-md-6">
+            <div className="form-row ">
+              <div className="form-group col-md-6" >
                 <label htmlFor="email"></label>
-                <textarea id="email" className="form-control" placeholder="Your Email" rows="2" required />
+                <textarea id="email" className="form-control" placeholder="Your Email"  required />
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="note"></label>
-                <textarea id="note" className="form-control" placeholder="Special Note" rows="2"/>
+                <textarea id="note" className="form-control" placeholder="Special Note"/>
               </div>
             </div>
-                <button type="submit" className="btn btn-submit btn-block">Submit</button>
+                <button type="submit" className="btn-submit btn-block col-md-9">Submit</button>
           </form>
          </div>
        </div>
