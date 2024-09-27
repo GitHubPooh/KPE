@@ -118,7 +118,6 @@ const Landing = () => {
               <CopyrightFooter/>
               </div>
             </div>
-
             
           </div>
       </div>
