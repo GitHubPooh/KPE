@@ -527,15 +527,3 @@ iframe {border: none !important;}
   .xs-mb-150 {margin-bottom: 150px !important;}
   .xs-mb-200 {margin-bottom: 200px !important;}
 }
-/*(max-width: 575px)*/
-.custom-carousel {
-  width: 100%; /* Adjust width as needed */
-  height: 400px; /* Fixed height for the carousel */
-  overflow: hidden; /* Hide overflow to maintain fixed size */
-}
-
-.custom-carousel .carousel-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensure the image covers the entire container */
-}

@@ -32,7 +32,11 @@ const ImageSlider = () => {
   }, []);
 
   return (
+<<<<<<< HEAD
     <div className="image-slider-container">
+=======
+    <div className="image-slider-container mb-0">
+>>>>>>> HeaderSliderFooter
     <Carousel className="custom-carousel" 
         prevIcon={<span className="carousel-control-prev-icon custom-prev-icon" />}
         nextIcon={<span className="carousel-control-next-icon custom-next-icon" />}

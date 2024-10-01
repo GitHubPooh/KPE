@@ -525,12 +525,7 @@ p {
   padding-bottom: 16px;
   color: rgba(255, 255, 255, 0.3);
 }
-.title-style-nine .main-title span {
-  background: linear-gradient(270.78deg, #ffa7a9 4.19%, #ff5ea3 96.11%);
-  -webkit-background-clip: text;
-  
-  -webkit-text-fill-color: transparent;
-}
+
 .title-style-ten .sc-title {
   font-size: 15px;
   letter-spacing: 3px;
@@ -895,7 +890,7 @@ body .btn-seventeen {
   position: relative;
   z-index: 1;
   background: linear-gradient(270.78deg, #ffa7a9 4.19%, #ff5ea3 96.11%);
-  -webkit-background-clip: text;
+ 
   -webkit-text-fill-color: transparent;
 }
 body .btn-seventeen:before {
@@ -908,9 +903,7 @@ body .btn-seventeen:before {
   border-radius: 7px;
   border: 2px solid transparent;
   background: linear-gradient(0deg, #fe3b7d, #ff66c9) border-box;
-  -webkit-mask: /*4*/
-    linear-gradient(#fff 0 0) padding-box,
-    linear-gradient(#fff 0 0);
+
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   z-index: -1;
@@ -4632,15 +4625,4 @@ body .btn-twentySix:hover:after {
 }
 .blog-meta-two .blog-title h4:hover {
   color: var(--prime-four);
-}
-.custom-carousel {
-  width: 100%; /* Adjust width as needed */
-  height: 400px; /* Fixed height for the carousel */
-  overflow: hidden; /* Hide overflow to maintain fixed size */
-}
-
-.custom-carousel .carousel-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensure the image covers the entire container */
 }
