@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import '../../scss/_ImageSlider.css'; // Import your CSS file
+//import '../../scss/_ImageSlider.scss'; // Import your CSS file
 
 const ImageSlider = () => {
   const [images, setImages] = useState([
@@ -32,11 +32,7 @@ const ImageSlider = () => {
   }, []);
 
   return (
-<<<<<<< HEAD
-    <div className="image-slider-container">
-=======
     <div className="image-slider-container mb-0">
->>>>>>> HeaderSliderFooter
     <Carousel className="custom-carousel" 
         prevIcon={<span className="carousel-control-prev-icon custom-prev-icon" />}
         nextIcon={<span className="carousel-control-next-icon custom-next-icon" />}
