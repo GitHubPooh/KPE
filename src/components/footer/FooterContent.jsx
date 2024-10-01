@@ -6,7 +6,7 @@ const Footer = () => {
     {
       title: "Quick Links",
       links: [
-        { label: "About Us", href: "/" },
+        { label: "About Us", href: "/about" },
         { label: "Contact Us", href: "/pages-menu/pricing" },
       ],
       title1: "Services",
@@ -22,7 +22,7 @@ const Footer = () => {
     <div className="row text-light" >
 
       {/* Added address-section class here */}
-      <div className="col-lg-6 col-md-6 col-sm-12 d-sm-block address-section">
+      <div className="col-lg-6 col-md-6 col-sm-12 address-section" >
         <h4 className="text-light" >Address</h4>
         <p>
           <i className="fa fa-map-marker-alt me-2"></i>Office No, 3 &amp; 4 Nanded City

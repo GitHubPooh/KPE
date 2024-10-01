@@ -8,6 +8,7 @@ import { Route, Routes } from "react-router-dom";
 import NotFound from "./pages/404";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehavier";
 import Landing from "./pages/landing";
+import AboutUs from "./pages/AboutUs";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<Landing />} />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="404" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Route>

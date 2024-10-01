@@ -79,7 +79,7 @@ const NavbarComponent = ({ isFixed }) => {
             <a className="nav-link" href="#" style={{ color: 'white' }}>HOME</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" style={{ color: 'white' }}>ABOUT US</a>
+            <a className="nav-link" href="/about" style={{ color: 'white' }}>ABOUT US</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#" style={{ color: 'white' }}>PROJECT</a>
