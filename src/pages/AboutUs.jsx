@@ -23,20 +23,81 @@ const AboutUs = () => {
         in handling complex projects sets us apart, allowing us to meet the diverse needs of our clients with efficiency
         and professionalism.</p>
 
-        
-
-
-  
-        <div className="fancy-feature-twelve position-relative mt-300 xl-mt-200 md-mt-120" id="s2">
-          <div className="container">
-            <div className="row">
-              <div className="col-xl-2 col-lg-3 text-center" data-aos="fade-right">
-                <div className="main-count"> </div>
-                  <div className="content" style={{ height: '2000px', paddingTop: '80px' }}></div>
+        <div class="container mt-5">
+          <div class="row">
+                          {/* <!-- Vision Box --> */}
+            <div class="col-md-6">
+              <div class="box">
+                <div class="image-wrapper">
+                  <img src="https://kpenggs.com/assets/images/vision.png" alt="Vision Image" class="box-image"/>
+                </div>
+                <br/>
+                <h3>VISION</h3>
+                <br/>
+                <p> To be the best quality 'Detailing and Drafting Service Provider to the Pre Engineered 
+                    Metal Building industry and that too in the most cost effective way.</p>
+              </div>
+            </div>
+                          {/* <!-- Mission Box --> */}
+            <div class="col-md-6">
+              <div class="box">
+                <div class="image-wrapper">
+                  <img src="https://kpenggs.com/assets/images/mission.png" alt="Mission Image" class="box-image"/>
+                </div>
+                <br/>
+                <h3>MISSION</h3>
+                <br/>
+                <p>To be the best, we are constantly updating our knowledge and keeping pace with 
+                  the latest changes and standards in the industry.</p>
               </div>
             </div>
           </div>
         </div>
+
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">OUR EXPERTISE</h2>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Aircraft Hanger</h5>
+          </div>          
+        </div>
+        <div class="col-md-4 mb-3"> 
+          <div class="card-body"> 
+            <h5 class="card-title">Warehouses Structures</h5>
+          </div>      
+        </div>
+        <div class="col-md-4 mb-3">  
+          <div class="card-body" >
+            <h5 class="card-title">Factories Structures</h5>
+          </div>          
+        </div>
+      </div>
+      <div class="row"> 
+        <div class="col-md-4 mb-3">
+          <div class="card-body" >
+            <h5 class="card-title">Churches</h5>
+          </div>    
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Schools Structures</h5>
+          </div>          
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="card-body" >
+            <h5 class="card-title">Cold Form Structures</h5>
+          </div>          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card-body" >
+            <h5 class="card-title">all types of storage buildings</h5>
+          </div>   
+        </div>
+      </div>
+    </div> 
   
             <div className="footer-style-four text-light theme-basic-footer position-relative"><div >
               <div className="container-fluid bg-dark text-light footer wow fadeIn">

@@ -76,19 +76,19 @@ const NavbarComponent = ({ isFixed }) => {
         {/* Aligning menu items to the right */}
         <ul className="navbar-nav me-auto justify-content-end" style={{ backgroundColor: '#f88f4a !important' }}>
           <li className="nav-item">
-            <a className="nav-link" href="#" style={{ color: 'white' }}>HOME</a>
+            <a className="nav-link" href="/" style={{ color: 'white' }}>HOME</a>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="/about" style={{ color: 'white' }}>ABOUT US</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" style={{ color: 'white' }}>PROJECT</a>
+            <a className="nav-link" href="/project" style={{ color: 'white' }}>PROJECT</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" style={{ color: 'white' }}>SERVICES</a>
+            <a className="nav-link" href="/services" style={{ color: 'white' }}>SERVICES</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#" style={{ color: 'white' }}>CONTACT US</a>
+            <a className="nav-link" href="/contact" style={{ color: 'white' }}>CONTACT US</a>
           </li>
         </ul>
       </div>

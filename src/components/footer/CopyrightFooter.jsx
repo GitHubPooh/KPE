@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 
 const links = [
   {
-    title: "Privacy & Terms.",
+    title: "Privacy, Terms and Conditions ",
     href: "/faq",
   },
-  {
-    title: "Contact Us",
-    href: "/contact",
-  },
+  // {
+  //   title: "Contact Us",
+  //   href: "/contact",
+  // },
 ];
 
 const icons = [
@@ -58,18 +58,11 @@ const CopyrightFooter = () => {
           </div>
           
           <div className="col-lg-6 order-lg-1 mt-15">
-            <p className="copyright text-center m0">
-               © {new Date().getFullYear()}{" "}
-              <a
-                style={{ color: "inherit" }}
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                KP Engineering Service, All Right Reserved.
-
+            <p className="copyright text-end ">
+             © {new Date().getFullYear()}{" "} 
+              <a style={{ color: "inherit"  }} href="#" target="_blank" rel="noopener noreferrer" >
+              © KP Engineering Service, All Right Reserved.
               </a>{" "}
-        
             </p>
           </div>
         </div>

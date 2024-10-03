@@ -9,6 +9,9 @@ import NotFound from "./pages/404";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehavier";
 import Landing from "./pages/landing";
 import AboutUs from "./pages/AboutUs";
+import Project from "./pages/Project";
+import Services from "./pages/Services";
+import ContactUs from "./pages/ContactUs";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import "bootstrap/dist/js/bootstrap.bundle.min";
@@ -28,6 +31,9 @@ function App() {
         <Route path="/">
           <Route index element={<Landing />} />
           <Route path="/about" element={<AboutUs />} />
+          <Route path="/project" element={<Project/>} />
+          <Route path="/services" element={<Services/>} />
+          <Route path="/contact" element={<ContactUs/>} />
           <Route path="404" element={<NotFound />} />
           <Route path="*" element={<NotFound />} />
         </Route>

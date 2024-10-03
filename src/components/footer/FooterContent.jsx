@@ -7,12 +7,12 @@ const Footer = () => {
       title: "Quick Links",
       links: [
         { label: "About Us", href: "/about" },
-        { label: "Contact Us", href: "/pages-menu/pricing" },
+        { label: "Contact Us", href: "/contact" },
       ],
       title1: "Services",
       links1: [
-        { label: "SERVICES", href: "/" },
-        { label: "PROJECTS", href: "/pages-menu/pricing" },
+        { label: "SERVICES", href: "/services" },
+        { label: "PROJECTS", href: "/project" },
       ],
       classes: "col-lg-3 col-sm-4 ms-auto mb-30",
     },

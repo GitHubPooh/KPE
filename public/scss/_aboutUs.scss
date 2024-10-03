@@ -1,6 +1,6 @@
 .full-width-image {
     width: 100%;
-    height: 500px;
+    height: 550px;
     overflow: hidden; /* To prevent any overflow of the image if the aspect ratio doesn't match */
   }
   
@@ -15,7 +15,7 @@
     position: absolute;
     width: auto;
     left: -50px;
-    top: 10%;
+    top: 15%;
     transform: translateX(-100%); /* Start off-screen from the left */
     background: #f88f4a; /* Semi-transparent background */
     color: white;
@@ -28,14 +28,12 @@
     transition: background 0.5s ease-in-out; /* Smooth background transition */
     animation: slideInFromLeft 1s ease-in-out forwards; /* Animation on load */
   }  
-  
 .image-text-container:hover .text-overlay {
     transform: translateX(0%); /* Slide into view */
     background: #f88f4a; /*  Change background color on hover */
   }
-  
 /* Keyframes for sliding text from left to right */
-    @keyframes slideInFromLeft {
+@keyframes slideInFromLeft {
     0% {
       transform: translateX(-100%); /* Start off the left side */
       opacity: 0; /* Initially invisible */
@@ -47,16 +45,16 @@
   }
   
   /* Optional: Hover effect to change background */
-  .text-overlay:hover {
+.text-overlay:hover {
     background: #f88f4a;/* Change background color on hover */
   }
   
-  @media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {
     .full-width-image {
       height: 500px; /* reduce the height on smaller screens */
     }
   }
-  @media only screen and (max-width: 768px) {
+@media only screen and (max-width: 915px) {
     .text-overlay {
       font-size: 30px; /* further reduce the font size on smaller screens */
       padding: 20px 80px; /* further reduce the padding on smaller screens */
@@ -66,5 +64,137 @@
       font-size: 50px;
     }
   }
+.image-description {
+    margin-top: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align:justify; /* Centers the text horizontally */
+    font-size: 18px; /* Adjusts the font size */
+    color: black; /* Sets the text color */
+    line-height: 1.5;
+    padding-bottom: 2px;
+    font-weight: 400;
+    font-family: Gill Sans, sans-serif;
+    margin-bottom: 80px;
+  }
+// -------------Mission Vision CSS----------------------------------------------------------------
+.box {
+    background-color: #fff8ed;
+    padding: -200px; /* Adjusted padding for box size */
+    box-sizing: border-box ;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    display: flex;
+    width:550px;
+    height:400px;
+    position:relative;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    text-align: center; /* Center-align text */
+    transition: box-shadow 0.3s ease; /* Smooth transition */
+}
+.box:hover {
+    box-shadow: 10px 10px 10px  #f88f4a; /* Orange shadow on hover */
+}
+.box h3 {
+    font-size: 34px;
+    font-weight: 900;
+    color:black;
+    font-weight: bold;
+    text-align: center; /* Center text horizontally */
+    margin-bottom: 15px;
+    margin-top: -65px;
+}
+.box p {
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+    text-align: justify;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 50px;
+}
+.box-image {
+    width: auto ; /* Make image responsive to box width */
+    height: 35px; /* Maintain aspect ratio */
+    display: block; /* Ensures image is a block-level element */
+}
+.image-wrapper {
+    background-color:#f88f4a; /* Orange background */
+    border-radius: 0px; /* Square shape */
+    margin-bottom: 70px;
+    border: 8px solid white; /* Remove border for better appearance on mobile */
+    top:-62px;
+    position: relative;
+    margin-top: 0px; /* Adjust margin as needed */
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center the image vertically */
+    justify-content: center; /* Center the image horizontally */
+    width: 100px; /* Adjust width for a larger wrapper */
+    height: 100px; /* Same as width for a square */
+    margin-left: 276px; /* Center the wrapper horizontally */
+    margin-right: auto; /* Center the wrapper horizontally */
+    text-align: center;
+    transform: translateX(-50%); /* Adjust to center */
+}
 
-
+@media only screen and (max-width: 915px) {
+.col-md-6 {
+        flex: 100%; /* Makes each box take full width */
+        max-width: 100%;
+      }
+.box {
+        text-align: center; /* Optional: Center-align content on mobile */
+        width: 100%;
+        margin-bottom: 100px; /* Add margin between Vision and Mission boxes */
+      }
+.box-image {
+        width: 100%; /* Optional: Ensure images take full width on mobile */
+        height: 100%;
+        padding: 17%;
+      }
+.image-wrapper {
+        background-color:#f88f4a; /* Orange background */
+        margin-bottom: 70px;
+        border: 8px solid white; /* Remove border for better appearance on mobile */
+        top:-62px;
+        position: relative;
+        margin-top: 0px; /* Adjust margin as needed */
+        display: flex; /* Flexbox for alignment */
+        align-items: center; /* Center the image vertically */
+        justify-content: center; /* Center the image horizontally */
+        width: 100px; /* Adjust width for a larger wrapper */
+        height: 100px; /* Same as width for a square */
+        margin-left: 180px; /* Center the wrapper horizontally */
+        margin-right: auto; /* Center the wrapper horizontally */
+        text-align: center;
+        transform: translateX(-50%); /* Adjust to center */
+      }
+  }
+// -------------Mission Vision CSS End----------------------------------------------------------------
+// -------------OUR EXPERTISE CSS--------------------------------------------------------------------
+.text-center {
+    font-size: 28px;
+    font-weight: 400;
+    font-family: avenir;
+}
+@media only screen and (max-width: 915px){
+    .text-center {
+        margin-top: -65px;
+    }
+}
+.card-body {
+  background-color: #f88f4f;
+  height: 70px;
+  transition: box-shadow 0.3s ease;
+}
+.card-body:hover {
+  box-shadow: 5px 6px 8px #f88f4a; /* Orange shadow */
+}
+h5.card-title {
+    color: white;
+    padding-top: 20px;
+    align-items: center;
+    text-align: center;
+}
