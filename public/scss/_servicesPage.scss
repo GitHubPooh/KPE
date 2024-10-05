@@ -1,0 +1,124 @@
+.full-width-image {
+    width: 100%;
+    height: 550px;
+    overflow: hidden; /* To prevent any overflow of the image if the aspect ratio doesn't match */
+  }
+  
+.full-width-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire area without distortion */
+    display: block; /* Removes any small gaps below the image */
+  }
+
+.text-overlay {
+    position: absolute;
+    width: auto;
+    left: -50px;
+    top: 300px;
+    transform: translateX(-100%); /* Start off-screen from the left */
+    background: #f88f4a; /* Semi-transparent background */
+    color: white;
+    padding: 25px 99px;
+    clip-path: polygon(0 0, 100% 0%, 78% 100%, 0% 100%);
+    font-size: 64px;
+    font-weight: bold;
+    align-content: center;
+    opacity: 0; /* Start with hidden text */
+    transition: background 0.5s ease-in-out; /* Smooth background transition */
+    animation: slideInFromLeft 1s ease-in-out forwards; /* Animation on load */
+  }  
+.image-text-container:hover .text-overlay {
+    transform: translateX(0%); /* Slide into view */
+    background: #f88f4a; /*  Change background color on hover */
+  }
+/* Keyframes for sliding text from left to right */
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%); /* Start off the left side */
+      opacity: 0; /* Initially invisible */
+    }
+    100% {
+      transform: translateX(0); /* Final position */
+      opacity: 1; /* Fully visible */
+    }
+  }
+  .image-description {
+    margin-top: 50px;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-align:justify; /* Centers the text horizontally */
+    font-size: 18px; /* Adjusts the font size */
+    color: black; /* Sets the text color */
+    line-height: 1.5;
+    padding-bottom: 2px;
+    font-weight: 200;
+    font-family: Gill Sans, sans-serif;
+  }
+  
+  /* Optional: Hover effect to change background */
+.text-overlay:hover {
+    background: #f88f4a;/* Change background color on hover */
+  }
+  
+@media only screen and (max-width: 768px) {
+    .full-width-image {
+      height: 500px; /* reduce the height on smaller screens */
+    }
+  }
+@media only screen and (max-width: 915px) {
+    .text-overlay {
+      font-size: 30px; /* further reduce the font size on smaller screens */
+      padding: 20px 80px; /* further reduce the padding on smaller screens */
+      margin-top: -120px;
+      top: 450px;
+      padding: 20px 80px;
+      font-size: 50px;
+    }
+  }
+.image-wrapper {
+    background-color: #f88f4a; /* Orange background */
+    padding: 30px; /* Space around the image */
+    border-radius: 0px; /* Square shape */
+    margin-bottom: 70px;
+    border: 8px solid white; /* Remove border for better appearance on mobile */
+    position: relative;
+    margin-top: 0px; /* Adjust margin as needed */
+    display: flex; /* Flexbox for alignment */
+    align-items: center; /* Center the image vertically */
+    justify-content: center; /* Center the image horizontally */
+    width: 100px; /* Adjust width for a larger wrapper */
+    height: 100px; /* Same as width for a square */
+    margin-left: 260px; /* Center the wrapper horizontally */
+    margin-right: auto; /* Center the wrapper horizontally */
+    text-align: center;
+    transform: translateX(-50%); /* Adjust to center */
+
+}
+.carousel-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+  }
+  .owl-prev, .owl-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .owl-prev {
+    left: 10px;
+  }  
+  .owl-next {
+    right: 10px;
+  }
