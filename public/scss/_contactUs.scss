@@ -6,6 +6,27 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+/* Add vertical line and spacing between the columns */
+.address-section {
+    border-right: 1px solid black; /* Vertical line */
+    padding-right: 20px; /* Space between text and line */
+}
+
+.customer-care-section {
+    padding-left: 10px; /* Space between the line and text */
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+    .address-section {
+        border-right: none; /* Remove line on mobile */
+        padding-right: 0;
+    }
+
+    .customer-care-section {
+        padding-left: 0;
+    }
+}
 
 .section {
     display: flex;
