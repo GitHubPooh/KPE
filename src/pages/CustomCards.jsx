@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CustomCards = () => {
   return (
-    <div className="container-fluid mt-0" >
+    <div className="container-fluid mt-0" style={{paddingTop:"0%" }} >
       <div className="row mt-0"  >
         <div className="col-md-4 mt-0">
           <div className="card__three card zoomOut">
