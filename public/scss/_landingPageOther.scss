@@ -2,6 +2,7 @@
 .image-text-section {
     margin-top: 40px;
   }
+  
 .img-fluid {
     width: 100%; 
     height: 100%; 
@@ -38,8 +39,11 @@
   }
 
 .workflow-image{
-    padding: 10%;
-    margin-top: -80px;
+    padding-bottom: 5%;
+    padding-top: 8%;
+    padding-left: 10%;
+    padding-right: 10%;
+    margin-top: -90px;
 }
 @media (max-width: 768px) {
     .workflow-image{

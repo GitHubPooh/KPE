@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const RequestQuoteForm = () => {
   return (
-    <div className="container-fluid bg-light overflow-hidden my-5 mt-5 px-lg-0">
+    <div className="container-fluid bg-light overflow-hidden my-0 mt-0 px-lg-0" style={{ marginTop:"0px" }}>
       <div className="row g-1 mx-lg-0">
         {/* Left Side: No Padding, Center Aligned Content */}
         <div className="col-lg-6 ps-lg-0 d-flex flex-column justify-content-center align-items-center" style={{ minHeight: "400px", backgroundColor: '#f88f4a' }}>
@@ -16,18 +16,16 @@ const RequestQuoteForm = () => {
             <img src="https://kpenggs.com/assets/images/civil1.png" alt="Icon Image" className="img-fluid" />
           </div>
           <h1>400+</h1>
-          <p>Successful Projects</p>
+          <p>Successful Projects</p>   
         </div>
-
         
-
         {/* Right Side: Quote Form */}
         <div className="col-md-6 quote-text py-5 d-flex align-items-center justify-content-center">
           <div className="p-4 p-lg-5 w-100">
             <div className="section-title text-start">
-              <h1 className="mb-4" style={{ fontSize: '30px' }}>Request a Quote</h1>
+              <h1 className="mb-4" style={{ fontSize: '40px' }}>Request a Quote</h1>
             </div>
-            <h6 className="mb-4 pb-2 text-body" style={{ fontWeight: 200 }}>
+            <h6 className="mb-4 pb-2 text-body" style={{ fontWeight: 600 }}>
               Do you have questions on Metal Building OR Storage Building Detailing? Send us your query to 
               <a href="mailto:info@kpenggs.com"> info@kpenggs.com</a>. Our professionals will always be there to assist you.
             </h6>

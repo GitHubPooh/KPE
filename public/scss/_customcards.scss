@@ -5,6 +5,7 @@
   .container-fluid{
     margin-left: 50px;
   }
+
   .card-heading {
     position: absolute;
     bottom: 8%;
@@ -87,7 +88,7 @@
   }
   @media (max-width: 768px) {
     .row {
-      margin-top: -100px; /* For tablet and smaller screens */
+      margin-top: -10px; /* For tablet and smaller screens */
     }
   }
   

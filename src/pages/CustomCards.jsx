@@ -3,9 +3,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const CustomCards = () => {
   return (
-    <div className="container-fluid my-0" >
-      <div className="row mt-3" >
-        <div className="col-md-4">
+    <div className="container-fluid mt-0" >
+      <div className="row mt-0"  >
+        <div className="col-md-4 mt-0">
           <div className="card__three card zoomOut">
             <div className="card-img-container">
               <img
@@ -17,7 +17,7 @@ const CustomCards = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-4" >
           <div className="card__three card zoomOut">
             <div className="card-img-container">
               <img

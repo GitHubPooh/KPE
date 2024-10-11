@@ -6,6 +6,7 @@ import CopyrightFooter from "@/components/footer/CopyrightFooter";
 import ImageSlider from "./ImageSlider";
 import "bootstrap/dist/js/bootstrap";
 import CustomCards from "./CustomCards";
+import ImageWithParagraph from "@/components/landingPageComponents/ImageWithParagraph";
 import RequestQuoteForm from "@/components/landingPageComponents/RequestQuoteForm";
 
 
@@ -16,8 +17,8 @@ const Landing = () => {
       <Header />
       <ImageSlider />
       <CustomCards/>
-
-<RequestQuoteForm/>
+      <ImageWithParagraph />  
+      <RequestQuoteForm/>
       {/* <div className="fancy-feature-twelve position-relative mt-300 xl-mt-200 md-mt-120" id="s2">
         <div className="container">
           <div className="row">
