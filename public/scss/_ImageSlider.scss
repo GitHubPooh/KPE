@@ -1,14 +1,16 @@
 .slider-container {
     width: 100vw;
+    height: 100vh;
     margin: 0 auto;
     overflow: hidden;
-    margin-bottom: 10px;
+
   }
   
   .slider-image {
     width: 100vw;
     height: 100vh;
     object-fit: cover;
+    margin-bottom: 0%;
   }
   
   .slick-arrow {
@@ -32,11 +34,19 @@
     right: 20px;
   }
   
-  .slick-dots {
-    bottom: 10px;
-  }
+  
   
   .slick-dots li button:before {
     color: white;
   }
   
+  .custom-carousel{
+    margin-bottom: 0%;
+    height: 90vh;
+  }
+  @media (max-width: 915px) {
+    .custom-carousel{
+      margin-bottom: 0%;
+      height: 45vh;
+    }
+  }

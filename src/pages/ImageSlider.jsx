@@ -32,7 +32,7 @@ const ImageSlider = () => {
   }, []);
 
   return (
-    <div className="image-slider-container mb-0" style={{ marginBottom:"0%" }}>
+    <div className="image-slider-container">
     <Carousel className="custom-carousel" 
         prevIcon={<span className="carousel-control-prev-icon custom-prev-icon" />}
         nextIcon={<span className="carousel-control-next-icon custom-next-icon" />}
@@ -41,7 +41,7 @@ const ImageSlider = () => {
       {images.map((image, index) => (
         <Carousel.Item key={index}>
           <img
-            className="d-block w-100"
+            className="d-block "
             src={image}
             alt={`Slide ${index + 1}`}
           />

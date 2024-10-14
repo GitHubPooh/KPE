@@ -64,3 +64,9 @@
   a.copyright text-start{
     margin-left: 10%;
   }
+  
+  @media (max-width: 915px) {
+    .address-section1{
+      margin-left: 5%;
+    }
+  }
