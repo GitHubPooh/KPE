@@ -12,13 +12,13 @@ const SliderImageWithParagraph = () => {
             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149745590.jpg" className="d-block w-100" style={{ height: '650px', objectFit: 'cover' }} alt="Scroll 1" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149745590.jpg" className="d-block w-100" style={{ height: 'auto', maxHeight: '650px', objectFit: 'cover' }} alt="Scroll 1" />
                 </div>
                 <div className="carousel-item">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149774625.jpg" className="d-block w-100" style={{ height: '650px', objectFit: 'cover' }} alt="Scroll 2" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149774625.jpg" className="d-block w-100" style={{ height: 'auto', maxHeight: '650px', objectFit: 'cover' }} alt="Scroll 2" />
                 </div>
                 <div className="carousel-item">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149774625.jpg" className="d-block w-100" style={{ height: '600px', objectFit: 'cover' }} alt="Scroll 3" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149780120.jpg" className="d-block w-100" style={{ height: 'auto', maxHeight: '650px', objectFit: 'cover' }} alt="Scroll 3" />
                 </div>
               </div>
               <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -58,16 +58,16 @@ const SliderImageWithParagraph = () => {
             <div id="carouselExamplePEMB" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/397367226.png" className="d-block w-100" style={{ height: '600px', objectFit: 'cover' }} alt="PEMB 1" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/397367226.png" className="d-block w-100" style={{ height: 'auto', maxHeight: '600px', objectFit: 'cover' }} alt="PEMB 1" />
                 </div>
                 <div className="carousel-item">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/397367228.png" className="d-block w-100" style={{ height: '600px', objectFit: 'cover' }} alt="PEMB 2" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/397367228.png" className="d-block w-100" style={{ height: 'auto', maxHeight: '600px', objectFit: 'cover' }} alt="PEMB 2" />
                 </div>
                 <div className="carousel-item">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/397367229.png" className="d-block w-100" style={{ height: '600px', objectFit: 'cover' }} alt="PEMB 3" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/397367229.png" className="d-block w-100" style={{ height: 'auto', maxHeight: '600px', objectFit: 'cover' }} alt="PEMB 3" />
                 </div>
                 <div className="carousel-item">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/397367230.webp" className="d-block w-100" style={{ height: '600px', objectFit: 'cover' }} alt="PEMB 4" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/397367230.webp" className="d-block w-100" style={{ height: 'auto', maxHeight: '600px', objectFit: 'cover' }} alt="PEMB 4" />
                 </div>
               </div>
               <button className="carousel-control-prev" type="button" data-bs-target="#carouselExamplePEMB" data-bs-slide="prev">
@@ -91,13 +91,13 @@ const SliderImageWithParagraph = () => {
             <div id="carouselExampleSteel" className="carousel slide" data-bs-ride="carousel">
               <div className="carousel-inner">
                 <div className="carousel-item active">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149165257.png" className="d-block w-100" style={{ height: '650px', objectFit: 'cover' }} alt="Steel 1" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149165257.png" className="d-block w-100" style={{ height: 'auto', maxHeight: '650px', objectFit: 'cover' }} alt="Steel 1" />
                 </div>
                 <div className="carousel-item">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149165261.jpg" className="d-block w-100" style={{ height: '650px', objectFit: 'cover' }} alt="Steel 2" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149165261.jpg" className="d-block w-100" style={{ height: 'auto', maxHeight: '650px', objectFit: 'cover' }} alt="Steel 2" />
                 </div>
                 <div className="carousel-item">
-                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149165262.jpg" className="d-block w-100" style={{ height: '600px', objectFit: 'cover' }} alt="Steel 3" />
+                  <img src="https://kpenggs.com/business_guru_admin/Product_Image/149165262.jpg" className="d-block w-100" style={{ height: 'auto', maxHeight: '600px', objectFit: 'cover' }} alt="Steel 3" />
                 </div>
               </div>
               <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleSteel" data-bs-slide="prev">
@@ -123,9 +123,10 @@ const SliderImageWithParagraph = () => {
           </div>
         </div>
       </div>
+
+     
     </>
     );
- 
 };
 
 export default SliderImageWithParagraph;

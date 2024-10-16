@@ -45,8 +45,8 @@
   }
   .image-description {
     margin-top: 50px;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
     text-align:justify; /* Centers the text horizontally */
     font-size: 16px; /* Adjusts the font size */
     color: black; /* Sets the text color */
@@ -75,53 +75,65 @@
       font-size: 50px;
     }
   }
+/* CSS */
 .carousel-inner{
   height: 610px;
   object-fit: cover;
   border-radius: 2%;
 }
 
-.slider-image-description-title{
-  font-size:31px;
+.carousel-image {
+  height: 100%;
+  object-fit: cover;
+}
+
+.slider-image-description-title {
+  font-size: 31px;
   line-height: 44px;
   letter-spacing: 2px;
   font-weight: 700;
   color: #111;
   font-family: Roboto, sans-serif;
 }
-.slider-image-description-paragraph{
-  font-size:16px;
+
+.slider-image-description-paragraph {
+  font-size: 16px;
   line-height: 20px;
   font-weight: 400;
   color: #111;
   font-family: system-ui;
   text-align: justify;
   margin-bottom: 35px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
 }
 
-.carousel-wrapper {
-    position: relative;
-    margin-bottom: 30px;
-  }
- 
-/* Ensure Previous and Next buttons have no background color */
 .carousel-control-prev,
 .carousel-control-next {
-  background-color: transparent !important; /* Set background to transparent */
-  border: none; /* Remove any borders */
+  background-color: transparent !important;
+  border: none;
 }
 
-/* Remove hover and focus states */
-.carousel-control-prev:hover,
-.carousel-control-next:hover,
-.carousel-control-prev:focus,
-.carousel-control-next:focus {
-  background-color: transparent !important; /* Ensure no color change on hover or focus */
-  outline: none; /* Remove focus outline if any */
-}
+@media (max-width: 915px) {
+  .carousel-inner {
+    height: auto; /* Adjust height for smaller screens */
+  }
 
-/* Optional: You can also remove the button background during the active state */
-.carousel-control-prev:active,
-.carousel-control-next:active {
-  background-color: transparent !important; /* Keep background transparent on click */
+  .carousel-image {
+    height: 450px; /* Reduce image height on smaller screens */
+  }
+  
+  .slider-image-description-title {
+    font-size: 24px; /* Adjust font size */
+    font-weight: bold;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  }
+
+  .slider-image-description-paragraph {
+    font-size: 16px; /* Adjust paragraph size */
+    font-weight: bold;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  }
 }
