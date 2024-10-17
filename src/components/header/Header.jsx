@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const NoticeBar = () => {
   return (
@@ -43,12 +44,33 @@ const NoticeBar = () => {
     </div>
   );
 };
+
 const NavbarComponent = ({ isFixed }) => {
+  const [menuItems, setMenuItems] = useState([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  // Fetching menu data from the API
+  useEffect(() => {
+    const fetchMenuItems = async () => {
+      try {
+        const response = await axios.post(
+          'https://kpenggs.com/business_guru_admin/Menu_Operations.php',
+          [{ "Operation": "Display_Operation" }],
+          { headers: { 'Content-Type': 'application/json' } }
+        );
+        setMenuItems(response.data);
+        console.log('Menu Data:', response.data);  // Console output
+      } catch (error) {
+        console.error('Error fetching menu data:', error);
+      }
+    };
+    fetchMenuItems();
+  }, []);
 
   return (
     <nav 
@@ -57,7 +79,7 @@ const NavbarComponent = ({ isFixed }) => {
     >
       {/* Mobile menu toggle button */}
       <button 
-        className="navbar-toggler me-auto  justify-content-end" 
+        className="navbar-toggler me-auto justify-content-end" 
         type="button" 
         onClick={toggleMenu} 
         aria-controls="navbarSupportedContent" 
@@ -70,10 +92,8 @@ const NavbarComponent = ({ isFixed }) => {
       <div 
         className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''}`} 
         id="navbarSupportedContent"
-        style={{ backgroundColor: '#f88f4a' }} // Orange background for mobile menu
-        >
-        
-        {/* Aligning menu items to the right */}
+        style={{ backgroundColor: '#f88f4a' }}  // Orange background for mobile menu
+      >
         <ul className="navbar-nav me-auto justify-content-end" style={{ backgroundColor: '#f88f4a !important' }}>
           <li className="nav-item">
             <a className="nav-link" href="/" style={{ color: 'white' }}>HOME</a>
@@ -84,9 +104,18 @@ const NavbarComponent = ({ isFixed }) => {
           <li className="nav-item">
             <a className="nav-link" href="/project" style={{ color: 'white' }}>PROJECT</a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/services" style={{ color: 'white' }}>SERVICES</a>
-          </li>
+          
+          {/* Adding SERVICES page dynamically */}
+          {menuItems
+            .filter(item => item.Menu_Name === 'SERVICES') // Filter to bind only SERVICES page
+            .map(item => (
+              <li className="nav-item" key={item.M_Id}>
+                <a className="nav-link" href={`/${item.Menu_Name.toLowerCase()}`} style={{ color: 'white' }}>
+                  {item.Menu_Name}
+                </a>
+              </li>
+          ))}
+          
           <li className="nav-item">
             <a className="nav-link" href="/contact" style={{ color: 'white' }}>CONTACT US</a>
           </li>
@@ -96,33 +125,36 @@ const NavbarComponent = ({ isFixed }) => {
   );
 };
 
-
 const Header = () => {
-const [isFixed, setIsFixed] = useState(false);
-const noticeRef = useRef(null);
-const handleScroll = () => {
-const noticeHeight = noticeRef.current.offsetHeight;
-if (window.scrollY > noticeHeight) {
-setIsFixed(true);
-} else {
-setIsFixed(false);
-}
+  const [isFixed, setIsFixed] = useState(false);
+  const noticeRef = useRef(null);
+
+  const handleScroll = () => {
+    const noticeHeight = noticeRef.current.offsetHeight;
+    if (window.scrollY > noticeHeight) {
+      setIsFixed(true);
+    } else {
+      setIsFixed(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return (
+    <div>
+      <div ref={noticeRef}>
+        <NoticeBar />
+      </div>
+      <div>
+        <NavbarComponent isFixed={isFixed} />
+      </div>
+    </div>
+  );
 };
-useEffect(() => {
-window.addEventListener('scroll', handleScroll);
-return () => {
-window.removeEventListener('scroll', handleScroll);
-};
-}, []);
-return (
-<div >
-   <div ref={noticeRef}>
-      <NoticeBar />
-   </div>
-   <div >
-      <NavbarComponent isFixed={isFixed} />
-   </div>
-</div>
-);
-};
+
 export default Header;
