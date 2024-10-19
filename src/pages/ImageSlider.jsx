@@ -53,3 +53,66 @@ const ImageSlider = () => {
 };
 
 export default ImageSlider;
+// import React, { useState, useEffect } from 'react';
+// import Carousel from 'react-bootstrap/Carousel';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+
+// const ImageSlider = () => {
+//   const [images, setImages] = useState([]);
+
+//   useEffect(() => {
+//     const fetchImages = async () => {
+//       try {
+//         const response = await fetch('https://kpenggs.com/business_guru_admin/Image_Gallery_Operations.php', {
+//           method: 'POST',
+//           headers: {
+//             'Content-Type': 'application/json',
+//           },
+//           body: JSON.stringify([
+//             {
+//               "Operation": "Display_Operation"
+//             }
+//           ])
+//         });
+        
+//         if (!response.ok) {
+//           throw new Error('Network response was not ok');
+//         }
+
+//         const data = await response.json();
+//         console.log('Fetched Image Data:', data);
+
+//         // Assuming the image URL is inside the `File_Path` field
+//         const fetchedImages = data.map(item => `https://kpenggs.com/business_guru_admin/Product_Image/${item.File_Path}`);
+//         setImages(fetchedImages);
+//       } catch (error) {
+//         console.error('Error fetching images:', error);
+//       }
+//     };
+
+//     fetchImages();
+//   }, []);
+
+//   return (
+//     <div className="image-slider-container">
+//       <Carousel
+//         className="custom-carousel" 
+//         prevIcon={<span className="carousel-control-prev-icon custom-prev-icon" />}
+//         nextIcon={<span className="carousel-control-next-icon custom-next-icon" />}
+//         controls
+//       >
+//         {images.map((image, index) => (
+//           <Carousel.Item key={index}>
+//             <img
+//               className="d-block "
+//               src={image}
+//               alt={`Slide ${index + 1}`}
+//             />
+//           </Carousel.Item>
+//         ))}
+//       </Carousel>
+//     </div>
+//   );
+// };
+
+// export default ImageSlider;

@@ -1,7 +1,38 @@
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Social from "../common/Social";
 
 const Footer = () => {
+  const [visitors, setVisitors] = useState(0);
+
+  // Function to increment the visitor count
+  useEffect(() => {
+    // Check if the visitor count was already updated in this session
+    const visitorUpdated = sessionStorage.getItem('visitorUpdated');
+    
+    if (!visitorUpdated) {
+      const currentVisitors = localStorage.getItem('visitors');
+      if (currentVisitors) {
+        // If visitors count exists in localStorage, increment it by 1
+        const newVisitorsCount = parseInt(currentVisitors) + 1;
+        localStorage.setItem('visitors', newVisitorsCount);
+        setVisitors(newVisitorsCount);
+      } else {
+        // If visitors count does not exist, initialize it with 1
+        localStorage.setItem('visitors', 1);
+        setVisitors(1);
+      }
+      // Set a flag in sessionStorage to avoid multiple increments in the same session
+      sessionStorage.setItem('visitorUpdated', 'true');
+    } else {
+      // If the visitor count has already been updated in this session, just load it
+      const currentVisitors = localStorage.getItem('visitors');
+      if (currentVisitors) {
+        setVisitors(parseInt(currentVisitors));
+      }
+    }
+  }, []);
+
   const footerLinks = [
     {
       title: "Quick Links",
@@ -20,7 +51,7 @@ const Footer = () => {
 
   return (
     <div className="row text-light">
-      <div className="col-lg-6 col-md-6 col-sm-12 address-section1" style={{padding:"2%"}}>
+      <div className="col-lg-6 col-md-6 col-sm-12 address-section1" style={{ padding: "2%" }}>
         <h4 className="text-light">Address</h4>
         <p>
           <i className="fa fa-map-marker-alt me-2"></i>Office No, 3 &amp; 4 Nanded City
@@ -48,34 +79,35 @@ const Footer = () => {
 
       {footerLinks.map((link, index) => (
         <div key={index} className={link.classes}>
-          <div className="col-lg-6 col-md-6 col-sm-12 quick-links" style={{padding:"5%"}}>
-          <h5 className="footer-title1 tx-dark fw-500 text-light" >{link.title}</h5>
-          <ul className="footer-nav-link style-none text-light">
-            {link.links.map((linkItem, index) => (
-              <li key={index}>
-                <Link to={linkItem.href} className="text-link">
-                  &gt; {linkItem.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          </div>
-            
-          <div className="col-lg-6 col-md-6 col-sm-12 quick-links" style={{padding:"5%"}}>
-          <h5 className="footer-title1 tx-dark fw-500 text-light">{link.title1}</h5>
-          <ul className="footer-nav-link style-none text-light">
-            {link.links1.map((linkItem, index) => (
-              <li key={index}>
-                <Link to={linkItem.href} className="text-link">
-                  &gt; {linkItem.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="col-lg-6 col-md-6 col-sm-12 quick-links" style={{ padding: "5%" }}>
+            <h5 className="footer-title1 tx-dark fw-500 text-light">{link.title}</h5>
+            <ul className="footer-nav-link style-none text-light">
+              {link.links.map((linkItem, index) => (
+                <li key={index}>
+                  <Link to={linkItem.href} className="text-link">
+                    &gt; {linkItem.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
+          <div className="col-lg-6 col-md-6 col-sm-12 quick-links" style={{ padding: "5%" }}>
+            <h5 className="footer-title1 tx-dark fw-500 text-light">{link.title1}</h5>
+            <ul className="footer-nav-link style-none text-light">
+              {link.links1.map((linkItem, index) => (
+                <li key={index}>
+                  <Link to={linkItem.href} className="text-link">
+                    &gt; {linkItem.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Visitors Section */}
           <div className="visitors">
-            <span>85+</span>
+            <span>{visitors}+</span>
             <p>visitors</p>
           </div>
         </div>
@@ -88,7 +120,7 @@ const Footer = () => {
           </Link>
         </div>
 
-        <p style={{ textAlignLast: "start", marginTop:"2%",padding:"5%" }}>
+        <p style={{ textAlignLast: "start", marginTop: "2%", padding: "5%" }}>
           KP Engineering Services was founded in 2020 by a team of professionals with over 15 years
           of experience in American Engineering and detailing. We deliver flawless Detailing output with
           precision and quick turnaround schedules that meet our clients' design and detailing requirements.
