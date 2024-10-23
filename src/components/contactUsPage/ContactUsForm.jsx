@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import emailjs from 'emailjs-com';  // Import EmailJS
 
 const ContactUsForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ const ContactUsForm = () => {
   });
   const [buttonClicked, setButtonClicked] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); // State to store any error messages
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,18 +24,41 @@ const ContactUsForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
     setButtonClicked(true);
-    setShowMessage(true);
 
-    setTimeout(() => {
+    // Define the email parameters, including the user's email as the recipient
+    const emailParams = {
+      from_name: 'PK Engineering',        // Sender's name (can be static)
+      to_name: formData.name,             // User's name
+      to_email: formData.email,           // User's email (recipient)
+      subject: formData.subject,          // Email subject
+      message: formData.message,          // Email message
+      phone: formData.phone               // Phone number (optional)
+    };
+
+    // Send the email using EmailJS
+    emailjs.send(
+      'service_4fs7o8n',      // Service ID
+      'template_armu5yn',     // Template ID
+      emailParams,            // Email parameters (form data)
+      'BSkrlYYhus_OeYAbB'     // Public Key (User ID)
+    )
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+      setShowMessage(true); // Show success modal
+    }, (error) => {
+      console.error('FAILED...', error);
+      setErrorMessage('Failed to send email. Please try again later.'); // Handle error
+    })
+    .finally(() => {
       setButtonClicked(false);
-    }, 100);
+    });
   };
 
   const handleCloseMessage = () => {
     setShowMessage(false);
     setButtonClicked(false);
+    setErrorMessage('');  // Clear any error message when the modal is closed
   };
 
   return (
@@ -105,13 +130,14 @@ const ContactUsForm = () => {
           type="submit" 
           className={`btn ${buttonClicked ? 'btn-light' : 'btn-primary'}`} 
           style={{ background: buttonClicked ? 'white' : '#f88f4a', color: buttonClicked ? '#f88f4a' : 'white' }}
+          disabled={buttonClicked} // Disable button while sending
         >
           <i className="fas fa-paper-plane" 
           style={{ background: buttonClicked ? 'white' : '#f88f4a', color: buttonClicked ? '#f88f4a' : 'white' }}></i> Send
         </button>
       </form>
 
-      {/* Popup Message */}
+      {/* Success/Failure Message Modal */}
       {showMessage && (
         <div className="modal show" style={{ display: 'block' }}>
           <div className="modal-dialog">
@@ -125,9 +151,23 @@ const ContactUsForm = () => {
           </div>
         </div>
       )}
+
+      {/* Error Message Modal */}
+      {errorMessage && (
+        <div className="modal show" style={{ display: 'block' }}>
+          <div className="modal-dialog">
+            <div className="modal-content" style={{ padding: '5%' }}>
+              <h5 className="modal-title">Error</h5>
+              <p>{errorMessage}</p>
+              <button type="button" className="btn btn-danger popup-button" onClick={handleCloseMessage}>
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default ContactUsForm;
-

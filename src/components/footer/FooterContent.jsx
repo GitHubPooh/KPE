@@ -1,36 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Social from "../common/Social";
 
 const Footer = () => {
   const [visitors, setVisitors] = useState(0);
 
-  // Function to increment the visitor count
   useEffect(() => {
-    // Check if the visitor count was already updated in this session
-    const visitorUpdated = sessionStorage.getItem('visitorUpdated');
-    
-    if (!visitorUpdated) {
-      const currentVisitors = localStorage.getItem('visitors');
-      if (currentVisitors) {
-        // If visitors count exists in localStorage, increment it by 1
-        const newVisitorsCount = parseInt(currentVisitors) + 1;
-        localStorage.setItem('visitors', newVisitorsCount);
-        setVisitors(newVisitorsCount);
-      } else {
-        // If visitors count does not exist, initialize it with 1
-        localStorage.setItem('visitors', 1);
-        setVisitors(1);
-      }
-      // Set a flag in sessionStorage to avoid multiple increments in the same session
-      sessionStorage.setItem('visitorUpdated', 'true');
+    // Check if the visitor count has already been set in sessionStorage
+    const currentVisitors = sessionStorage.getItem('visitors');
+
+    if (currentVisitors) {
+      // If there are already visitors recorded in sessionStorage, set the state
+      setVisitors(parseInt(currentVisitors));
     } else {
-      // If the visitor count has already been updated in this session, just load it
-      const currentVisitors = localStorage.getItem('visitors');
-      if (currentVisitors) {
-        setVisitors(parseInt(currentVisitors));
-      }
+      // If no visitors recorded, initialize it with 0
+      sessionStorage.setItem('visitors', 0); // Initialize with 0
     }
+
+    // Increment the visitor count by 1
+    const updatedVisitorsCount = parseInt(sessionStorage.getItem('visitors')) + 1;
+    sessionStorage.setItem('visitors', updatedVisitorsCount); // Update sessionStorage
+    setVisitors(updatedVisitorsCount); // Update the state
+
   }, []);
 
   const footerLinks = [

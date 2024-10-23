@@ -16,6 +16,7 @@
     "bootstrap": "^5.3.3",
     "caniuse-lite": "^1.0.30001580",
     "carousel": "^0.0.3",
+    "emailjs-com": "^3.2.0",
     "photoswipe": "^5.4.3",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
