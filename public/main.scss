@@ -6,6 +6,8 @@
 @import "./fonts/font-awesome/css/all.min.scss";
 
 // main css
+@import "./scss/supplierForm";
+
 @import "./scss/custom-animation";
 @import "./scss/framework";
 @import "./scss/navbar";
@@ -14,12 +16,5 @@
 @import "./scss/custom-next";
 @import "./scss/responsive";
 @import "./scss/cutomnav";
-@import "./scss/customcards";
-@import "./scss/ImageSlider";
 @import "./scss/footer";
-@import "./scss/aboutUs";
-@import "./scss/landingPageOther";
-@import "./scss/project";
-@import "./scss/contactUs";
-@import "./scss/servicesPage";
-  
+@import "./scss/customerCard"

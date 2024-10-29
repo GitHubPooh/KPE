@@ -3,8 +3,7 @@ const Seo = ({ pageTitle }) => (
   <HelmetProvider>
     <Helmet>
       <title>
-        KP-Engineering-Services
-        kpenggs.com
+        Supplier Master
       </title>
     </Helmet>
   </HelmetProvider>

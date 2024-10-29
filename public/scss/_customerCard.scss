@@ -1,0 +1,130 @@
+html, body {
+    height: 100%; /* Ensures the body takes up full height */
+    margin: 0; /* Removes default margin */
+  }
+  
+  body {
+    display: flex; /* Use flexbox layout */
+    flex-direction: column; /* Align items in a column */
+  }
+  
+  .custom-container {
+    background-color:aqua; /* Light Turquoise background */
+    color: #000; /* Black text */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  }
+  
+  .row {
+    margin-bottom: 15px;
+  }
+  
+  h4 {
+    color: #000; 
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+  label {
+    font-weight: bold;
+  }
+  
+  .form-control-sm {
+    border-radius: 5px; /* Rounded input fields */
+    border-color: #ccc; /* Light gray border */
+  }
+  
+  .text-danger {
+    color: red; /* Red for mandatory indication */
+  }
+  
+  .footer {
+    margin-top: 30px;
+    margin-bottom: -28px;
+    background-color: #0069D9;
+    padding:10px;
+    position: relative;
+    margin-left: -1px;
+    text-align: center;
+  }
+  .footer button {
+    background-color: black; 
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .footer button:hover {
+    background-color: white;
+    color:black;
+  }
+
+  .success-snackbar {
+    background-color: #4caf50; 
+    color: white;
+    
+  }
+  
+  .error-snackbar {
+    background-color: #f44336; 
+    color: white;
+  }
+  .modal-custom {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    /* background-color: #f9f9f9; */
+    border-radius: 5px;
+    padding: 20px;
+    width: 500px;
+    margin: 10px auto;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-custom h4 {
+    margin-top: 0;
+  }
+  
+  .modal-custom p {
+    margin-bottom: 0;
+  }
+  
+  .modal-custom button {
+    margin-right: 10px;
+  }
+  
+  .modal-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .modal-table th,
+  .modal-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .modal-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  .modal-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .modal-table tr:hover {
+    background-color: #ddd;
+  }
+  .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 10px;
+    margin-top:10px;
+}

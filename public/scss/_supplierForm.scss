@@ -1,0 +1,95 @@
+.supplier-form-container {
+  background-color: #fdfdeb;
+}
+
+.form-group {
+  margin-bottom: -0.6rem;
+  align-items: center;
+}
+
+.form-control {
+  height: 17px;
+  border-radius: 0%;
+  border: 1px solid transparent;
+  background-color: #f8e4f3;
+}
+
+.form-control.black-bg {
+  background-color: black;
+  border: 1px solid white;
+  color: white;
+}
+.supplier-form-container {
+    background-color: #fdfdeb;
+  
+    label {
+      font-size: 16px;
+    }
+    .col-form-label{
+        border-left: 15px solid #fdfdeb;
+    }
+    .form-group{
+        margin-bottom: -0.6rem;
+        align-items: center;
+    }
+    .form-control {
+      background-color: #f8e4f3;
+      height: 17px;
+      border-radius: 0%;
+      border: none;
+    }
+    .picture{
+        height: 75px;
+        margin-top: 0.6rem;
+        margin-bottom: -0.5rem;
+    }
+    .file-select-box{
+        width: "25px";
+        height: "1px";
+        background-color: black;
+        text-decoration-color: "white";
+        font-size: "18px";
+        display: "flex";
+        align-items: "center";
+        justify-content: "center";
+        cursor: "pointer"
+    }
+    .blurred-text {
+        color: rgba(0, 0, 0, 0.3); /* Optional: make text slightly lighter for effect */
+    }
+    .btn {
+        background-color: black;
+        color: white;
+        font-size: 12px;
+        border: none;
+        border-radius: 0px;
+        padding-top: 1px;
+        padding-bottom: 1px;
+      }
+    .form-footer {
+      background-color: #339704;
+      padding: 10px;
+  
+      .btn {
+        background-color: black;
+        color: white;
+        font-size: 13px;
+        font-weight: 500;
+        border: none;
+        width: 98px;
+        height: 30px;
+        border-radius: 0px;
+        
+      }
+      .btn:hover{
+        background-color:  white;
+        color: black;
+      }
+    }
+    .text-danger {
+      font-size: 12px;
+      font-weight: 700;
+    }
+  }
+  
+  

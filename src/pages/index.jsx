@@ -1,5 +1,5 @@
 import Wrapper from "../layout/wrapper";
-import Landing from "./landing";
+import Landing from "./CustomerForm";
 
 const MainRoot = () => {
   return (

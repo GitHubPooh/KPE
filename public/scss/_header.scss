@@ -1,56 +1,52 @@
-.top_heading1 {
-  font-size: 26px;
-  font-weight: 700;
-  color: #555555;
-  font-display: bold;
+.header-container {
+  display:flex;
+  flex-direction: column;
+  background-color: #339704; /* Green background color */
+  font-family: Arial, sans-serif;
+  color: black;
+  padding: 6px;
+  margin-bottom: -20px;
 }
 
-.top_heading_design1 {
-  font-size: 18px;
-  font-weight: 700;
-  font-weight:bold;
-  color: #555555;
+.left-column, .right-column {
+  justify-content: space-between;
+}
+.companyName{
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 750;
 }
 
-@media (max-width :912px) {
-  .navbar-brand {
-    vertical-align: middle;
-    height: 85px;
-    margin-left: -10px;
-    box-sizing: border-box;
-    flex: 0 0 auto;
-    width: 30%;
-  }
-  .top_heading1 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #555555;
-    font-display: bold;
-    margin-bottom: 27px;
-  }
-  
-  .top_heading_design1 {
-    font-size: 14px;
-    font-weight: 700;
-    font-weight:bold;
-    color: #555555;
-    margin-bottom: 23px;
-  }
-}
-.navbar-nav .staticmenu {
-  font-size: 18px;
-  text-transform: uppercase;
+.left-column {
+  color: black;
+  font-weight: bold;
 }
 
-.btn-sm-square {
-  border-radius: 0;
-  padding: 5px;
+.left-column p {
+  margin: 0;
+  font-size: 12px;
+  margin-top: -10px;
+  font-weight: 400;
+}
+p.formName{
+  font-size: 16px;
+  font-weight: 750;
+  margin-top: 10px;
 }
 
-.bg-light {
-  background-color: #f8f9fa !important;
+.right-column {
+  text-align: left;
+  color: black;
+  font-weight: bold;
 }
 
-.navbar-toggler {
-  background-color: #343a40;
+.right-column p {
+  margin-top: -10px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+p.companyNumber{
+  margin-top: -20px;
+  font-size: 12px;
 }
