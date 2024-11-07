@@ -13,14 +13,7 @@ const StaticSupplierForm = () => {
   const openFileDialog = () => {
     document.getElementById("pictureInput").click();
   };
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, picture: e.target.files[0] });
-  };
+ 
   return (
     <>
     <Header />
@@ -71,11 +64,13 @@ const StaticSupplierForm = () => {
                 </div>
               </div>
             
-              <div className="form-group row align-items-center">
+              <div className="form-group row ">
                 <label className="col-sm-4 col-form-label">Mobile</label>
-                <div className="col-sm-8 d-flex">
-                  <input type="text" className="form-control" readOnly />
-                  <span className="text-danger ml-2 align-self-center">*Mandatory</span>
+                <div className="col-sm-6">
+                  <input className="form-control" style={{width:"285px"}} readOnly />
+                </div>
+                <div className="col-sm-2">
+                <span className="text-danger" style={{marginLeft:"60px"}}>*Mandatory</span>
                 </div>
               </div>
               <div className="form-group row">
@@ -101,10 +96,10 @@ const StaticSupplierForm = () => {
               </div> <div className="form-group row align-items-center">
                 <label className="col-sm-4 col-form-label">GST No.</label>
                 <div className="col-sm-6">
-                  <input className="form-control" readOnly />
+                  <input className="form-control" style={{width:"285px"}} readOnly />
                 </div>
                 <div className="col-sm-2">
-                  <button type="button" className="btn btn-dark">Check</button>
+                  <button type="button" className="btn btn-dark"style={{marginLeft:"65px"}}>Check</button>
                 </div>
               </div><div className="form-group row">
                 <label className="col-sm-4 col-form-label">Type of Dealer</label>
