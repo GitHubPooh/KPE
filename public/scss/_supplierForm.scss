@@ -1,5 +1,13 @@
 .supplier-form-container {
     background-color: #fdfdeb;
+    .black-bg {
+      background-color: black;
+      color: white;
+    }
+    
+    .gray-text {
+      color: gray;
+    }
   
     label {
       font-size: 16px;
