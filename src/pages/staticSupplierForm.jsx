@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../components/header/Header";
+import ModalComponent from "@/components/otherButtons/modify";
 
 const StaticSupplierForm = () => {
   const [isNewMode, setIsNewMode] = useState(false);
+  const [isModifyMode, setIsModifyMode] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isSearchEditable, setIsSearchEditable] = useState(false);
   const [formData, setFormData] = useState({
     supplierName: "",
     other1: "",
@@ -27,7 +32,6 @@ const StaticSupplierForm = () => {
   });
 
   const [activeField, setActiveField] = useState("");
-  const [showModal, setShowModal] = useState(false);
 
   const formFields = [
     "supplierName", "other1", "other2", "address", "city", "state", "postalCode", "mobile",
@@ -70,6 +74,8 @@ const StaticSupplierForm = () => {
 
   const handleNewClick = () => {
     setIsNewMode(true);
+    setIsModifyMode(false);
+    setShowModal(false);
     setFormData({
       supplierName: "",
       other1: "",
@@ -93,23 +99,30 @@ const StaticSupplierForm = () => {
     });
     setActiveField("supplierName"); 
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
-
-  const handleCancel = () => {
-    setIsNewMode(false);
-    setActiveField("");
-  };
-
+  
   const handleModifyClick = () => {
+    setIsModifyMode(true);
+    setIsNewMode(false);
     setShowModal(true);
+    setIsSearchEditable(true); // Enable search bar editing
+    setSearchQuery(""); // Clear search input
   };
 
   const handleModalClose = () => {
     setShowModal(false);
+    setIsModifyMode(false);
+    setIsSearchEditable(false); // Reset search editability when closing modal
+  };
+
+  const handleCancel = () => {
+    setIsNewMode(false);
+    setIsModifyMode(false);
+    
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
   };
 
   return (
@@ -273,58 +286,33 @@ const StaticSupplierForm = () => {
           <div className="form-footer text-center mt-4">
             {isNewMode ? (
               <>
-                <button type="submit" className="btn btn-primary mx-1" id="saveButton"> Save </button>
-                <button type="button" className="btn btn-primary mx-1" onClick={handleCancel} id="cancelButton"> Cancel </button>
+                <button type="submit" className="btn btn-primary mx-1">Save</button>
+                <button type="button" className="btn btn-primary mx-1" onClick={handleCancel}>Cancel</button>
+              </>
+            ) : isModifyMode ? (
+              <>
+                <button type="button" className="btn btn-primary mx-1" onClick={handleModalClose}>Modify</button>
+                <button type="button" className="btn btn-primary mx-1" onClick={handleModalClose}>Cancel</button>
               </>
             ) : (
               <>
-                <button type="button" className="btn btn-primary mx-1" onClick={handleNewClick}> New </button>
-                <button type="button" className="btn btn-primary mx-1" onClick={handleModifyClick}> Modify </button>
-                <button type="button" className="btn btn-primary mx-1"> Delete </button>
-                <button type="button" className="btn btn-primary mx-1"> View </button>
-                <button type="button" className="btn btn-primary mx-1"> Exit </button> </>
+                <button type="button" className="btn btn-primary mx-1" onClick={handleNewClick}>New</button>
+                <button type="button" className="btn btn-primary mx-1" onClick={handleModifyClick}>Modify</button>
+                <button type="button" className="btn btn-primary mx-1">Delete</button>
+                <button type="button" className="btn btn-primary mx-1">View</button>
+                <button type="button" className="btn btn-primary mx-1">Exit</button>
+                <button type="button" className="btn btn-primary mx-1">Excel Import</button>
+              </>
             )}
           </div>
         </form>
       </div>
 
-      {/* Modal for Modify */}
-      <div className={`modal fade ${showModal ? "show" : ""}`} style={{ display: showModal ? "block" : "none" }} tabIndex="-1" role="dialog" aria-labelledby="modifyModalLabel" aria-hidden={!showModal}>
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="modifyModalLabel">Modify Supplier</h5>
-              <button type="button" className="close" onClick={handleModalClose} aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <div className="form-group">
-                <label htmlFor="supplierName">Name</label>
-                <input type="text" className="form-control" id="supplierName" placeholder="Enter Name" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="mobileNo">Mobile No.</label>
-                <input type="text" className="form-control" id="mobileNo" placeholder="Enter Mobile No." />
-              </div>
-              <div className="form-group">
-                <label htmlFor="search">Search</label>
-                <input type="text" className="form-control" id="search" placeholder="Search..." />
-              </div>
-              <ul className="list-group">
-                {/* Example list items, replace with dynamic data as needed */}
-                <li className="list-group-item">Supplier 1</li>
-                <li className="list-group-item">Supplier 2</li>
-                <li className="list-group-item">Supplier 3</li>
-              </ul>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={handleModalClose}>Cancel</button>
-              <button type="button" className="btn btn-primary">Modify</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ModalComponent
+          showModal={showModal}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          isSearchEditable={isSearchEditable} />
     </>
   );
 };
