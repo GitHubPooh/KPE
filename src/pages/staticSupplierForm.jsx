@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Header from "../components/header/Header";
 import ModalComponent from "@/components/otherButtons/modify";
+import ConfirmationModal from "@/components/otherButtons/confirmtionModal";
 
 const StaticSupplierForm = () => {
   const [isNewMode, setIsNewMode] = useState(false);
   const [isModifyMode, setIsModifyMode] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchEditable, setIsSearchEditable] = useState(false);
   const [formData, setFormData] = useState({
-    supplierName: "",
+    supplierName:"",
     other1: "",
     other2: "",
     address: "",
@@ -57,11 +59,7 @@ const StaticSupplierForm = () => {
       e.preventDefault();
       const nextField = formFields[fieldIndex + 1];
       if (nextField) {
-        if (nextField === "saveButton" || nextField === "cancelButton ") {
-          document.getElementById(nextField).focus();
-        } else {
-          document.getElementsByName(nextField)[0]?.focus();
-        }
+        document.getElementsByName(nextField)[0]?.focus();
       }
     } else if (["ArrowUp", "ArrowLeft"].includes(e.key)) {
       e.preventDefault();
@@ -73,16 +71,61 @@ const StaticSupplierForm = () => {
   };
 
   const handleNewClick = () => {
-    setIsNewMode(true);
-    setIsModifyMode(false);
+  setIsNewMode(true);
+  setIsModifyMode(false);
+  setShowModal(false);
+  setFormData({
+    supplierName:"",
+    other1: "",
+    other2: "",
+    address: "",
+    city: "",
+    state: "Maharashtra",
+    postalCode: "",
+    mobile: "",
+    phoneNo: "",
+    fax: "",
+    email: "",
+    website: "",
+    gstNo: "",
+    supplierCode: "",
+    areaName: "",
+    panCardNo: "",
+    aadharCard: "",
+    tdsEligibility: "Not Eligible",
+    typeOfDealer: "UnRegister",
+  });
+  setActiveField("supplierName");
+  setTimeout(() => {
+    document.getElementsByName("supplierName")[0]?.focus(); // Automatically focus on Supplier Name
+  }, 0);
+};
+  
+const handleSelectItem = (item) => {
+  setFormData({ supplierName: item.name, mobile: item.mobile });
+  setShowModal(false);
+  setIsModifyMode(true);
+};
+
+  const handleModifyClick = () => {
+    setIsModifyMode(true);
+    setIsNewMode(false);
+    setShowModal(true);
+    setIsSearchEditable(true); // Enable search bar editing
+    setSearchQuery(""); // Clear search input
+  };
+
+  const handleModalClose = () => {
     setShowModal(false);
+    setIsModifyMode(false);
+    setIsSearchEditable(false); // Reset search editability when closing modal
     setFormData({
-      supplierName: "",
+      supplierName:"",
       other1: "",
       other2: "",
       address: "",
       city: "",
-      state: "Maharashtra",
+      state: "",
       postalCode: "",
       mobile: "",
       phoneNo: "",
@@ -96,35 +139,68 @@ const StaticSupplierForm = () => {
       aadharCard: "",
       tdsEligibility: "Not Eligible",
       typeOfDealer: "UnRegister",
-    });
-    setActiveField("supplierName"); 
+    }); // Clear all fields
   };
-  
-  const handleModifyClick = () => {
-    setIsModifyMode(true);
-    setIsNewMode(false);
-    setShowModal(true);
-    setIsSearchEditable(true); // Enable search bar editing
-    setSearchQuery(""); // Clear search input
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
-    setIsModifyMode(false);
-    setIsSearchEditable(false); // Reset search editability when closing modal
-  };
-
   const handleCancel = () => {
     setIsNewMode(false);
     setIsModifyMode(false);
+    setFormData((prevData) => ({
+      ...prevData,
+      other1: "",
+      other2: "",
+      address: "",
+      city: "",
+      state: "",
+      postalCode: "",
+      mobile: "",
+      phoneNo: "",
+      fax: "",
+      email: "",
+      website: "",
+      gstNo: "",
+      supplierCode: "",
+      areaName: "",
+      panCardNo: "",
+      aadharCard: "",
+      tdsEligibility: "Not Eligible",
+      typeOfDealer: "UnRegister",
+    }));
     
+    // Reset the activeField to clear any specific styling
+    setActiveField("");
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
   };
+  
+  // Trigger confirmation dialog on Modify button click in modal
+  const handleModifyConfirm = () => {
+    setShowConfirmation(true);
+  };
+ // Handle confirmation response
+ const handleConfirmYes = () => {
+  // Update JSON data (e.g., save formData to file or API)
+  fetch("/data.json", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData),
+  })
+    .then(response => response.json())
+    .then(data => {
+      console.log("Data updated:", data);
+      setShowConfirmation(false);
+      handleModalClose();
+    })
+    .catch(error => console.error("Error updating data:", error));
+};
 
+const handleConfirmNo = () => {
+  setShowConfirmation(false);
+  handleModalClose();
+};
   return (
     <>
       <Header />
@@ -132,7 +208,24 @@ const StaticSupplierForm = () => {
         <form onSubmit={handleSubmit}>
           <div className="row">
             <div className="col-md-4">
-              {["supplierName", "other1", "other2", "address", "city", "state", "postalCode"].map((field, index) => (
+              <div className="form-group row">
+                <label className="col-sm-4 col-form-label">Supplier Name</label>
+                <div className="col-sm-8">
+                  <input
+                    type="text"
+                    className={`form-control ${activeField === "supplierName" ? "black-bg" : isNewMode ? "" : "gray-text"}`}
+                    name="supplierName"
+                    value={formData.supplierName}
+                    onChange={handleChange}
+                    onFocus={() => handleFocus("supplierName")}
+                    onBlur={handleBlur}
+                    onKeyDown={(e) => handleKeyDown(e, 0)}
+                    readOnly={!isNewMode && !isModifyMode}
+                  />
+                </div>
+              </div>
+
+              {["other1", "other2", "address", "city", "state", "postalCode"].map((field, index) => (
                 <div className="form-group row" key={field}>
                   <label className="col-sm-4 col-form-label">
                     {field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
@@ -146,8 +239,8 @@ const StaticSupplierForm = () => {
                       onChange={handleChange}
                       onFocus={() => handleFocus(field)}
                       onBlur={handleBlur}
-                      onKeyDown={(e) => handleKeyDown(e, index)}
-                      readOnly={!isNewMode}
+                      onKeyDown={(e) => handleKeyDown(e, index + 1)} 
+                      readOnly={!isNewMode && !isModifyMode}
                     />
                   </div>
                 </div>
@@ -165,7 +258,7 @@ const StaticSupplierForm = () => {
                     onFocus={() => handleFocus("mobile")}
                     onBlur={handleBlur}
                     onKeyDown={(e) => handleKeyDown(e, formFields.indexOf("mobile"))}
-                    readOnly={!isNewMode}
+                    readOnly={!isNewMode && !isModifyMode}
                   />
                 </div>
                 <div className="col-sm-1 d-flex align-items-center">
@@ -275,7 +368,7 @@ const StaticSupplierForm = () => {
                       onFocus={() => handleFocus(field)}
                       onBlur={handleBlur}
                       onKeyDown={(e) => handleKeyDown(e, formFields.indexOf(field))}
-                      readOnly={!isNewMode || field === "tdsEligibility"}
+                      readOnly={!isNewMode && !isModifyMode || field === "tdsEligibility"}
                     />
                   </div>
                 </div>
@@ -291,7 +384,7 @@ const StaticSupplierForm = () => {
               </>
             ) : isModifyMode ? (
               <>
-                <button type="button" className="btn btn-primary mx-1" onClick={handleModalClose}>Modify</button>
+                <button type="button" className="btn btn-primary mx-1" onClick={handleModifyConfirm}>Modify</button>
                 <button type="button" className="btn btn-primary mx-1" onClick={handleModalClose}>Cancel</button>
               </>
             ) : (
@@ -312,7 +405,13 @@ const StaticSupplierForm = () => {
           showModal={showModal}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
-          isSearchEditable={isSearchEditable} />
+          isSearchEditable={isSearchEditable}
+          onItemSelect={handleSelectItem} />
+
+      <ConfirmationModal
+        show={showConfirmation}
+        onConfirm={handleConfirmYes}
+        onCancel={handleConfirmNo} />
     </>
   );
 };

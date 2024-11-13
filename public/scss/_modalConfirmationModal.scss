@@ -1,0 +1,109 @@
+//........................Modify modal css ........................
+.modal-overlay {
+    position: absolute;
+    top: 84px;
+    left: 0;
+    width: 100%;
+    max-width: 570px;
+    max-height: 488px;
+    height: 100%;
+    background-color: #f8e4f3;
+    padding: 0px;
+    z-index: 1060;
+    border: 0.2px solid gray ;
+  }
+  .highlight {
+    background-color: yellow;
+  }
+    
+  .modal-header table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: -3px;
+  }
+  
+  .modal-header th {
+    background-color: #5d8114;
+    color: black;
+    text-align: center;
+    margin: top 0px;
+  }
+  
+  .search-input {
+    width: 100%;
+    height: 20px;
+  }
+  
+  .modal-body table {
+    width: 95%;
+    border-collapse: collapse;
+    background-color:#f8e4f3;
+    font-weight: 650 ;
+    font-size: 13px;
+    font-family:'Gill Sans';
+    margin-left: 10px;
+  }
+  
+  .modal-body td {
+    padding: 0px;
+    color: black;
+  }
+ 
+  //........................Confirmation modal css ........................
+  .modal-overlay1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent dark background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1050;
+}
+
+.modal-dialog1 {
+    max-width: 400px;
+    border: 1px solid #ccc; /* Border for Windows dialog appearance */
+    border-radius: 4px;
+}
+
+.modal-content1 {
+    padding: 10px;
+}
+
+.modal-header1 {
+    border-bottom: none; /* No border for header */
+    padding-bottom: 0;
+}
+
+.modal-title1 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.modal-body1 {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.modal-footer1 {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-primary1 {
+    background-color: #0078d4; /* Blue color similar to Windows Yes button */
+    border-color: #0078d4;
+    color: white;
+}
+
+.btn-secondary1 {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    color: black;
+}
+
