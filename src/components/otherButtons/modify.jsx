@@ -4,26 +4,44 @@ import "bootstrap/dist/css/bootstrap.min.css";
 const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditable, onItemSelect }) => {
   const [filteredItems, setFilteredItems] = useState([]);
   const [items, setItems] = useState([]);
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(22); 
 
-  // Fetch data when modal opens
   useEffect(() => {
     if (showModal) {
-      fetch("/data.json")
-        .then(response => response.json())
-        .then(data => setItems(data))
+      fetch("https://businessguruerp.com/BG_API_NEW/LEDGER_MASTER_Display_API.php", {
+        method: 'POST',
+        body: new URLSearchParams({
+          appKeyCodeKey: "1013",
+          firmCodeKey: "3"
+        }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        }
+      })
+        .then(response => response.text())
+        .then(html => {
+          const tempData = parseHTMLResponse(html);
+          setItems(tempData);
+        })
         .catch(error => console.error("Error fetching data:", error));
     }
   }, [showModal]);
 
-  // Focus on search input if editable
+  const parseHTMLResponse = (html) => {
+    const data = JSON.parse(html);
+    return data.map(item => ({
+      name: item.Comapy_Name,
+      mobile: item.Mobile_No || item.Mobile_Number,
+    }));
+  };
+
   useEffect(() => {
     if (showModal && isSearchEditable) {
       document.querySelector(".search-input").focus();
     }
   }, [showModal, isSearchEditable]);
 
-  // Filter items based on search query
   useEffect(() => {
     const query = searchQuery.toLowerCase();
     const filtered = items.filter(item => {
@@ -35,31 +53,41 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
       );
     });
     setFilteredItems(filtered);
-    setHighlightedIndex(-1);
+    setHighlightedIndex(0);
   }, [searchQuery, items]);
 
-  // Keyboard navigation for highlighting rows
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "ArrowDown") {
-        setHighlightedIndex(prevIndex => Math.min(prevIndex + 1, filteredItems.length - 1));
+        setHighlightedIndex((prevIndex) => {
+          const newIndex = Math.min(prevIndex + 1, filteredItems.length - 1);
+          if (newIndex >= visibleCount) {
+            setVisibleCount(visibleCount + 1); 
+          }
+          return newIndex;
+        });
       } else if (e.key === "ArrowUp") {
-        setHighlightedIndex(prevIndex => Math.max(prevIndex - 1, 0));
-      } if (e.key === "Enter" && highlightedIndex >= 0) {
+        setHighlightedIndex((prevIndex) => {
+          const newIndex = Math.max(prevIndex - 1, 0);
+          if (newIndex < visibleCount - 22) {
+            setVisibleCount(visibleCount - 1); 
+          }
+          return newIndex;
+        });
+      } else if (e.key === "Enter" && highlightedIndex >= 0) {
         e.preventDefault();
         onItemSelect(filteredItems[highlightedIndex]);
       }
-      
     };
+
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [filteredItems, highlightedIndex, onItemSelect]);
+  }, [filteredItems, highlightedIndex, onItemSelect, visibleCount]);
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Highlight matching text
   const highlightText = (text, query) => {
     const startIndex = text.toLowerCase().indexOf(query.toLowerCase());
     if (startIndex === -1) return text;
@@ -76,8 +104,6 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
   if (!showModal) return null;
 
   return (
-    <>
-    
     <div className="modal-overlay">
       <div className="modal-content">
         <div className="modal-header">
@@ -100,14 +126,15 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
           />
           <table>
             <tbody>
-              {filteredItems.map((item, index) => (
+              {filteredItems.slice(visibleCount - 22, visibleCount).map((item, index) => (
                 <tr
-                  key={index}
+                  key={index + (visibleCount - 22)}
                   onClick={() => onItemSelect(item)}
                   style={{
-                    backgroundColor: index === highlightedIndex
-                      ? (index % 2 === 0 ? "blue" : "pink")
-                      : "transparent",
+                    backgroundColor:
+                      index + (visibleCount - 22) === highlightedIndex
+                        ? (index % 2 === 0 ? "blue" : "pink")
+                        : "transparent",
                     cursor: "pointer",
                   }}
                 >
@@ -120,7 +147,6 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
         </div>
       </div>
     </div>
-    </>
   );
 };
 
