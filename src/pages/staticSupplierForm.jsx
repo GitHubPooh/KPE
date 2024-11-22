@@ -12,19 +12,19 @@ const StaticSupplierForm = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearchEditable, setIsSearchEditable] = useState(false);
   const [formData, setFormData] = useState({
-    supplierName:"",
+    Comapy_Name:"",
     other1: "",
     other2: "",
-    address: "",
+    Addr1: "",
     city: "",
     state: "Maharashtra",
     postalCode: "",
-    mobile: "",
+    Mobile_No: "",
     phoneNo: "",
     fax: "",
-    email: "",
+    mailID: "",
     website: "",
-    gstNo: "",
+    gst: "",
     supplierCode: "",
     areaName: "",
     panCardNo: "",
@@ -36,8 +36,8 @@ const StaticSupplierForm = () => {
   const [activeField, setActiveField] = useState("");
 
   const formFields = [
-    "supplierName", "other1", "other2", "address", "city", "state", "postalCode", "mobile",
-    "phoneNo", "fax", "email", "website", "gstNo", "typeOfDealer", "supplierCode", "areaName", 
+    "Comapy_Name", "other1", "other2", "Addr1", "city", "state", "postalCode", "Mobile_No",
+    "phoneNo", "fax", "mailID", "website", "gst", "typeOfDealer", "supplierCode", "areaName", 
     "panCardNo", "aadharCard", "tdsEligibility", "saveButton", "cancelButton"
   ];  
 
@@ -57,37 +57,43 @@ const StaticSupplierForm = () => {
   const handleKeyDown = (e, fieldIndex) => {
     if (["Enter", "ArrowDown", "ArrowRight"].includes(e.key)) {
       e.preventDefault();
-      const nextField = formFields[fieldIndex + 1];
+      const nextField = formFields[fieldIndex + 1]; // Find the next field in the sequence
       if (nextField) {
-        document.getElementsByName(nextField)[0]?.focus();
+        const nextElement = document.getElementsByName(nextField)[0];
+        if (nextElement) {
+          nextElement.focus(); // Move focus to the next element
+        }
       }
     } else if (["ArrowUp", "ArrowLeft"].includes(e.key)) {
       e.preventDefault();
-      const prevField = formFields[fieldIndex - 1];
+      const prevField = formFields[fieldIndex - 1]; // Find the previous field in the sequence
       if (prevField) {
-        document.getElementsByName(prevField)[0]?.focus();
+        const prevElement = document.getElementsByName(prevField)[0];
+        if (prevElement) {
+          prevElement.focus(); // Move focus to the previous element
+        }
       }
     }
-  };
+  };  
 
   const handleNewClick = () => {
   setIsNewMode(true);
   setIsModifyMode(false);
   setShowModal(false);
   setFormData({
-    supplierName:"",
+    Comapy_Name:"",
     other1: "",
     other2: "",
-    address: "",
+    Addr1: "",
     city: "",
     state: "Maharashtra",
     postalCode: "",
-    mobile: "",
+    Mobile_No: "",
     phoneNo: "",
     fax: "",
-    email: "",
+    mailID: "",
     website: "",
-    gstNo: "",
+    gst: "",
     supplierCode: "",
     areaName: "",
     panCardNo: "",
@@ -95,16 +101,20 @@ const StaticSupplierForm = () => {
     tdsEligibility: "Not Eligible",
     typeOfDealer: "UnRegister",
   });
-  setActiveField("supplierName");
+  setActiveField("Comapy_Name");
   setTimeout(() => {
-    document.getElementsByName("supplierName")[0]?.focus(); // Automatically focus on Supplier Name
+    document.getElementsByName("Comapy_Name")[0]?.focus();
   }, 0);
 };
   
 const handleSelectItem = (item) => {
-  setFormData({ supplierName: item.name, mobile: item.mobile });
+  setFormData({ Comapy_Name:item.name,Mobile_No:item.Mobile_No,Addr1:item.Addr1,gst:item.gst,mailID:item.mailID});
   setShowModal(false);
   setIsModifyMode(true);
+  setActiveField("Comapy_Name");
+  setTimeout(() => {
+    document.getElementsByName("Comapy_Name")[0]?.focus();
+  }, 0);
 };
 
   const handleModifyClick = () => {
@@ -120,19 +130,19 @@ const handleSelectItem = (item) => {
     setIsModifyMode(false);
     setIsSearchEditable(false); // Reset search editability when closing modal
     setFormData({
-      supplierName:"",
+      Comapy_Name:"",
       other1: "",
       other2: "",
-      address: "",
+      Addr1: "",
       city: "",
       state: "",
       postalCode: "",
-      mobile: "",
+      Mobile_No: "",
       phoneNo: "",
       fax: "",
-      email: "",
+      mailID: "",
       website: "",
-      gstNo: "",
+      gst: "",
       supplierCode: "",
       areaName: "",
       panCardNo: "",
@@ -148,16 +158,16 @@ const handleSelectItem = (item) => {
       ...prevData,
       other1: "",
       other2: "",
-      address: "",
+      Addr1: "",
       city: "",
       state: "",
       postalCode: "",
-      mobile: "",
+      Mobile_No: "",
       phoneNo: "",
       fax: "",
-      email: "",
+      mailID: "",
       website: "",
-      gstNo: "",
+      gst: "",
       supplierCode: "",
       areaName: "",
       panCardNo: "",
@@ -165,9 +175,7 @@ const handleSelectItem = (item) => {
       tdsEligibility: "Not Eligible",
       typeOfDealer: "UnRegister",
     }));
-    
-    // Reset the activeField to clear any specific styling
-    setActiveField("");
+    setActiveField(""); // Reset the activeField to clear any specific styling
   };
   
 
@@ -213,26 +221,26 @@ const handleConfirmNo = () => {
                 <div className="col-sm-8">
                   <input
                     type="text"
-                    className={`form-control ${activeField === "supplierName" ? "black-bg" : isNewMode ? "" : "gray-text"}`}
-                    name="supplierName"
-                    value={formData.supplierName}
+                    className={`form-control ${activeField === "Comapy_Name" ? "black-bg" : isNewMode ? "" : "gray-text"}`}
+                    name="Comapy_Name"
+                    value={formData.Comapy_Name}
                     onChange={handleChange}
-                    onFocus={() => handleFocus("supplierName")}
+                    onFocus={() => handleFocus("Comapy_Name")}
                     onBlur={handleBlur}
-                    onKeyDown={(e) => handleKeyDown(e, 0)}
+                    onKeyDown={(e) => handleKeyDown(e, formFields.indexOf("Comapy_Name"))}
                     readOnly={!isNewMode && !isModifyMode}
                   />
                 </div>
               </div>
 
-              {["other1", "other2", "address", "city", "state", "postalCode"].map((field, index) => (
+              {["other1", "other2", "Addr1", "city", "state", "postalCode"].map((field, index) => (
                 <div className="form-group row" key={field}>
                   <label className="col-sm-4 col-form-label">
                     {field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
                   </label>
                   <div className="col-sm-8">
                     <input
-                      type={field === "email" ? "email" : "text"}
+                      type={field === "mailID" ? "mailID" : "text"}
                       className={`form-control ${activeField === field ? "black-bg" : isNewMode ? "" : "gray-text"}`}
                       name={field}
                       value={formData[field]}
@@ -251,13 +259,13 @@ const handleConfirmNo = () => {
                 <div className="col-sm-7">
                   <input
                     type="text"
-                    className={`form-control ${activeField === "mobile" ? "black-bg" : ""}`} style={{width:"285px"}}
-                    name="mobile"
-                    value={formData.mobile}
+                    className={`form-control ${activeField === "Mobile_No" ? "black-bg" : ""}`} style={{width:"285px"}}
+                    name="Mobile_No"
+                    value={formData.Mobile_No}
                     onChange={handleChange}
-                    onFocus={() => handleFocus("mobile")}
+                    onFocus={() => handleFocus("Mobile_No")}
                     onBlur={handleBlur}
-                    onKeyDown={(e) => handleKeyDown(e, formFields.indexOf("mobile"))}
+                    onKeyDown={(e) => handleKeyDown(e, formFields.indexOf("Mobile_No"))}
                     readOnly={!isNewMode && !isModifyMode}
                   />
                 </div>
@@ -266,14 +274,14 @@ const handleConfirmNo = () => {
                 </div>
               </div>
 
-              {["phoneNo", "fax", "email", "website"].map((field, index) => (
+              {["phoneNo", "fax", "mailID", "website"].map((field, index) => (
                 <div className="form-group row" key={field}>
                   <label className="col-sm-4 col-form-label">
                     {field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}
                   </label>
                   <div className="col-sm-8">
                     <input
-                      type={field === "email" ? "email" : "text"}
+                      type={field === "mailID" ? "mailID" : "text"}
                       className={`form-control ${activeField === field ? "black-bg" : ""}`}
                       name={field}
                       value={formData[field]}
@@ -281,7 +289,7 @@ const handleConfirmNo = () => {
                       onFocus={() => handleFocus(field)}
                       onBlur={handleBlur}
                       onKeyDown={(e) => handleKeyDown(e, formFields.indexOf(field))}
-                      readOnly={!isNewMode}
+                      readOnly={!isNewMode && !isModifyMode}
                     />
                   </div>
                 </div>
@@ -292,14 +300,14 @@ const handleConfirmNo = () => {
                 <div className="col-sm-7">
                   <input
                     type="text"
-                    className={`form-control ${activeField === "gstNo" ? "black-bg" : ""}`} style={{width:"285px"}}
-                    name="gstNo"
-                    value={formData.gstNo}
+                    className={`form-control ${activeField === "gst" ? "black-bg" : ""}`} style={{width:"285px"}}
+                    name="gst"
+                    value={formData.gst}
                     onChange={handleChange}
-                    onFocus={() => handleFocus("gstNo")}
+                    onFocus={() => handleFocus("gst")}
                     onBlur={handleBlur}
-                    onKeyDown={(e) => handleKeyDown(e, formFields.indexOf("gstNo"))}
-                    readOnly={!isNewMode}
+                    onKeyDown={(e) => handleKeyDown(e, formFields.indexOf("gst"))}
+                    readOnly={!isNewMode && !isModifyMode}
                   />
                 </div>
                 <div className="col-sm-1">

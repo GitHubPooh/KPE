@@ -32,7 +32,10 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
     const data = JSON.parse(html);
     return data.map(item => ({
       name: item.Comapy_Name,
-      mobile: item.Mobile_No || item.Mobile_Number,
+      Mobile_No: item.Mobile_No || item.Mobile_Number,
+      Addr1: item.Addr1 || item.Addr2 || item.Addr3 || item.Addr4,
+      gst: item.gst, // Example field
+      mailID: item.mailID, // Example field
     }));
   };
 
@@ -46,7 +49,7 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
     const query = searchQuery.toLowerCase();
     const filtered = items.filter(item => {
       const nameWords = item.name.toLowerCase().split(" ");
-      const mobileWords = item.mobile.toLowerCase().split(" ");
+      const mobileWords = item.Mobile_No.toLowerCase().split(" ");
       return (
         nameWords.some(word => word.startsWith(query)) ||
         mobileWords.some(word => word.startsWith(query))
@@ -58,7 +61,7 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "ArrowDown") {
+      if (e.key === "ArrowDown"||"Enter") {
         setHighlightedIndex((prevIndex) => {
           const newIndex = Math.min(prevIndex + 1, filteredItems.length - 1);
           if (newIndex >= visibleCount) {
@@ -139,7 +142,7 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
                   }}
                 >
                   <td>{highlightText(item.name, searchQuery)}</td>
-                  <td>{highlightText(item.mobile, searchQuery)}</td>
+                  <td>{highlightText(item.Mobile_No, searchQuery)}</td>
                 </tr>
               ))}
             </tbody>

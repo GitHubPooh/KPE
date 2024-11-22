@@ -65,12 +65,13 @@
 
 .modal-dialog1 {
     max-width: 400px;
-    border: 1px solid #ccc; /* Border for Windows dialog appearance */
+    border: 1px solid black; /* Border for Windows dialog appearance */
     border-radius: 4px;
 }
 
 .modal-content1 {
     padding: 10px;
+    background-color: white;
 }
 
 .modal-header1 {
@@ -87,23 +88,28 @@
     display: flex;
     align-items: center;
     padding: 10px 0;
+    background-color: white;
 }
 
 .modal-footer1 {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
+    display:flex;
+    justify-content: right;
+    background-color:rgb(231, 229, 229);
+    padding: 2px;
+    margin: -8px;
 
-.btn-primary1 {
-    background-color: #0078d4; /* Blue color similar to Windows Yes button */
-    border-color: #0078d4;
-    color: white;
-}
-
-.btn-secondary1 {
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
+  .btn {
+    background-color:rgb(231, 229, 229);
     color: black;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid black;
+    width: 60px;
+    height: 30px;
+    margin: 5px;
+  }
+  .btn:hover{
+    background-color: rgb(152, 152, 245);
+    color: black;
+  }
 }
-

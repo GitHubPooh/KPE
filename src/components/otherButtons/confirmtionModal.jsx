@@ -16,8 +16,8 @@ const ConfirmationModal = ({ show, onConfirm, onCancel }) => {
                         <p className="mb-0">Do You Want To Modify Record?</p>
                     </div>
                     <div className="modal-footer1">
-                        <button className="btn btn-primary1" onClick={onConfirm}>Yes</button>
-                        <button className="btn btn-secondary1" onClick={onCancel}>No</button>
+                        <button className="btn btn-primary" onClick={onConfirm}>Yes</button>
+                        <button className="btn btn-secondary" onClick={onCancel}>No</button>
                     </div>
                 </div>
             </div>

@@ -21,9 +21,11 @@
     }
     .form-control {
       background-color: #f8e4f3;
-      height: 17px;
+      height: 19px;
       border-radius: 0%;
       border: none;
+      padding-left: 0; /* Remove padding from the left */
+      text-indent: 0; /* Ensure text starts at the very beginning */
     }
     .form-control.black-bg {
       background-color: black;
