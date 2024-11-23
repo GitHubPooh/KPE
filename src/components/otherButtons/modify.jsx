@@ -34,8 +34,8 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
       name: item.Comapy_Name,
       Mobile_No: item.Mobile_No || item.Mobile_Number,
       Addr1: item.Addr1 || item.Addr2 || item.Addr3 || item.Addr4,
-      gst: item.gst, // Example field
-      mailID: item.mailID, // Example field
+      gst: item.gst, 
+      mailID: item.mailID,
     }));
   };
 
@@ -61,7 +61,7 @@ const ModalComponent = ({ showModal, searchQuery, setSearchQuery, isSearchEditab
 
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "ArrowDown"||"Enter") {
+      if (e.key === "ArrowDown") {
         setHighlightedIndex((prevIndex) => {
           const newIndex = Math.min(prevIndex + 1, filteredItems.length - 1);
           if (newIndex >= visibleCount) {
