@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import PISupplierModal from "@/components/pI/purchaseInvoiceSupplierNamesModal";
 
 const PurchaseInvoiceHeader = () => {
+  const suppNameRef = useRef(null); // Ref for the "Supp. Name" field
+  const [showModal, setShowModal] = useState(false); // Modal visibility state
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" || event.key === "ArrowDown") {
+      setShowModal(true); // Open modal on Enter or ArrowDown key
+    }
+  };
   return (
     <>
+    
     <div className="header-section">
       <div className="header-content">
         <div className="radio-buttons">
@@ -35,7 +45,10 @@ const PurchaseInvoiceHeader = () => {
               </tr>
               <tr>
                 <td>Supp. Name</td>
-                <td><input type="text" /></td>
+                <td><input type="text" ref={suppNameRef}
+                      autoFocus
+                      className="highlight-input"
+                      onKeyDown={handleKeyDown}/></td>
               </tr>
               <tr>
                 <td>Mobile No.</td>
@@ -164,6 +177,7 @@ const PurchaseInvoiceHeader = () => {
         </div>
       </div>
     </div>
+    {showModal && <PISupplierModal onClose={() => setShowModal(false)} />}
     </>
   );
 };
