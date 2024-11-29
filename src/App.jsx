@@ -9,6 +9,7 @@ import CustomerForm from "./pages/CustomerForm";
 //import SupplierForm from "./pages/supplierForm";
 import StaticSupplierForm from "./pages/staticSupplierForm";
 import PurchaseInvoice from "./pages/purchaseInvoice";
+import PISupplierModal from "./components/pI/purchaseInvoiceSupplierNamesModal";
 import NotFound from "./pages/404";
 import ScrollToTop from "./components/common/ScrollTop";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehavier";

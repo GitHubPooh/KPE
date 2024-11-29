@@ -162,13 +162,46 @@
     }
   }
   //------------Supplier list in Purchase Invoice below Header Section--------------
-  thead.pitable-success{
-    border: 1px solid black;
-    th{
-      background-color: #0f8800;
-    }
+.pimodal-dialog {
+  width: 800px;
+  margin: 0 auto; /* Center horizontally */
+  top: 50%;
+}
+.table-custom {
+  border: 1px solid black; /* Black border around the table */
+}
+.table-custom th,
+.table-custom td {
+  border: 1px solid black; /* Black border for each cell */
+}
+thead.table-header th {
+  background-color: green; /* Green background */
+  color: black; /* White text */
+  text-align: center;
+}
+.reduced-height {
+  th,td {
+    height: 20px; /* Reduce row height */
+    margin: 0%;
+    padding: 0%;
   }
-  .pimodal-dialog{
-    width:900px;
-    margin-left: 200px;
-  }
+}
+.search-input {
+  height: 100%; /* Reduce the height */
+  font-size: 14px; /* Adjust text size */
+  width: 100%;
+  border: 1px solid black;
+}
+
+/* Style the "Add New" button */
+.add-new-btn {
+  background-color: black; /* Black background */
+  color: white; /* White text */
+  font-size: 14px;
+  height: 100%; /* Match reduced row height */
+}
+
+/* Button hover effect */
+.add-new-btn:hover {
+  background-color: #333; /* Slightly lighter black */
+}
