@@ -162,46 +162,70 @@
     }
   }
   //------------Supplier list in Purchase Invoice below Header Section--------------
-.pimodal-dialog {
-  width: 800px;
-  margin: 0 auto; /* Center horizontally */
-  top: 50%;
-}
-.table-custom {
-  border: 1px solid black; /* Black border around the table */
-}
-.table-custom th,
-.table-custom td {
-  border: 1px solid black; /* Black border for each cell */
-}
-thead.table-header th {
-  background-color: green; /* Green background */
-  color: black; /* White text */
-  text-align: center;
-}
-.reduced-height {
-  th,td {
-    height: 20px; /* Reduce row height */
-    margin: 0%;
-    padding: 0%;
+  .pimodal-dialog {
+    width: 800px;
+    margin-left: 200px;
   }
-}
-.search-input {
-  height: 100%; /* Reduce the height */
-  font-size: 14px; /* Adjust text size */
-  width: 100%;
+  
+  .tablepi {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .tablepi th,
+  .tablepi td {
+    border: 1px solid black;
+  }
+  
+  .tablepi thead th {
+    background-color: #0f8800; 
+    color: black; 
+    text-align: center;
+    padding: 1.5%;
+    border: 1px solid black;
+  }
+  
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid black;
+    margin-top: -32px;
+  }
+  .tablepi th{
   border: 1px solid black;
+  line-height: 1; /* Reduce line height */
+ 
 }
 
-/* Style the "Add New" button */
-.add-new-btn {
-  background-color: black; /* Black background */
-  color: white; /* White text */
+.tablepi td {
+  border: 1px solid black;
+  line-height: 0.35; /* Reduce line height */
   font-size: 14px;
-  height: 100%; /* Match reduced row height */
+  font-weight: 600;
 }
 
-/* Button hover effect */
-.add-new-btn:hover {
-  background-color: #333; /* Slightly lighter black */
+.tablepi tr {
+  height: 12px; /* Set a specific height for rows */
 }
+  .add-new-btn {
+    background-color: black;
+    color: white;
+    width: 142px;
+    padding: 1px 0px;
+    font-size: 12px;
+    margin-top: -32px;
+  }
+  
+  .add-new-btn:hover {
+    background-color: #333;
+  }
+  
+ 
+  

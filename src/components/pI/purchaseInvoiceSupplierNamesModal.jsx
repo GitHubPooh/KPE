@@ -21,17 +21,30 @@ const PISupplierModal = ({ onClose }) => {
       .then((html) => {
         const data = parseHTMLResponse(html);
         setItems(data);
-        setFilteredItems(data); // Initialize filtered items
+        setFilteredItems(data);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
+  
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
 
   const parseHTMLResponse = (html) => {
     const data = JSON.parse(html);
     return data.map((item) => ({
       name: item.Comapy_Name,
-      mobileNo: item.Mobile_No || item.Mobile_Number,
-      address: item.Addr1 || item.Addr2 || item.Addr3 || item.Addr4,
+      mobileNo: item.Mobile_No || item.Mobile_Number || "—",
+      address: item.Addr1 || item.Addr2 || item.Addr3 || item.Addr4 || "",
       type: item.Type || "SUPPLIER",
     }));
   };
@@ -48,76 +61,52 @@ const PISupplierModal = ({ onClose }) => {
     setFilteredItems(filtered);
   };
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        onClose(); // Close the modal
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onClose]);
-
   return (
     <div className="pimodal show d-block">
       <div className="pimodal-dialog">
-        <div className="pimodal-content">
-          <div className="pimodal-body">
-            <table className="table table-bordered table-striped table-custom">
-              <thead className="table-header">
-                <tr className="reduced-height">
-                  <th>#</th>
-                  <th>Supplier Name</th>
-                  <th>Mobile No.</th>
-                  <th>Address</th>
-                  <th>Type</th>
-                </tr>
-              </thead>
-            </table>
+        <table className="table table-bordered tablepi">
+          <thead className="pitable-header" >
+            <tr>
+              <th style={{ width: "5%" }}>.</th>
+              <th style={{ width: "40%" }}>Supplier Name</th>
+              <th style={{ width: "15%" }}>Mobile No.</th>
+              <th style={{ width: "25%" }}>Address</th>
+              <th style={{ width: "15%" }}>Type</th>
+            </tr>
+          </thead>
+        </table>
 
-            <table className="table table-bordered table-custom">
-              <tbody>
-                <tr className="reduced-height">
-                  <td colSpan="4">
-                    <input
-                      type="text"
-                      className="search-input"
-                      value={searchQuery}
-                      onChange={handleSearchChange}
-                    />
-                  </td>
-                  <td>
-                    <button className="add-new-btn">Add New (Ctrl+N)</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <table className="table table-bordered table-striped table-custom">
-              <tbody>
-                {filteredItems.length > 0 ? (
-                  filteredItems.map((item, index) => (
-                    <tr className="reduced-height" key={index}>
-                      <td>{index + 1}</td>
-                      <td>{item.name}</td>
-                      <td>{item.mobileNo}</td>
-                      <td>{item.address}</td>
-                      <td>{item.type}</td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="5" className="text-center">
-                      No records found
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+        <div className="search-container">
+          <input
+            type="text"
+            className="search-input"
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+          <button className="add-new-btn">Add New (Ctrl+N)</button>
         </div>
+
+        <table className="table table-bordered table-striped tablepi" style={{ marginTop:"-6px" }}>
+          <tbody>
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item, index) => (
+                <tr key={index} >
+                  <td style={{ width: "5%" }}>{index + 1}</td>
+                  <td style={{ width: "40%" }}>{item.name}</td>
+                  <td style={{ width: "15%" }}>{item.mobileNo}</td>
+                  <td style={{ width: "25%" }}>{item.address}</td>
+                  <td style={{ width: "15%" }}>{item.type}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" className="text-center">
+                  No records found
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );
