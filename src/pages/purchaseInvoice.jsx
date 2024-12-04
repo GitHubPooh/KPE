@@ -1,15 +1,45 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect  } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PISupplierModal from "@/components/pI/purchaseInvoiceSupplierNamesModal";
 
 const PurchaseInvoiceHeader = () => {
-  const suppNameRef = useRef(null); // Ref for the "Supp. Name" field
+  
   const [showModal, setShowModal] = useState(false); // Modal visibility state
+  const [supplierDetails, setSupplierDetails] = useState({
+    name: "",
+    mobileNo: "",
+    address: "",
+  });
+  const [invoiceDate, setInvoiceDate] = useState(""); // State for Invoice Date
+  const suppNameRef = useRef(null); // Ref for the "Supp. Name" field
+
+  useEffect(() => {
+    // Focus on "Supp. Name" field on component mount
+    if (suppNameRef.current) {
+      suppNameRef.current.focus();
+    }
+    const today = new Date();
+    const formattedDate = today.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    }).replace(/ /g, "-");
+    setInvoiceDate(formattedDate);
+  }, []);
+  
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter" || event.key === "ArrowDown") {
       setShowModal(true); // Open modal on Enter or ArrowDown key
     }
+  };
+  const handleSelectItem = (item) => {
+    setSupplierDetails({
+      name: item.name,
+      mobileNo: item.mobileNo,
+      address: item.address,
+    });
+    setShowModal(false); // Close modal after selecting an item
   };
   return (
     <>
@@ -45,18 +75,35 @@ const PurchaseInvoiceHeader = () => {
               </tr>
               <tr>
                 <td>Supp. Name</td>
-                <td><input type="text" ref={suppNameRef}
-                      autoFocus
+                <td>
+                <input
+                      type="text"
+                      value={supplierDetails.name}
+                      onKeyDown={handleKeyDown}
+                      ref={suppNameRef}
                       className="highlight-input"
-                      onKeyDown={handleKeyDown}/></td>
+                    />
+              </td>
               </tr>
               <tr>
                 <td>Mobile No.</td>
-                <td><input type="text" /></td>
+                <td>
+                <input
+                  type="text"
+                  value={supplierDetails.mobileNo}
+                  readOnly
+                />
+              </td>
               </tr>
               <tr>
                 <td>Address</td>
-                <td><input type="text" /></td>
+                <td>
+                <input
+                  type="text"
+                  value={supplierDetails.address}
+                  readOnly
+                />
+              </td>
               </tr>
               <tr>
                 <td>GST Type</td>
@@ -80,7 +127,7 @@ const PurchaseInvoiceHeader = () => {
                 </tr>
                 <tr>
                   <td>Invoice Date</td>
-                  <td><input type="text" value="23-Nov-2024" readOnly /></td>
+                  <td><input type="text" value={invoiceDate} readOnly /></td>
                 </tr>
                 <tr>
                   <td>Delivery Boy</td>
@@ -177,7 +224,12 @@ const PurchaseInvoiceHeader = () => {
         </div>
       </div>
     </div>
-    {showModal && <PISupplierModal onClose={() => setShowModal(false)} />}
+    {showModal && (
+        <PISupplierModal
+          onClose={() => setShowModal(false)}
+          onSelectItem={handleSelectItem}
+        />
+      )}
     </>
   );
 };

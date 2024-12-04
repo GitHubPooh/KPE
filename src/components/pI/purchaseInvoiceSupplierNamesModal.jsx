@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const PISupplierModal = ({ onClose }) => {
+const PISupplierModal = ({ onClose, onSelectItem }) => {
   const [items, setItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(15);
+  const searchInputRef = useRef(null); 
 
   useEffect(() => {
     fetch("https://businessguruerp.com/BG_API_NEW/LEDGER_MASTER_Display_API.php", {
@@ -25,19 +28,6 @@ const PISupplierModal = ({ onClose }) => {
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
-  
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        onClose();
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [onClose]);
-
 
   const parseHTMLResponse = (html) => {
     const data = JSON.parse(html);
@@ -59,6 +49,49 @@ const PISupplierModal = ({ onClose }) => {
         item.address.toLowerCase().includes(query)
     );
     setFilteredItems(filtered);
+    setHighlightedIndex(0);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      setHighlightedIndex((prevIndex) => {
+        const newIndex = Math.min(prevIndex + 1, filteredItems.length - 1);
+        if (newIndex >= visibleCount) {
+          setVisibleCount(visibleCount + 1);
+        }
+        return newIndex;
+      });
+    } else if (e.key === "ArrowUp") {
+      setHighlightedIndex((prevIndex) => {
+        const newIndex = Math.max(prevIndex - 1, 0);
+        if (newIndex < visibleCount - 15) {
+          setVisibleCount(visibleCount - 1);
+        }
+        return newIndex;
+      });
+    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+      e.preventDefault();
+      handleItemClick(filteredItems[highlightedIndex]);
+    } else if (e.key === "Escape") {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    // Focus the search bar when the modal is opened
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [filteredItems, highlightedIndex, visibleCount]);
+
+
+  const handleItemClick = (item) => {
+    onSelectItem(item); // Pass the clicked item back to the parent
+    onClose(); // Close the modal
   };
 
   return (
@@ -82,15 +115,26 @@ const PISupplierModal = ({ onClose }) => {
             className="search-input"
             value={searchQuery}
             onChange={handleSearchChange}
+            ref={searchInputRef}
           />
           <button className="add-new-btn">Add New (Ctrl+N)</button>
         </div>
 
         <table className="table table-bordered table-striped tablepi" style={{ marginTop:"-6px" }}>
           <tbody>
-            {filteredItems.length > 0 ? (
-              filteredItems.map((item, index) => (
-                <tr key={index} >
+          {filteredItems.length > 0 ? (
+              filteredItems.slice(visibleCount - 15, visibleCount).map((item, index) => (
+                <tr
+                  key={index + (visibleCount - 15)}
+                  onClick={() => handleItemClick(item)}
+                  style={{
+                    backgroundColor:
+                      index + (visibleCount - 15) === highlightedIndex
+                        ? "lightblue"
+                        : "transparent",
+                    cursor: "pointer",
+                  }}
+                >
                   <td style={{ width: "5%" }}>{index + 1}</td>
                   <td style={{ width: "40%" }}>{item.name}</td>
                   <td style={{ width: "15%" }}>{item.mobileNo}</td>
