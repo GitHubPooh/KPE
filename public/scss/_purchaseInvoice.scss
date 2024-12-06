@@ -170,6 +170,16 @@
     }
   }
   //------------Supplier list in Purchase Invoice below Header Section PISupplierModal--------------
+  .tablepi tr {
+    height: 12px;
+    cursor: pointer;
+  }
+  
+  .tablepi tr.highlight {
+    background-color: darkblue !important;
+    color: white !important;
+  }
+  
   .pimodal {
     height: 100%;
     display: flex;
@@ -178,12 +188,12 @@
   }
   
   .pimodal-dialog {
-    max-width: 800px;
-    height: 383px; /* Specific height */
+    max-width: 900px;
+    height: 387px; /* Specific height */
     border: 1px solid black; /* Outer black border */
     display: flex;
     flex-direction: column;
-    margin-left: 200px;
+    margin-left: 100px;
     background-color: #dadddd;
   }
   
@@ -214,7 +224,7 @@
   .search-input {
     width: 100%;
     padding: 5px;
-    font-size: 14px;
+    font-size: 16px;
     border: 1px solid black;
     margin-top: -32px;
   }
@@ -237,7 +247,7 @@
   .add-new-btn {
     background-color: black;
     color: white;
-    width: 142px;
+    width: 159px;
     padding: 1px 0px;
     font-size: 12px;
     margin-top: -32px;
