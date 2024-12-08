@@ -5,10 +5,10 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
   const [items, setItems] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(15);
   const searchInputRef = useRef(null);
-  const rowsRef = useRef([]); // Refs for rows to handle focus
+  const rowsRef = useRef([]); 
 
   useEffect(() => {
     fetch("https://businessguruerp.com/BG_API_NEW/LEDGER_MASTER_Display_API.php", {
@@ -33,6 +33,7 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
   const parseHTMLResponse = (html) => {
     const data = JSON.parse(html);
     return data.map((item) => ({
+      ledgerCode: item.Ledger_Code || "-",
       name: item.Comapy_Name,
       mobileNo: item.Mobile_No || item.Mobile_Number || "—",
       address: item.Addr1 || item.Addr2 || item.Addr3 || item.Addr4 || "",
@@ -45,12 +46,13 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
     setSearchQuery(query);
     const filtered = items.filter(
       (item) =>
+        item.ledgerCode.toLowerCase().includes(query) ||
         item.name.toLowerCase().includes(query) ||
         item.mobileNo.toLowerCase().includes(query) ||
         item.address.toLowerCase().includes(query)
     );
     setFilteredItems(filtered);
-    setHighlightedIndex(-1); // Reset to focus on the search bar
+    setHighlightedIndex(0); 
   };
 
   const highlightText = (text, query) => {
@@ -69,19 +71,22 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
   const handleKeyDown = (e) => {
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      if (highlightedIndex < filteredItems.length - 1) {
-        setHighlightedIndex((prevIndex) => prevIndex + 1);
-      }
+      setHighlightedIndex((prevIndex) => {
+        const newIndex = Math.min(prevIndex + 1, filteredItems.length - 1);
+        if (newIndex >= visibleCount) {
+          setVisibleCount((prevCount) => prevCount + 1);
+        }
+        return newIndex;
+      });
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      if (highlightedIndex > 0) {
-        setHighlightedIndex((prevIndex) => prevIndex - 1);
-      } else {
-        setHighlightedIndex(-1);
-        if (searchInputRef.current) {
-          searchInputRef.current.focus();
+      setHighlightedIndex((prevIndex) => {
+        const newIndex = Math.max(prevIndex - 1, 0);
+        if (newIndex < visibleCount - 15) {
+          setVisibleCount((prevCount) => prevCount - 1);
         }
-      }
+        return newIndex;
+      });
     } else if (e.key === "Enter" && highlightedIndex >= 0) {
       e.preventDefault();
       handleItemClick(filteredItems[highlightedIndex]);
@@ -98,7 +103,7 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [filteredItems, highlightedIndex]);
+  }, [filteredItems, highlightedIndex, visibleCount]);
 
   useEffect(() => {
     if (highlightedIndex >= 0 && rowsRef.current[highlightedIndex]) {
@@ -110,8 +115,8 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
   }, [highlightedIndex]);
 
   const handleItemClick = (item) => {
-    onSelectItem(item); // Pass the clicked item back to the parent
-    onClose(); // Close the modal
+    onSelectItem(item); 
+    onClose();
   };
 
   return (
@@ -140,20 +145,19 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
           <button className="add-new-btn">Add New (Ctrl+N)</button>
         </div>
 
-        <table className="table table-bordered table-striped tablepi" style={{ marginTop: "-6px" }}>
+        <table className="table table-striped tablepi" style={{ marginTop: "-6px" }}>
           <tbody>
             {filteredItems.length > 0 ? (
               filteredItems.slice(0, visibleCount).map((item, index) => (
-                <tr
+                <tr className="highlightedIndex"
                   key={index}
-                  ref={(el) => (rowsRef.current[index] = el)} // Assign ref for focus management
+                  ref={(el) => (rowsRef.current[index] = el)} 
                   onClick={() => handleItemClick(item)}
                   style={{
-                    backgroundColor: index === highlightedIndex ? "lightblue" : "transparent", cursor: "pointer",
-               
+                    backgroundColor: index === highlightedIndex ? "blue" : "transparent",
                   }}
                 >
-                  <td style={{ width: "5%" }}>{index + 1}</td>
+                  <td style={{ width: "5%" }}>{highlightText(item.ledgerCode, searchQuery)}</td>
                   <td style={{ width: "40%" }}>{highlightText(item.name, searchQuery)}</td>
                   <td style={{ width: "15%" }}>{highlightText(item.mobileNo, searchQuery)}</td>
                   <td style={{ width: "25%" }}>{highlightText(item.address, searchQuery)}</td>

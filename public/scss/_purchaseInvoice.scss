@@ -169,17 +169,12 @@
       }
     }
   }
-  //------------Supplier list in Purchase Invoice below Header Section PISupplierModal--------------
-  .tablepi tr {
-    height: 12px;
-    cursor: pointer;
-  }
-  
-  .tablepi tr.highlight {
+  //------------Supplier list in Purchase Invoice below Header Section PISupplierModal-------------- 
+  .tablepi tr.highlightedIndex {
     background-color: darkblue !important;
     color: white !important;
   }
-  
+
   .pimodal {
     height: 100%;
     display: flex;
@@ -189,7 +184,7 @@
   
   .pimodal-dialog {
     max-width: 900px;
-    height: 387px; /* Specific height */
+    height: 386px; /* Specific height */
     border: 1px solid black; /* Outer black border */
     display: flex;
     flex-direction: column;
@@ -198,7 +193,6 @@
   }
   
   .tablepi {
-    border-collapse: collapse;
     width: 100%;
   }
   
@@ -213,6 +207,7 @@
     text-align: center;
     padding: 1.5%;
     border: 1px solid black;
+    line-height: 1;
   }
   
   .search-container {
@@ -228,22 +223,17 @@
     border: 1px solid black;
     margin-top: -32px;
   }
-  .tablepi th{
-  border: 1px solid black;
-  line-height: 1; /* Reduce line height */
- 
-}
 
-.tablepi td {
-  border: 1px solid black;
-  line-height: 0.35; /* Reduce line height */
-  font-size: 14px;
-  font-weight: 600;
-}
+  .tablepi td {
+    border: 1px solid black;
+    line-height: 0.35; /* Reduce line height */
+    font-size: 14px;
+    font-weight: 600;
+  }
 
-.tablepi tr {
-  height: 12px; /* Set a specific height for rows */
-}
+  .tablepi tr {
+    height: 12px; /* Set a specific height for rows */
+  }
   .add-new-btn {
     background-color: black;
     color: white;

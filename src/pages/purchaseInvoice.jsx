@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PISupplierModal from "@/components/pI/purchaseInvoiceSupplierNamesModal";
+import ModalComponent from "@/components/otherButtons/modify";
 
 const PurchaseInvoiceHeader = () => {
   const [showModal, setShowModal] = useState(false); // Modal visibility state
@@ -86,7 +87,7 @@ const PurchaseInvoiceHeader = () => {
         <div className="header-content">
           <div className="radio-buttons">
             <label>
-              <input type="radio" name="gstOption" value="gst" /> GST
+              <input type="radio" name="gstOption" value="gst" checked/> GST
             </label>
             <label>
               <input type="radio" name="gstOption" value="composition" /> Composition
