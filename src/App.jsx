@@ -9,6 +9,7 @@ import CustomerForm from "./pages/CustomerForm";
 //import SupplierForm from "./pages/supplierForm";
 import StaticSupplierForm from "./pages/staticSupplierForm";
 import PurchaseInvoice from "./pages/purchaseInvoice";
+import PISuppModal from "./components/pI/PISuppModal";
 import PISupplierModal from "./components/pI/purchaseInvoiceSupplierNamesModal";
 import NotFound from "./pages/404";
 import ScrollToTop from "./components/common/ScrollTop";
@@ -24,6 +25,7 @@ function App() {
         <Route path="/">
           <Route index element={<StaticSupplierForm />} />
           <Route path="/PI" element={<PurchaseInvoice/>} />
+          <Route path="/P" element={<PISuppModal showModal={true}/>} />
           {/* <Route path="/project" element={<Project/>} />
           <Route path="/services" element={<Services/>} />
           <Route path="/contact" element={<ContactUs/>} /> */}

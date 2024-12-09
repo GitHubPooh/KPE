@@ -149,13 +149,10 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
           <tbody>
             {filteredItems.length > 0 ? (
               filteredItems.slice(0, visibleCount).map((item, index) => (
-                <tr className="highlightedIndex"
+                <tr className={highlightedIndex === index ? "table-primary" : ""}
                   key={index}
                   ref={(el) => (rowsRef.current[index] = el)} 
                   onClick={() => handleItemClick(item)}
-                  style={{
-                    backgroundColor: index === highlightedIndex ? "blue" : "transparent",
-                  }}
                 >
                   <td style={{ width: "5%" }}>{highlightText(item.ledgerCode, searchQuery)}</td>
                   <td style={{ width: "40%" }}>{highlightText(item.name, searchQuery)}</td>

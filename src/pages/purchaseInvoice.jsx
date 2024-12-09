@@ -1,18 +1,17 @@
 import React, { useRef, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PISupplierModal from "@/components/pI/purchaseInvoiceSupplierNamesModal";
-import ModalComponent from "@/components/otherButtons/modify";
 
 const PurchaseInvoiceHeader = () => {
-  const [showModal, setShowModal] = useState(false); // Modal visibility state
+  const [showModal, setShowModal] = useState(false); 
   const [supplierDetails, setSupplierDetails] = useState({
     name: "",
     mobileNo: "",
     address: "",
   });
-  const [invoiceDate, setInvoiceDate] = useState(""); // State for Invoice Date
+  const [invoiceDate, setInvoiceDate] = useState("");
   const [fieldValues, setFieldValues] = useState({});
-  const suppNameRef = useRef(null); // Ref for the "Supp. Name" field
+  const suppNameRef = useRef(null); 
   const fieldsRefs = useRef([]);
   const fieldOrder = [
     "Invoice No",
@@ -32,19 +31,16 @@ const PurchaseInvoiceHeader = () => {
   ];
 
   useEffect(() => {
-    // Initialize default values for fields
     const initialValues = fieldOrder.reduce((acc, field) => {
       acc[field] = field === "Invoice Date" ? "" : "0";
       return acc;
     }, {});
     setFieldValues(initialValues);
 
-    // Focus on "Supp. Name" field on component mount
     if (suppNameRef.current) {
       suppNameRef.current.focus();
     }
 
-    // Set default date for "Invoice Date"
     const today = new Date();
     const formattedDate = today.toLocaleDateString("en-GB", {
       day: "2-digit",
@@ -58,11 +54,11 @@ const PurchaseInvoiceHeader = () => {
     if (event.key === "Enter" || event.key === "ArrowDown") {
       event.preventDefault();
       if (index < fieldsRefs.current.length - 1) {
-        fieldsRefs.current[index + 1]?.focus(); // Focus on the next field
+        fieldsRefs.current[index + 1]?.focus(); 
       }
     } else if (event.key === "ArrowUp" && index > 0) {
       event.preventDefault();
-      fieldsRefs.current[index - 1]?.focus(); // Focus on the previous field
+      fieldsRefs.current[index - 1]?.focus(); 
     }
   };
 
@@ -77,7 +73,7 @@ const PurchaseInvoiceHeader = () => {
       address: item.address,
     });
 
-    setShowModal(false); // Close modal
+    setShowModal(false);
     fieldsRefs.current[0]?.focus(); // Focus on the first field (Invoice No) after modal selection
   };
 
