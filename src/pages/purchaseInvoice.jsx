@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import PISupplierModal from "@/components/pI/purchaseInvoiceSupplierNamesModal";
+import Product from "@/components/pI/product";
 
 const PurchaseInvoiceHeader = () => {
   const [showModal, setShowModal] = useState(false); 
@@ -273,6 +274,7 @@ const PurchaseInvoiceHeader = () => {
           onSelectItem={handleSelectItem}
         />
       )}
+      <Product/>
     </>
   );
 };
