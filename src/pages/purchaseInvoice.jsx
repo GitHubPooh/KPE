@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import PISupplierModal from "@/components/pI/purchaseInvoiceSupplierNamesModal";
+import PISupplierModal from "@/components/pI/SupplierNamesModal";
 import Product from "@/components/pI/product";
 
 const PurchaseInvoiceHeader = () => {

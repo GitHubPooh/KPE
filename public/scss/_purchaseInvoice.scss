@@ -169,12 +169,13 @@
       }
     }
   }
-  //------------Supplier list in Purchase Invoice below Header Section PISupplierModal-------------- 
+  //------------Supplier list : PISupplierModal-------------- 
   .pimodal {
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1001
   }
   
   .pimodal-dialog {
@@ -185,6 +186,7 @@
     flex-direction: column;
     margin-left: 100px;
     background-color: #dadddd;
+    z-index: 1001
   }
   
   .tablepi {
@@ -211,6 +213,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 1001
   }
   
   .search-input {
@@ -238,6 +241,7 @@
     padding: 1px 0px;
     font-size: 12px;
     margin-top: -32px;
+    z-index: 1001
   }
   
   .add-new-btn:hover {
@@ -248,18 +252,17 @@
 
 .p-product-container {
   position: fixed; /* Fixed position below PurchaseInvoiceHeader */
-  top: 269px; /* Adjust based on the height of PurchaseInvoiceHeader */
+  top: 169px; /* Adjust based on the height of PurchaseInvoiceHeader */
   left: 0;
   right: 0;
   background-color: white;
-
-  height: 600px;
+  height: 400px fixed;
   width: 1050px;
   border-top: 1px solid #000;
 
   .p-table-wrapper {
     overflow-x: auto; /* Enable horizontal scrolling */
-    max-height: 600px; /* Fixed height for the table */
+    height: 400px; /* Fixed height for the table */
     border: 1px solid #000; /* Border around the table container */
   
     &::-webkit-scrollbar {
