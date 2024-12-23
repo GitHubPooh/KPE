@@ -45,45 +45,60 @@ const Product = () => {
 
   const handleChange = (e, rowIndex, fieldName) => {
     const value = e.target.value;
+  
     if (["qty", "rate", "tax", "discount", "amount"].includes(fieldName) && !/^\d*\.?\d*$/.test(value)) {
-      return; 
+      return; // Restrict invalid input
     }
+  
     const updatedRows = [...rows];
     updatedRows[rowIndex][fieldName] = value;
-    setRows(updatedRows);
+  
+    setRows(updatedRows); // Update row data without immediate calculation
   };
   
 
   const handleKeyDown = (e, rowIndex, fieldName) => {
     if (e.key === "Enter") {
-      if (["qty", "rate", "tax", "discount"].includes(fieldName)) {
+      const fields = ["qty", "rate", "tax", "discount"];
+      const nextFieldIndex = fields.indexOf(fieldName) + 1;
+  
+      if (nextFieldIndex === fields.length) {
+        // Last field in calculation chain (Discount) triggers amount calculation
         const updatedRows = [...rows];
         updatedRows[rowIndex].amount = calculateAmount(updatedRows[rowIndex]);
         setRows(updatedRows);
-      }
-
-      const fields = ["qty", "rate", "tax", "discount", "mrp"];
-      const nextFieldIndex = fields.indexOf(fieldName) + 1;
-
-      if (nextFieldIndex < fields.length) {
-        fieldRefs.current[rowIndex][fields[nextFieldIndex]].focus();
-      } else if (rowIndex < rows.length - 1) {
-        fieldRefs.current[rowIndex + 1]["qty"].focus();
+  
+        // Focus on the MRP field
+        fieldRefs.current[rowIndex]["mrp"].focus();
+      } else if (fieldName === "mrp") {
+        // Navigate to the Product Name field of the next row
+        if (rowIndex < rows.length - 1) {
+          fieldRefs.current[rowIndex + 1]["productName"].focus();
+        } else {
+          addRow();
+          setTimeout(() => {
+            fieldRefs.current[rowIndex + 1]["productName"].focus();
+          }, 0);
+        }
+      } else if (fieldName === "productName") {
+        // Open modal for the current row
+        handleFieldClick(rowIndex);
       } else {
-        addRow();
-        setTimeout(() => {
-          fieldRefs.current[rowIndex + 1]["qty"].focus();
-        }, 0);
+        // Move to the next field in the same row
+        const nextField = fields[nextFieldIndex];
+        fieldRefs.current[rowIndex][nextField].focus();
       }
     }
   };
+  
+  
 
   const calculateAmount = ({ qty = 0, rate = 0, discount = 0, tax = 0 }) => {
     const discountedRate = rate - discount;
     const taxAmount = (discountedRate * tax) / 100;
     const amount = qty * (discountedRate + taxAmount);
     return amount.toFixed(2);
-  };
+  };  
 
   return (
     <div className="p-product-container col-md-10">
@@ -106,13 +121,21 @@ const Product = () => {
               <tr key={rowIndex}>
                 <td>{rowIndex + 1}</td>
                 <td onClick={() => handleFieldClick(rowIndex)}>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={row.productName || ""}
-                    readOnly
-                  />
-                </td>
+  <input
+    type="text"
+    className="form-control"
+    value={row.productName || ""}
+    readOnly
+    onKeyDown={(e) => handleKeyDown(e, rowIndex, "productName")}
+    ref={(el) => {
+      if (!fieldRefs.current[rowIndex]) {
+        fieldRefs.current[rowIndex] = {};
+      }
+      fieldRefs.current[rowIndex]["productName"] = el;
+    }}
+  />
+</td>
+
                 <td>
                   <input
                     type="text"
@@ -180,11 +203,7 @@ const Product = () => {
             ))}
           </tbody>
         </table>
-      </div>
-      <button className="btn btn-primary p-add-row" onClick={addRow}>
-        Add Row
-      </button>
-
+      </div> 
       {isModalOpen && (
         <ProductNameList onClose={closeModal} onSelectItem={handleSelectItem} />
       )}
