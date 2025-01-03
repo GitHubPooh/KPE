@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductNameList from "./productNamesModal";
 
@@ -11,7 +11,7 @@ const Product = () => {
   const addRow = () => {
     setRows([
       ...rows,
-      { qty: "", productName: "", rate: "", tax: "", discount: "", amount: "", mrp: "" },
+      { qty: "", productName: "", rate: "", tax: "", discount: "", amount: "" },
     ]);
   };
 
@@ -22,7 +22,6 @@ const Product = () => {
 
   const handleSelectItem = (item) => {
     if (selectedRowIndex !== null) {
-      // Update the selected row with the item data
       const updatedRows = [...rows];
       updatedRows[selectedRowIndex] = {
         ...updatedRows[selectedRowIndex],
@@ -45,36 +44,31 @@ const Product = () => {
 
   const handleChange = (e, rowIndex, fieldName) => {
     const value = e.target.value;
-  
+
     if (["qty", "rate", "tax", "discount", "amount"].includes(fieldName) && !/^\d*\.?\d*$/.test(value)) {
       return; // Restrict invalid input
     }
-  
+
     const updatedRows = [...rows];
     updatedRows[rowIndex][fieldName] = value;
-  
+
     setRows(updatedRows); // Update row data without immediate calculation
   };
-  
 
   const handleKeyDown = (e, rowIndex, fieldName) => {
+    const fields = ["qty", "rate", "tax", "discount"];
+    
     if (e.key === "Enter") {
-      const fields = ["qty", "rate", "tax", "discount"];
       const nextFieldIndex = fields.indexOf(fieldName) + 1;
   
       if (nextFieldIndex === fields.length) {
-        // Last field in calculation chain (Discount) triggers amount calculation
+        // Last field in calculation chain triggers amount calculation
         const updatedRows = [...rows];
         updatedRows[rowIndex].amount = calculateAmount(updatedRows[rowIndex]);
         setRows(updatedRows);
   
-        // Focus on the MRP field
-        fieldRefs.current[rowIndex]["mrp"].focus();
-      } else if (fieldName === "mrp") {
-        // Navigate to the Product Name field of the next row
-        if (rowIndex < rows.length - 1) {
-          fieldRefs.current[rowIndex + 1]["productName"].focus();
-        } else {
+        // Add a new row if on the last row
+        if (rowIndex === rows.length - 1) {
           addRow();
           setTimeout(() => {
             fieldRefs.current[rowIndex + 1]["productName"].focus();
@@ -88,9 +82,32 @@ const Product = () => {
         const nextField = fields[nextFieldIndex];
         fieldRefs.current[rowIndex][nextField].focus();
       }
+    } else if (e.key === "ArrowDown") {
+      // Move focus to the same field in the next row
+      if (rowIndex < rows.length - 1) {
+        fieldRefs.current[rowIndex + 1][fieldName].focus();
+      }
+    } else if (e.key === "ArrowUp") {
+      // Move focus to the same field in the previous row
+      if (rowIndex > 0) {
+        fieldRefs.current[rowIndex - 1][fieldName].focus();
+      }
+    } else if (e.key === "ArrowLeft") {
+      // Move focus to the previous field in the same row
+      const prevFieldIndex = fields.indexOf(fieldName) - 1;
+      if (prevFieldIndex >= 0) {
+        const prevField = fields[prevFieldIndex];
+        fieldRefs.current[rowIndex][prevField].focus();
+      }
+    } else if (e.key === "ArrowRight") {
+      // Move focus to the next field in the same row
+      const nextFieldIndex = fields.indexOf(fieldName) + 1;
+      if (nextFieldIndex < fields.length) {
+        const nextField = fields[nextFieldIndex];
+        fieldRefs.current[rowIndex][nextField].focus();
+      }
     }
   };
-  
   
 
   const calculateAmount = ({ qty = 0, rate = 0, discount = 0, tax = 0 }) => {
@@ -98,7 +115,7 @@ const Product = () => {
     const taxAmount = (discountedRate * tax) / 100;
     const amount = qty * (discountedRate + taxAmount);
     return amount.toFixed(2);
-  };  
+  };
 
   return (
     <div className="p-product-container col-md-10">
@@ -106,14 +123,13 @@ const Product = () => {
         <table className="p-table">
           <thead className="p-thead">
             <tr>
-              <th style={{ width: "5%" }}>Sr. No</th>
-              <th style={{ width: "25%" }}>Product Name</th>
+              <th style={{ width: "3%" }}>Sr. No</th>
+              <th style={{ width: "20%" }}>Product Name</th>
               <th style={{ width: "10%" }}>Qty</th>
               <th style={{ width: "10%" }}>Pur Rate</th>
               <th style={{ width: "10%" }}>GST%</th>
               <th style={{ width: "10%" }}>Discount</th>
-              <th style={{ width: "15%" }}>Amount</th>
-              <th style={{ width: "10%" }}>MRP</th>
+              <th style={{ width: "10%" }}>Amount</th>
             </tr>
           </thead>
           <tbody className="p-tbody">
@@ -121,21 +137,20 @@ const Product = () => {
               <tr key={rowIndex}>
                 <td>{rowIndex + 1}</td>
                 <td onClick={() => handleFieldClick(rowIndex)}>
-  <input
-    type="text"
-    className="form-control"
-    value={row.productName || ""}
-    readOnly
-    onKeyDown={(e) => handleKeyDown(e, rowIndex, "productName")}
-    ref={(el) => {
-      if (!fieldRefs.current[rowIndex]) {
-        fieldRefs.current[rowIndex] = {};
-      }
-      fieldRefs.current[rowIndex]["productName"] = el;
-    }}
-  />
-</td>
-
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={row.productName || ""}
+                    readOnly
+                    onKeyDown={(e) => handleKeyDown(e, rowIndex, "productName")}
+                    ref={(el) => {
+                      if (!fieldRefs.current[rowIndex]) {
+                        fieldRefs.current[rowIndex] = {};
+                      }
+                      fieldRefs.current[rowIndex]["productName"] = el;
+                    }}
+                  />
+                </td>
                 <td>
                   <input
                     type="text"
@@ -169,6 +184,7 @@ const Product = () => {
                     onChange={(e) => handleChange(e, rowIndex, "tax")}
                     onKeyDown={(e) => handleKeyDown(e, rowIndex, "tax")}
                     ref={(el) => (fieldRefs.current[rowIndex]["tax"] = el)}
+                    readOnly
                   />
                 </td>
                 <td>
@@ -189,21 +205,11 @@ const Product = () => {
                     readOnly
                   />
                 </td>
-                <td>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={row.mrp || ""}
-                    onChange={(e) => handleChange(e, rowIndex, "mrp")}
-                    onKeyDown={(e) => handleKeyDown(e, rowIndex, "mrp")}
-                    ref={(el) => (fieldRefs.current[rowIndex]["mrp"] = el)}
-                  />
-                </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div> 
+      </div>
       {isModalOpen && (
         <ProductNameList onClose={closeModal} onSelectItem={handleSelectItem} />
       )}
