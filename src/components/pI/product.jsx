@@ -48,6 +48,11 @@ useImperativeHandle(ref, () => ({
     setIsModalOpen(false);
   };
 
+  const calculateGrandTotal = () => {
+    const total = rows.reduce((sum, row) => sum + parseFloat(row.amount || 0), 0);
+    props.onUpdateGrandTotal(total.toFixed(1)); // Pass the total to the parent
+  };
+  
   const handleChange = (e, rowIndex, fieldName) => {
     const value = e.target.value;
   
@@ -67,8 +72,10 @@ useImperativeHandle(ref, () => ({
   
     const updatedRows = [...rows];
     updatedRows[rowIndex][fieldName] = value;
+    updatedRows[rowIndex].amount = calculateAmount(updatedRows[rowIndex]);
   
     setRows(updatedRows); // Update row data
+    calculateGrandTotal(); // Update grand total
   };
   
   const handleKeyDown = (e, rowIndex, fieldName) => {
