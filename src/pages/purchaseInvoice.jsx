@@ -4,15 +4,20 @@ import PISupplierModal from "@/components/pI/SupplierNamesModal";
 import Product from "@/components/pI/product";
 
 const PurchaseInvoiceHeader = () => {
+  const [grandTotal, setGrandTotal] = useState(0);
   const [showModal, setShowModal] = useState(false); 
   const [supplierDetails, setSupplierDetails] = useState({
     name: "",
     mobileNo: "",
     address: "",
   });
+  const updateGrandTotal = (total) => {
+    setGrandTotal(total); // Update the grand total
+  };
   const [invoiceDate, setInvoiceDate] = useState("");
   const [fieldValues, setFieldValues] = useState({});
   const suppNameRef = useRef(null); 
+  const productRef = useRef(null); // Ref for Product component
   const fieldsRefs = useRef([]);
   const fieldOrder = [
     "Invoice No",
@@ -52,14 +57,15 @@ const PurchaseInvoiceHeader = () => {
   }, []);
 
   const handleKeyDown = (event, index) => {
-    if (event.key === "Enter" || event.key === "ArrowDown") {
+    if (event.key === "Enter") {
       event.preventDefault();
-      if (index < fieldsRefs.current.length - 1) {
-        fieldsRefs.current[index + 1]?.focus(); 
+      if (index < fieldOrder.length - 1) {
+        // Focus the next field
+        fieldsRefs.current[index + 1]?.focus();
+      } else if (index === fieldOrder.length - 1) {
+        // Focus the first "Product Name" field in the Product component
+        productRef.current.focusFirstProductName();
       }
-    } else if (event.key === "ArrowUp" && index > 0) {
-      event.preventDefault();
-      fieldsRefs.current[index - 1]?.focus(); 
     }
   };
 
@@ -69,7 +75,7 @@ const PurchaseInvoiceHeader = () => {
 
   const handleSelectItem = (item) => {
     setSupplierDetails({
-      name: item.name,
+      name: item.supplierName,
       mobileNo: item.mobileNo,
       address: item.address,
     });
@@ -264,7 +270,7 @@ const PurchaseInvoiceHeader = () => {
           </div>
 
           <div className="table-section amount-box">
-            <div className="balance-display">0</div>
+            <div className="balance-display">{grandTotal}</div>
           </div>
         </div>
       </div>
@@ -274,7 +280,7 @@ const PurchaseInvoiceHeader = () => {
           onSelectItem={handleSelectItem}
         />
       )}
-      <Product/>
+      <Product  ref={productRef} onUpdateGrandTotal={updateGrandTotal} />
     </>
   );
 };

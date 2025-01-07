@@ -1,13 +1,19 @@
-import React, { useState, useRef } from "react";
+import React, { forwardRef, useImperativeHandle, useState, useRef } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductNameList from "./productNamesModal";
 
-const Product = () => {
+const Product = forwardRef((props, ref) => {
   const [rows, setRows] = useState([{}]); // One empty row initially
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
   const fieldRefs = useRef([]); // Store refs for each field in every row
-
+useImperativeHandle(ref, () => ({
+    focusFirstProductName: () => {
+      if (fieldRefs.current[0]?.productName) {
+        fieldRefs.current[0].productName.focus();
+      }
+    },
+  }));
   const addRow = () => {
     setRows([
       ...rows,
@@ -241,6 +247,6 @@ const Product = () => {
       )}
     </div>
   );
-};
+});
 
 export default Product;

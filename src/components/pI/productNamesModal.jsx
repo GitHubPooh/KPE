@@ -164,6 +164,7 @@ const ProductNameList = ({ onClose, onSelectItem }) => {
           style={{
             overflowY: "auto",
             maxHeight: `${visibleCount * 25}px`, // Visible row count * row height
+            marginTop: "-4px"
           }}
         >
           <table className="table table-striped tablepi">

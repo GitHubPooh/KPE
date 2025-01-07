@@ -6,9 +6,10 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(15);
+  const visibleCount = 15; // Fixed number of visible rows
   const searchInputRef = useRef(null);
-  const rowsRef = useRef([]); 
+  const tableBodyRef = useRef(null);
+  const rowsRef = useRef([]);
 
   useEffect(() => {
     fetch("https://businessguruerp.com/BG_API_NEW/LEDGER_MASTER_Display_API.php", {
@@ -33,10 +34,11 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
   const parseHTMLResponse = (html) => {
     const data = JSON.parse(html);
     return data.map((item) => ({
-      ledgerCode: item.Ledger_Code || "-",
+      supplierCode: item.Ledger_Code || "-",
       name: item.Comapy_Name,
-      mobileNo: item.Mobile_No || item.Mobile_Number || "—",
-      address: item.Addr1 || item.Addr2 || item.Addr3 || item.Addr4 || "",
+      supplierName: item.Comapy_Name || "N/A",
+      mobileNo: item.Mobile_No || "N/A",
+      address: `${item.Addr1 || ""} ${item.Addr2 || ""}`.trim() || "N/A",
       type: item.Type || "SUPPLIER",
     }));
   };
@@ -46,14 +48,72 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
     setSearchQuery(query);
     const filtered = items.filter(
       (item) =>
-        item.ledgerCode.toLowerCase().includes(query) ||
-        item.name.toLowerCase().includes(query) ||
+        item.supplierCode.toLowerCase().includes(query) ||
+        item.supplierName.toLowerCase().includes(query) ||
         item.mobileNo.toLowerCase().includes(query) ||
-        item.address.toLowerCase().includes(query)
+        item.address.toLowerCase().includes(query) ||
+        item.type.toLowerCase().includes(query)
     );
     setFilteredItems(filtered);
-    setHighlightedIndex(0); 
+    setHighlightedIndex(0);
   };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setHighlightedIndex((prevIndex) => {
+        const nextIndex = Math.min(prevIndex + 1, filteredItems.length - 1);
+        scrollToRow(nextIndex);
+        return nextIndex;
+      });
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setHighlightedIndex((prevIndex) => {
+        const nextIndex = Math.max(prevIndex - 1, 0);
+        scrollToRow(nextIndex);
+        return nextIndex;
+      });
+    } else if (e.key === "Enter" && highlightedIndex >= 0) {
+      e.preventDefault();
+      handleItemClick(filteredItems[highlightedIndex]);
+    } else if (e.key === "Escape") {
+      onClose();
+    }
+  };
+
+  const scrollToRow = (index) => {
+    const tableBody = tableBodyRef.current;
+    if (tableBody) {
+      const row = tableBody.querySelector(`tr:nth-child(${index + 1})`);
+      if (row) {
+        const rowTop = row.offsetTop;
+        const rowBottom = rowTop + row.offsetHeight;
+        const bodyScrollTop = tableBody.scrollTop;
+        const bodyHeight = tableBody.clientHeight;
+
+        if (rowTop < bodyScrollTop) {
+          tableBody.scrollTop = rowTop;
+        } else if (rowBottom > bodyScrollTop + bodyHeight) {
+          tableBody.scrollTop = rowBottom - bodyHeight;
+        }
+      }
+    }
+  };
+
+  const handleItemClick = (item) => {
+    onSelectItem(item);
+    onClose();
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [filteredItems, highlightedIndex]);
 
   const highlightText = (text, query) => {
     const startIndex = text.toLowerCase().indexOf(query.toLowerCase());
@@ -68,67 +128,26 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
     );
   };
 
-  const handleKeyDown = (e) => {
-    if (e.key === "ArrowDown") {
-      e.preventDefault();
-      setHighlightedIndex((prevIndex) => {
-        const newIndex = Math.min(prevIndex + 1, filteredItems.length - 1);
-        if (newIndex >= visibleCount) {
-          setVisibleCount((prevCount) => prevCount + 1);
-        }
-        return newIndex;
-      });
-    } else if (e.key === "ArrowUp") {
-      e.preventDefault();
-      setHighlightedIndex((prevIndex) => {
-        const newIndex = Math.max(prevIndex - 1, 0);
-        if (newIndex < visibleCount - 15) {
-          setVisibleCount((prevCount) => prevCount - 1);
-        }
-        return newIndex;
-      });
-    } else if (e.key === "Enter" && highlightedIndex >= 0) {
-      e.preventDefault();
-      handleItemClick(filteredItems[highlightedIndex]);
-    } else if (e.key === "Escape") {
-      onClose();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [filteredItems, highlightedIndex, visibleCount]);
-
-  useEffect(() => {
-    if (highlightedIndex >= 0 && rowsRef.current[highlightedIndex]) {
-      rowsRef.current[highlightedIndex].scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    }
-  }, [highlightedIndex]);
-
-  const handleItemClick = (item) => {
-    onSelectItem(item); 
-    onClose();
-  };
-
   return (
-    <div className="pimodal show d-block">
+    <div className="pimodal show d-block" style={{
+      position: "fixed",
+      top: "57.5%",
+      left: "40%",
+      transform: "translate(-50%, -50%)",
+      zIndex: 1050,
+      borderRadius: "8px",
+      overflow: "hidden",
+      width: "100%",
+      maxWidth: "800px",
+    }}>
       <div className="pimodal-dialog">
         <table className="table table-bordered tablepi">
           <thead className="pitable-header">
             <tr>
-              <th style={{ width: "5%" }}>.</th>
-              <th style={{ width: "40%" }}>Supplier Name</th>
-              <th style={{ width: "15%" }}>Mobile No.</th>
-              <th style={{ width: "25%" }}>Address</th>
+              <th style={{ width: "15%" }}>Code</th>
+              <th style={{ width: "40%" }}>Supplier</th>
+              <th style={{ width: "15%" }}>Mobile</th>
+              <th style={{ width: "15%" }}>Address</th>
               <th style={{ width: "15%" }}>Type</th>
             </tr>
           </thead>
@@ -145,31 +164,42 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
           <button className="add-new-btn">Add New (Ctrl+N)</button>
         </div>
 
-        <table className="table table-striped tablepi" style={{ marginTop: "-6px" }}>
-          <tbody>
-            {filteredItems.length > 0 ? (
-              filteredItems.slice(0, visibleCount).map((item, index) => (
-                <tr className={highlightedIndex === index ? "table-primary" : ""}
-                  key={index}
-                  ref={(el) => (rowsRef.current[index] = el)} 
-                  onClick={() => handleItemClick(item)}
-                >
-                  <td style={{ width: "5%" }}>{highlightText(item.ledgerCode, searchQuery)}</td>
-                  <td style={{ width: "40%" }}>{highlightText(item.name, searchQuery)}</td>
-                  <td style={{ width: "15%" }}>{highlightText(item.mobileNo, searchQuery)}</td>
-                  <td style={{ width: "25%" }}>{highlightText(item.address, searchQuery)}</td>
-                  <td style={{ width: "15%" }}>{item.type}</td>
+        <div
+          className="tablepi-body"
+          ref={tableBodyRef}
+          style={{
+            overflowY: "auto",
+            maxHeight: `${visibleCount * 25}px`, marginTop: "-4px"
+          }}
+        >
+          <table className="table table-striped tablepi">
+            <tbody>
+              {filteredItems.length > 0 ? (
+                filteredItems.map((item, index) => (
+                  <tr
+                    className={highlightedIndex === index ? "table-primary" : ""}
+                    key={index}
+                    ref={(el) => (rowsRef.current[index] = el)}
+                    onClick={() => handleItemClick(item)}
+                    
+                  >
+                    <td style={{ width: "15%" }}>{highlightText(item.supplierCode, searchQuery)}</td>
+                    <td style={{ width: "40%" }}>{highlightText(item.supplierName, searchQuery)}</td>
+                    <td style={{ width: "15%" }}>{highlightText(item.mobileNo, searchQuery)}</td>
+                    <td style={{ width: "15%" }}>{highlightText(item.address, searchQuery)}</td>
+                    <td style={{ width: "15%" }}>{item.type}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="4" className="text-center">
+                    No records found
+                  </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5" className="text-center">
-                  No records found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
