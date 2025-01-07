@@ -221,7 +221,7 @@
     padding: 5px;
     font-size: 16px;
     border: 1px solid black;
-    margin-top: -32px;
+    margin-top: -25px;
   }
 
   .tablepi td {
@@ -233,6 +233,8 @@
 
   .tablepi tr {
     height: 12px; /* Set a specific height for rows */
+    margin-top: 5px;
+    
   }
   .add-new-btn {
     background-color: black;
@@ -240,7 +242,7 @@
     width: 159px;
     padding: 1px 0px;
     font-size: 12px;
-    margin-top: -32px;
+    margin-top: -25px;
     z-index: 1001
   }
   
@@ -301,7 +303,7 @@
   }
   
   .p-table {
-    width: 1200px; /* Fixed width for horizontal scrolling */
+    width: 1140px; /* Fixed width for horizontal scrolling */
     table-layout: fixed; /* Ensure equal column widths */
     border-collapse: collapse;
     background-color: white;

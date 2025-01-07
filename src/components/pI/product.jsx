@@ -44,44 +44,67 @@ const Product = () => {
 
   const handleChange = (e, rowIndex, fieldName) => {
     const value = e.target.value;
-
-    if (["qty", "rate", "tax", "discount", "amount"].includes(fieldName) && !/^\d*\.?\d*$/.test(value)) {
-      return; // Restrict invalid input
+  
+    if (
+      ["qty", "rate", "tax", "discount", "amount"].includes(fieldName) &&
+      !rows[rowIndex].productName
+    ) {
+      return; 
     }
-
+  
+    if (
+      ["qty", "rate", "tax", "discount", "amount"].includes(fieldName) &&
+      !/^\d*\.?\d*$/.test(value)
+    ) {
+      return; 
+    }
+  
     const updatedRows = [...rows];
     updatedRows[rowIndex][fieldName] = value;
-
-    setRows(updatedRows); // Update row data without immediate calculation
+  
+    setRows(updatedRows); // Update row data
   };
-
+  
   const handleKeyDown = (e, rowIndex, fieldName) => {
     const fields = ["qty", "rate", "tax", "discount"];
-    
-    if (e.key === "Enter") {
-      const nextFieldIndex = fields.indexOf(fieldName) + 1;
   
-      if (nextFieldIndex === fields.length) {
-        // Last field in calculation chain triggers amount calculation
+    if (e.key === "Enter") {
+      if (fieldName === "productName" && !rows[rowIndex].productName) {
+        handleFieldClick(rowIndex); // Open modal to select product
+        return;
+      }
+
+      if (!rows[rowIndex].productName && ["qty", "rate", "tax", "discount", "amount"].includes(fieldName)) {
+        handleFieldClick(rowIndex); // Open modal to select product
+        return;
+      }
+  
+      if (["qty", "rate", "discount"].includes(fieldName)) {
         const updatedRows = [...rows];
         updatedRows[rowIndex].amount = calculateAmount(updatedRows[rowIndex]);
         setRows(updatedRows);
+      }
   
-        // Add a new row if on the last row
+      const nextFieldIndex = fields.indexOf(fieldName) + 1;
+  
+      if (nextFieldIndex === fields.length) {
+        // Add a new row if on the last field of the row
         if (rowIndex === rows.length - 1) {
+          if (!rows[rowIndex].productName) {
+            handleFieldClick(rowIndex); // Open modal if product name is empty
+            return;
+          }
           addRow();
           setTimeout(() => {
             fieldRefs.current[rowIndex + 1]["productName"].focus();
           }, 0);
         }
-      } else if (fieldName === "productName") {
-        // Open modal for the current row
-        handleFieldClick(rowIndex);
       } else {
         // Move to the next field in the same row
         const nextField = fields[nextFieldIndex];
         fieldRefs.current[rowIndex][nextField].focus();
       }
+    
     } else if (e.key === "ArrowDown") {
       // Move focus to the same field in the next row
       if (rowIndex < rows.length - 1) {
@@ -163,7 +186,7 @@ const Product = () => {
                         fieldRefs.current[rowIndex] = {};
                       }
                       fieldRefs.current[rowIndex]["qty"] = el;
-                    }}
+                    }}disabled={!row.productName}
                   />
                 </td>
                 <td>
@@ -174,6 +197,7 @@ const Product = () => {
                     onChange={(e) => handleChange(e, rowIndex, "rate")}
                     onKeyDown={(e) => handleKeyDown(e, rowIndex, "rate")}
                     ref={(el) => (fieldRefs.current[rowIndex]["rate"] = el)}
+                    disabled={!row.productName}
                   />
                 </td>
                 <td>
@@ -185,6 +209,7 @@ const Product = () => {
                     onKeyDown={(e) => handleKeyDown(e, rowIndex, "tax")}
                     ref={(el) => (fieldRefs.current[rowIndex]["tax"] = el)}
                     readOnly
+                    disabled={!row.productName}
                   />
                 </td>
                 <td>
@@ -195,6 +220,7 @@ const Product = () => {
                     onChange={(e) => handleChange(e, rowIndex, "discount")}
                     onKeyDown={(e) => handleKeyDown(e, rowIndex, "discount")}
                     ref={(el) => (fieldRefs.current[rowIndex]["discount"] = el)}
+                    disabled={!row.productName}
                   />
                 </td>
                 <td>
