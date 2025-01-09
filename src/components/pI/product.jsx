@@ -35,6 +35,7 @@ useImperativeHandle(ref, () => ({
         rate: item.rate,
         tax: item.tax,
         discount: item.discount,
+        qty: "1",
       };
       setRows(updatedRows);
       setTimeout(() => {
@@ -50,7 +51,7 @@ useImperativeHandle(ref, () => ({
 
   const calculateGrandTotal = () => {
     const total = rows.reduce((sum, row) => sum + parseFloat(row.amount || 0), 0);
-    props.onUpdateGrandTotal(total.toFixed(1)); // Pass the total to the parent
+    props.onUpdateGrandTotal(total.toFixed()); // Pass the total to the parent
   };
   
   const handleChange = (e, rowIndex, fieldName) => {

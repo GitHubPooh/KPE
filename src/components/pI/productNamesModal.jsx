@@ -14,7 +14,7 @@ const ProductNameList = ({ onClose, onSelectItem }) => {
     fetch("https://businessguruerp.com/BG_API_NEW/PRODUCT_STOCK_DISPLAY.php", {
       method: "POST",
       body: new URLSearchParams({
-        appKeyCodeKey: "1013",
+        appKeyCodeKey: "1011",
         firmCodeKey: "3",
       }),
       headers: {
@@ -172,15 +172,16 @@ const ProductNameList = ({ onClose, onSelectItem }) => {
               {filteredItems.length > 0 ? (
                 filteredItems.map((item, index) => (
                   <tr
-                    className={highlightedIndex === index ? "table-primary" : ""}
+                    className={highlightedIndex === index ? "table-primary"  : "" }
                     key={index}
                     onClick={() => handleItemClick(item)}
+                    style={{backgroundColor: "blue"}}
                   >
                     <td style={{ width: "10%" }}>{highlightText(item.productCode, searchQuery)}</td>
-<td style={{ width: "40%" }}>{highlightText(item.productName, searchQuery)}</td>
-<td style={{ width: "20%" }}>{highlightText(item.groupName, searchQuery)}</td>
-<td style={{ width: "15%" }}>{highlightText(item.rate, searchQuery)}</td>
-<td style={{ width: "14.5%" }}>{highlightText(item.stock, searchQuery)}</td>
+                    <td style={{ width: "40%" }}>{highlightText(item.productName, searchQuery)}</td>
+                    <td style={{ width: "20%" }}>{highlightText(item.groupName, searchQuery)}</td>
+                    <td style={{ width: "15%" }}>{highlightText(item.rate, searchQuery)}</td>
+                    <td style={{ width: "14.5%" }}>{highlightText(item.stock, searchQuery)}</td>
 
                   </tr>
                 ))

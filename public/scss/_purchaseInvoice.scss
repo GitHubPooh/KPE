@@ -249,7 +249,9 @@
   .add-new-btn:hover {
     background-color: #333;
   }
-  
+  .tablepi.table-primary.highlightedIndex{
+    background-color: #0056b3 !important;
+  }
  //-------------------------------Product----------------------------------- 
 
 .p-product-container {
@@ -332,7 +334,15 @@
       }
     }
   }
-
+  .p-table input:focus {
+    background-color: #007bff; /* Blue background color */
+    color:black; /* White text color for contrast */
+    border: none; /* Remove outer border */
+    outline: none; /* Remove default focus outline */
+    box-shadow: none; /* Remove default box shadow */
+    transition: background-color 0.2s ease-in-out; /* Smooth transition */
+  }
+  
   .p-add-row {
     margin-top: 10px;
     float: right; /* Align the button to the right */

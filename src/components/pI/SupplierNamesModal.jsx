@@ -15,7 +15,7 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
     fetch("https://businessguruerp.com/BG_API_NEW/LEDGER_MASTER_Display_API.php", {
       method: "POST",
       body: new URLSearchParams({
-        appKeyCodeKey: "1013",
+        appKeyCodeKey: "1011",
         firmCodeKey: "3",
       }),
       headers: {
@@ -137,7 +137,7 @@ const PISupplierModal = ({ onClose, onSelectItem }) => {
       zIndex: 1050,
       borderRadius: "8px",
       overflow: "hidden",
-      width: "100%",
+      width: "90%",
       maxWidth: "800px",
     }}>
       <div className="pimodal-dialog">
