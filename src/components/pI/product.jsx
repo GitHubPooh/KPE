@@ -6,14 +6,17 @@ const Product = forwardRef((props, ref) => {
   const [rows, setRows] = useState([{}]); // One empty row initially
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
+  const [clearedField, setClearedField] = useState(null); // Track cleared fields
   const fieldRefs = useRef([]); // Store refs for each field in every row
-useImperativeHandle(ref, () => ({
+
+  useImperativeHandle(ref, () => ({
     focusFirstProductName: () => {
       if (fieldRefs.current[0]?.productName) {
         fieldRefs.current[0].productName.focus();
       }
     },
   }));
+
   const addRow = () => {
     setRows([
       ...rows,
@@ -53,99 +56,6 @@ useImperativeHandle(ref, () => ({
     const total = rows.reduce((sum, row) => sum + parseFloat(row.amount || 0), 0);
     props.onUpdateGrandTotal(total.toFixed()); // Pass the total to the parent
   };
-  
-  const handleChange = (e, rowIndex, fieldName) => {
-    const value = e.target.value;
-  
-    if (
-      ["qty", "rate", "tax", "discount", "amount"].includes(fieldName) &&
-      !rows[rowIndex].productName
-    ) {
-      return; 
-    }
-  
-    if (
-      ["qty", "rate", "tax", "discount", "amount"].includes(fieldName) &&
-      !/^\d*\.?\d*$/.test(value)
-    ) {
-      return; 
-    }
-  
-    const updatedRows = [...rows];
-    updatedRows[rowIndex][fieldName] = value;
-    updatedRows[rowIndex].amount = calculateAmount(updatedRows[rowIndex]);
-  
-    setRows(updatedRows); // Update row data
-    calculateGrandTotal(); // Update grand total
-  };
-  
-  const handleKeyDown = (e, rowIndex, fieldName) => {
-    const fields = ["qty", "rate", "tax", "discount"];
-  
-    if (e.key === "Enter") {
-      if (fieldName === "productName" && !rows[rowIndex].productName) {
-        handleFieldClick(rowIndex); // Open modal to select product
-        return;
-      }
-
-      if (!rows[rowIndex].productName && ["qty", "rate", "tax", "discount", "amount"].includes(fieldName)) {
-        handleFieldClick(rowIndex); // Open modal to select product
-        return;
-      }
-  
-      if (["qty", "rate", "discount"].includes(fieldName)) {
-        const updatedRows = [...rows];
-        updatedRows[rowIndex].amount = calculateAmount(updatedRows[rowIndex]);
-        setRows(updatedRows);
-      }
-  
-      const nextFieldIndex = fields.indexOf(fieldName) + 1;
-  
-      if (nextFieldIndex === fields.length) {
-        // Add a new row if on the last field of the row
-        if (rowIndex === rows.length - 1) {
-          if (!rows[rowIndex].productName) {
-            handleFieldClick(rowIndex); // Open modal if product name is empty
-            return;
-          }
-          addRow();
-          setTimeout(() => {
-            fieldRefs.current[rowIndex + 1]["productName"].focus();
-          }, 0);
-        }
-      } else {
-        // Move to the next field in the same row
-        const nextField = fields[nextFieldIndex];
-        fieldRefs.current[rowIndex][nextField].focus();
-      }
-    
-    } else if (e.key === "ArrowDown") {
-      // Move focus to the same field in the next row
-      if (rowIndex < rows.length - 1) {
-        fieldRefs.current[rowIndex + 1][fieldName].focus();
-      }
-    } else if (e.key === "ArrowUp") {
-      // Move focus to the same field in the previous row
-      if (rowIndex > 0) {
-        fieldRefs.current[rowIndex - 1][fieldName].focus();
-      }
-    } else if (e.key === "ArrowLeft") {
-      // Move focus to the previous field in the same row
-      const prevFieldIndex = fields.indexOf(fieldName) - 1;
-      if (prevFieldIndex >= 0) {
-        const prevField = fields[prevFieldIndex];
-        fieldRefs.current[rowIndex][prevField].focus();
-      }
-    } else if (e.key === "ArrowRight") {
-      // Move focus to the next field in the same row
-      const nextFieldIndex = fields.indexOf(fieldName) + 1;
-      if (nextFieldIndex < fields.length) {
-        const nextField = fields[nextFieldIndex];
-        fieldRefs.current[rowIndex][nextField].focus();
-      }
-    }
-  };
-  
 
   const calculateAmount = ({ qty = 0, rate = 0, discount = 0, tax = 0 }) => {
     const discountedRate = rate - discount;
@@ -153,6 +63,90 @@ useImperativeHandle(ref, () => ({
     const amount = qty * (discountedRate + taxAmount);
     return amount.toFixed(2);
   };
+
+  const handleChange = (e, rowIndex, fieldName) => {
+    const value = e.target.value;
+
+    if (
+      ["qty", "rate", "tax", "discount", "amount"].includes(fieldName) &&
+      !rows[rowIndex].productName
+    ) {
+      return;
+    }
+
+    if (
+      ["qty", "rate", "tax", "discount", "amount"].includes(fieldName) &&
+      !/^\d*\.?\d*$/.test(value)
+    ) {
+      return;
+    }
+
+    const updatedRows = [...rows];
+    updatedRows[rowIndex][fieldName] = value;
+
+    if (["qty", "rate", "discount"].includes(fieldName)) {
+      updatedRows[rowIndex].amount = calculateAmount(updatedRows[rowIndex]);
+    }
+
+    setRows(updatedRows); // Update row data
+    calculateGrandTotal(); // Update grand total
+  };
+
+  const handleKeyDown = (e, rowIndex, fieldName) => {
+    const fields = ["qty", "rate", "discount"]; // Exclude tax field
+
+    if (
+      e.key !== "ArrowLeft" &&
+      e.key !== "ArrowRight" &&
+      e.key !== "ArrowDown" &&
+      e.key !== "ArrowUp" &&
+      e.key !== "Enter" &&
+      clearedField !== `${rowIndex}-${fieldName}`
+    ) {
+      const updatedRows = [...rows];
+      updatedRows[rowIndex][fieldName] = ""; // Clear the field
+      setRows(updatedRows);
+      setClearedField(`${rowIndex}-${fieldName}`); // Mark field as cleared
+    }
+
+    if (e.key === "Enter") {
+      if (fieldName === "productName" && !rows[rowIndex].productName) {
+        handleFieldClick(rowIndex);
+        return;
+      }
+
+      const nextFieldIndex = fields.indexOf(fieldName) + 1;
+
+      if (nextFieldIndex === fields.length) {
+        if (rowIndex === rows.length - 1) {
+          addRow();
+          setTimeout(() => {
+            fieldRefs.current[rowIndex + 1]["productName"].focus();
+          }, 0);
+        }
+      } else {
+        const nextField = fields[nextFieldIndex];
+        fieldRefs.current[rowIndex][nextField].focus();
+      }
+    } else if (e.key === "ArrowDown" && rowIndex < rows.length - 1) {
+      fieldRefs.current[rowIndex + 1][fieldName].focus();
+    } else if (e.key === "ArrowUp" && rowIndex > 0) {
+      fieldRefs.current[rowIndex - 1][fieldName].focus();
+    } else if (e.key === "ArrowLeft") {
+      const prevFieldIndex = fields.indexOf(fieldName) - 1;
+      if (prevFieldIndex >= 0) {
+        const prevField = fields[prevFieldIndex];
+        fieldRefs.current[rowIndex][prevField].focus();
+      }
+    } else if (e.key === "ArrowRight") {
+      const nextFieldIndex = fields.indexOf(fieldName) + 1;
+      if (nextFieldIndex < fields.length) {
+        const nextField = fields[nextFieldIndex];
+        fieldRefs.current[rowIndex][nextField].focus();
+      }
+    }
+  };
+
 
   return (
     <div className="p-product-container col-md-10">
@@ -200,7 +194,8 @@ useImperativeHandle(ref, () => ({
                         fieldRefs.current[rowIndex] = {};
                       }
                       fieldRefs.current[rowIndex]["qty"] = el;
-                    }}disabled={!row.productName}
+                    }}
+                    disabled={!row.productName}
                   />
                 </td>
                 <td>
@@ -219,13 +214,12 @@ useImperativeHandle(ref, () => ({
                     type="text"
                     className="form-control"
                     value={row.tax || ""}
-                    onChange={(e) => handleChange(e, rowIndex, "tax")}
                     onKeyDown={(e) => handleKeyDown(e, rowIndex, "tax")}
                     ref={(el) => (fieldRefs.current[rowIndex]["tax"] = el)}
-                    readOnly
-                    disabled={!row.productName}
-                  />
-                </td>
+                    readOnly // Ensures the field is non-editable
+                    disabled={!row.productName} // Disable the field when no product is selected
+                    />
+                  </td>
                 <td>
                   <input
                     type="text"
