@@ -95,6 +95,13 @@ const Product = forwardRef((props, ref) => {
   const handleKeyDown = (e, rowIndex, fieldName) => {
     const fields = ["qty", "rate", "discount"]; // Exclude tax field
 
+    if (e.key === "Delete" && fieldName === "productName") {
+      const updatedRows = rows.filter((_, index) => index !== rowIndex);
+      setRows(updatedRows);
+      calculateGrandTotal();
+      return;
+    }
+
     if (
       e.key !== "ArrowLeft" &&
       e.key !== "ArrowRight" &&
@@ -146,7 +153,6 @@ const Product = forwardRef((props, ref) => {
       }
     }
   };
-
 
   return (
     <div className="p-product-container col-md-10">
@@ -218,8 +224,8 @@ const Product = forwardRef((props, ref) => {
                     ref={(el) => (fieldRefs.current[rowIndex]["tax"] = el)}
                     readOnly // Ensures the field is non-editable
                     disabled={!row.productName} // Disable the field when no product is selected
-                    />
-                  </td>
+                  />
+                </td>
                 <td>
                   <input
                     type="text"

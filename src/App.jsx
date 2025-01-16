@@ -15,25 +15,39 @@ import ScrollToTop from "./components/common/ScrollTop";
 import ScrollTopBehaviour from "./components/common/ScrollTopBehavier";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { DataProvider } from "./components/pI/DataContext";
+import Wrapper from "./layout/wrapper";
 
-function App() {
 
+function MainRoot() {
   return (
-    <div className="main-page-wrapper">
+    <Wrapper>
       <Routes>
         <Route path="/">
           <Route index element={<StaticSupplierForm />} />
-          <Route path="/PI" element={<PurchaseInvoice/>} />
-          {/* <Route path="/P" element={<PISuppModal showModal={true}/>} /> */}
-          {/* <Route path="/project" element={<Project/>} />
-          <Route path="/services" element={<Services/>} />
-          <Route path="/contact" element={<ContactUs/>} /> */}
+          <Route path="/PI" element={<PurchaseInvoice />} />
+          {/* <Route path="/P" element={<PISupplierModal showModal={true} />} /> */}
+          {/* Additional Routes for other pages */}
           {/* <Route path="404" element={<NotFound />} />
           <Route path="*" element={<NotFound />} /> */}
         </Route>
       </Routes>
       {/* <ScrollTopBehaviour />
       <ScrollToTop /> */}
+    </Wrapper>
+  );
+}
+
+function App() {
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
+
+  return (
+    <div className="main-page-wrapper">
+      <DataProvider>
+        <MainRoot />
+      </DataProvider>
     </div>
   );
 }

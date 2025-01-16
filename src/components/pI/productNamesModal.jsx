@@ -1,8 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useDataContext } from "./DataContext";
 
 const ProductNameList = ({ onClose, onSelectItem }) => {
-  const [items, setItems] = useState([]);
+  const { data, isLoading } = useDataContext(); // Use context to get data
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState([]);
   const [highlightedIndex, setHighlightedIndex] = useState(0);
@@ -11,42 +12,25 @@ const ProductNameList = ({ onClose, onSelectItem }) => {
   const tableBodyRef = useRef(null);
 
   useEffect(() => {
-    fetch("https://businessguruerp.com/BG_API_NEW/PRODUCT_STOCK_DISPLAY.php", {
-      method: "POST",
-      body: new URLSearchParams({
-        appKeyCodeKey: "1011",
-        firmCodeKey: "3",
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    })
-      .then((response) => response.text())
-      .then((html) => {
-        const data = parseHTMLResponse(html);
-        setItems(data);
-        setFilteredItems(data);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+    if (!isLoading) {
+      setFilteredItems(data); // Set filtered items when data is loaded
+    }
+  }, [isLoading, data]);
 
-  const parseHTMLResponse = (html) => {
-    const data = JSON.parse(html);
-    return data.map((item) => ({
-      productCode: item.Product_Code || "-",
-      productName: item.Product_Name || "N/A",
-      groupName: item.Group_Name || "N/A",
-      rate: item.Selling_Rate || "0",
-      stock: item.Stock || "0",
-      tax: item.Tax || "0",
-      discount: item.Discount || "0",
-    }));
-  };
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [filteredItems, highlightedIndex]);
 
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
-    const filtered = items.filter(
+    const filtered = data.filter(
       (item) =>
         item.productCode.toLowerCase().includes(query) ||
         item.productName.toLowerCase().includes(query) ||
@@ -108,16 +92,6 @@ const ProductNameList = ({ onClose, onSelectItem }) => {
     onClose();
   };
 
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [filteredItems, highlightedIndex]);
-  
   const highlightText = (text, query) => {
     const startIndex = text.toLowerCase().indexOf(query.toLowerCase());
     if (startIndex === -1) return text;
@@ -130,7 +104,6 @@ const ProductNameList = ({ onClose, onSelectItem }) => {
       </>
     );
   };
-  
 
   return (
     <div className="pimodal show d-block" style={{ marginTop: "-400px" }}>
@@ -172,7 +145,7 @@ const ProductNameList = ({ onClose, onSelectItem }) => {
               {filteredItems.length > 0 ? (
                 filteredItems.map((item, index) => (
                   <tr
-                    className={highlightedIndex === index ? "table-primary"  : "" }
+                    className={highlightedIndex === index ? "table-primary" : ""}
                     key={index}
                     onClick={() => handleItemClick(item)}
                     style={{backgroundColor: "blue"}}
@@ -182,7 +155,6 @@ const ProductNameList = ({ onClose, onSelectItem }) => {
                     <td style={{ width: "20%" }}>{highlightText(item.groupName, searchQuery)}</td>
                     <td style={{ width: "15%" }}>{highlightText(item.rate, searchQuery)}</td>
                     <td style={{ width: "14.5%" }}>{highlightText(item.stock, searchQuery)}</td>
-
                   </tr>
                 ))
               ) : (
