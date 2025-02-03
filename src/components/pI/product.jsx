@@ -93,21 +93,32 @@ const Product = forwardRef((props, ref) => {
   };
 
   const handleKeyDown = (e, rowIndex, fieldName) => {
-    const fields = ["qty", "rate", "discount"]; // Exclude tax field
-
+    const fields = ["productName", "qty", "rate", "discount", "amount"]; // GST is omitted
+    const fieldIndex = fields.indexOf(fieldName);
+  
+    // Get the current field value and cursor position
+    const fieldValue = rows[rowIndex][fieldName] || "";
+    const cursorPosition = e.target.selectionStart;
+  
     if (e.key === "Delete" && fieldName === "productName") {
       const updatedRows = rows.filter((_, index) => index !== rowIndex);
       setRows(updatedRows);
       calculateGrandTotal();
       return;
     }
-
+    if ((e.key === "Enter" || e.key === "Backspace"|| e.key === "ArrowLeft"|| e.key ===  "ArrowRight"|| e.key === "ArrowDown"|| e.key === "ArrowUp") && !rows[rowIndex][fieldName]) {
+      const updatedRows = [...rows];
+      if (fieldName === "qty") {
+        updatedRows[rowIndex].qty = "1"; // Default qty to 1
+      } else if (fieldName === "rate" || fieldName === "discount") {
+        updatedRows[rowIndex][fieldName] = "0"; // Default rate/discount to 0
+      }
+      setRows(updatedRows);
+      calculateGrandTotal();
+    }
+    // Clear fields on any key except navigation keys
     if (
-      e.key !== "ArrowLeft" &&
-      e.key !== "ArrowRight" &&
-      e.key !== "ArrowDown" &&
-      e.key !== "ArrowUp" &&
-      e.key !== "Enter" &&
+      !["ArrowLeft", "ArrowRight", "ArrowDown", "ArrowUp", "Enter"].includes(e.key) &&
       clearedField !== `${rowIndex}-${fieldName}`
     ) {
       const updatedRows = [...rows];
@@ -115,44 +126,55 @@ const Product = forwardRef((props, ref) => {
       setRows(updatedRows);
       setClearedField(`${rowIndex}-${fieldName}`); // Mark field as cleared
     }
-
+  
+    // Navigation within the field
+    if (
+      ["ArrowLeft", "ArrowRight"].includes(e.key) &&
+      cursorPosition !== null
+    ) {
+      const isAtStart = cursorPosition === 0 && e.key === "ArrowLeft";
+      const isAtEnd = cursorPosition === fieldValue.length && e.key === "ArrowRight";
+  
+      if (isAtStart && e.key === "ArrowLeft" && fieldIndex > 0) {
+        const prevField = fields[fieldIndex - 1];
+        fieldRefs.current[rowIndex][prevField]?.focus();
+      } else if (isAtEnd && e.key === "ArrowRight" && fieldIndex < fields.length - 1) {
+        const nextField = fields[fieldIndex + 1];
+        fieldRefs.current[rowIndex][nextField]?.focus();
+      }
+    }
+  
+    // Navigation across rows
+    if (e.key === "ArrowDown" && rowIndex < rows.length - 1) {
+      fieldRefs.current[rowIndex + 1][fieldName]?.focus();
+    } else if (e.key === "ArrowUp" && rowIndex > 0) {
+      fieldRefs.current[rowIndex - 1][fieldName]?.focus();
+    }
+  
+    // Handle Enter for field switching
     if (e.key === "Enter") {
       if (fieldName === "productName" && !rows[rowIndex].productName) {
         handleFieldClick(rowIndex);
         return;
       }
-
-      const nextFieldIndex = fields.indexOf(fieldName) + 1;
-
-      if (nextFieldIndex === fields.length) {
-        if (rowIndex === rows.length - 1) {
-          addRow();
-          setTimeout(() => {
-            fieldRefs.current[rowIndex + 1]["productName"].focus();
-          }, 0);
-        }
+  
+      if (fieldName === "discount" && rowIndex === rows.length - 1) {
+        addRow();
+        setTimeout(() => {
+          fieldRefs.current[rowIndex + 1]["productName"].focus();
+        }, 0);
       } else {
-        const nextField = fields[nextFieldIndex];
-        fieldRefs.current[rowIndex][nextField].focus();
-      }
-    } else if (e.key === "ArrowDown" && rowIndex < rows.length - 1) {
-      fieldRefs.current[rowIndex + 1][fieldName].focus();
-    } else if (e.key === "ArrowUp" && rowIndex > 0) {
-      fieldRefs.current[rowIndex - 1][fieldName].focus();
-    } else if (e.key === "ArrowLeft") {
-      const prevFieldIndex = fields.indexOf(fieldName) - 1;
-      if (prevFieldIndex >= 0) {
-        const prevField = fields[prevFieldIndex];
-        fieldRefs.current[rowIndex][prevField].focus();
-      }
-    } else if (e.key === "ArrowRight") {
-      const nextFieldIndex = fields.indexOf(fieldName) + 1;
-      if (nextFieldIndex < fields.length) {
-        const nextField = fields[nextFieldIndex];
-        fieldRefs.current[rowIndex][nextField].focus();
+        const nextFieldIndex = (fieldIndex + 1) % fields.length;
+        const nextRowIndex = nextFieldIndex === 0 ? rowIndex + 1 : rowIndex;
+  
+        if (nextRowIndex < rows.length) {
+          const nextField = fields[nextFieldIndex];
+          fieldRefs.current[nextRowIndex][nextField]?.focus();
+        }
       }
     }
   };
+  
 
   return (
     <div className="p-product-container col-md-10">
