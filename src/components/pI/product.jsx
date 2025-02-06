@@ -8,6 +8,7 @@ import InvoiceComponent from "./pdfInvoice";
 import { useNavigate } from "react-router-dom";
 
 
+
 const Product = forwardRef((props, ref) => {
   const [rows, setRows] = useState([{}]); // One empty row initially
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +17,9 @@ const Product = forwardRef((props, ref) => {
   const fieldRefs = useRef([]); // Store refs for each field in every row
   const tableRef = useRef(); // Ref for table to print
   const invoiceRef = useRef(); // Reference to InvoiceComponent
- const nav=useNavigate();
+  const navigate = useNavigate();
+
+ 
   useImperativeHandle(ref, () => ({
     focusFirstProductName: () => {
       if (fieldRefs.current[0]?.productName) {
@@ -73,7 +76,7 @@ const Product = forwardRef((props, ref) => {
   };
 
   const handlePrint = () => {
-      nav("/pdfInvoice")
+    navigate("/pdfInvoice", { state: { products: rows } });
   };
 
   const handleChange = (e, rowIndex, fieldName) => {

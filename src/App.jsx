@@ -18,7 +18,15 @@ import 'slick-carousel/slick/slick-theme.css';
 import { DataProvider } from "./components/pI/DataContext";
 import Wrapper from "./layout/wrapper";
 import InvoiceComponent from "./components/pI/pdfInvoice";
+import Product from "./components/pI/product";
+import { BrowserRouter as Router,  useLocation } from "react-router-dom";
 
+const InvoiceWrapper = () => {
+  const location = useLocation();
+  const products = location.state?.products || [];
+
+  return <InvoiceComponent products={products} />;
+};
 
 function MainRoot() {
   return (
@@ -28,7 +36,7 @@ function MainRoot() {
           <Route index element={<StaticSupplierForm />} />
           <Route path="/PI" element={<PurchaseInvoice />} />
           
-          <Route path="/pdfInvoice" element={<InvoiceComponent/>}/>
+          <Route path="/pdfInvoice" element={<InvoiceWrapper />} />
           {/* <Route path="/P" element={<PISupplierModal showModal={true} />} /> */}
           {/* Additional Routes for other pages */}
           {/* <Route path="404" element={<NotFound />} />
