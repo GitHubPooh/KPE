@@ -17,6 +17,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { DataProvider } from "./components/pI/DataContext";
 import Wrapper from "./layout/wrapper";
+import InvoiceComponent from "./components/pI/pdfInvoice";
 
 
 function MainRoot() {
@@ -26,6 +27,8 @@ function MainRoot() {
         <Route path="/">
           <Route index element={<StaticSupplierForm />} />
           <Route path="/PI" element={<PurchaseInvoice />} />
+          
+          <Route path="/pdfInvoice" element={<InvoiceComponent/>}/>
           {/* <Route path="/P" element={<PISupplierModal showModal={true} />} /> */}
           {/* Additional Routes for other pages */}
           {/* <Route path="404" element={<NotFound />} />

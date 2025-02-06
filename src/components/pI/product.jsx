@@ -1,6 +1,12 @@
 import React, { forwardRef, useImperativeHandle, useState, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ProductNameList from "./productNamesModal";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable"; // Correct import
+import InvoiceComponent from "./pdfInvoice";
+import { useNavigate } from "react-router-dom";
+
 
 const Product = forwardRef((props, ref) => {
   const [rows, setRows] = useState([{}]); // One empty row initially
@@ -8,7 +14,9 @@ const Product = forwardRef((props, ref) => {
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
   const [clearedField, setClearedField] = useState(null); // Track cleared fields
   const fieldRefs = useRef([]); // Store refs for each field in every row
-
+  const tableRef = useRef(); // Ref for table to print
+  const invoiceRef = useRef(); // Reference to InvoiceComponent
+ const nav=useNavigate();
   useImperativeHandle(ref, () => ({
     focusFirstProductName: () => {
       if (fieldRefs.current[0]?.productName) {
@@ -62,6 +70,10 @@ const Product = forwardRef((props, ref) => {
     const taxAmount = (discountedRate * tax) / 100;
     const amount = qty * (discountedRate + taxAmount);
     return amount.toFixed(2);
+  };
+
+  const handlePrint = () => {
+      nav("/pdfInvoice")
   };
 
   const handleChange = (e, rowIndex, fieldName) => {
@@ -272,10 +284,14 @@ const Product = forwardRef((props, ref) => {
           </tbody>
         </table>
       </div>
+      
+        <button onClick={handlePrint} className="btn btn-primary" >Print</button>
+      
       {isModalOpen && (
         <ProductNameList onClose={closeModal} onSelectItem={handleSelectItem} />
       )}
     </div>
+  
   );
 });
 

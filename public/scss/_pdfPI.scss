@@ -1,0 +1,65 @@
+.pdf-invoice-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .pdf-invoice-title {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .pdf-invoice-subtitle {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .pdf-divider {
+    border: 0;
+    height: 2px;
+    background-color: #000;
+  }
+  
+  .pdf-invoice-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  
+  .pdf-info-left, .pdf-info-right {
+    flex: 1;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+  
+  .pdf-item-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .pdf-item-table th, .pdf-item-table td {
+    text-align: center;
+    vertical-align: middle;
+    height: 40px;
+    border-right: 1px solid #000;
+  }
+  
+  .pdf-item-table th {
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+  }
+  
+  .pdf-total-amount {
+    font-size: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  .pdf-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+  }
+  
