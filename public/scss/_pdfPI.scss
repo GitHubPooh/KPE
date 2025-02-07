@@ -1,65 +1,152 @@
+/* Set A4 size */
+.pdf-page {
+  width: 210mm;
+  height: 297mm;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Outer border */
+.pdf-border-outer {
+  width: 100%;
+  height: 100%;
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Inner border */
+.pdf-border-inner {
+  width: 95%;
+  height: 95%;
+  border: 2px solid black;
+}
+
+/* Header */
 .pdf-invoice-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .pdf-invoice-title {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .pdf-invoice-subtitle {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .pdf-divider {
-    border: 0;
-    height: 2px;
-    background-color: #000;
-  }
-  
-  .pdf-invoice-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-  }
-  
-  .pdf-info-left, .pdf-info-right {
-    flex: 1;
-    padding: 0 10px;
-    font-size: 12px;
-  }
-  
-  .pdf-item-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .pdf-item-table th, .pdf-item-table td {
-    text-align: center;
-    vertical-align: middle;
-    height: 40px;
-    border-right: 1px solid #000;
-  }
-  
-  .pdf-item-table th {
-    font-weight: bold;
-    border-bottom: 2px solid #000;
-  }
-  
-  .pdf-total-amount {
-    font-size: 15px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-  }
-  
-  .pdf-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-  }
-  
+  margin-bottom: 20px;
+}
+
+.pdf-invoice-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.pdf-invoice-subtitle {
+  font-size: 14px;
+  color:black;
+}
+
+/* Thick black horizontal line */
+.pdf-divider-thick {
+  border: 1px solid black;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+/* Invoice details */
+.pdf-invoice-info {
+  display: flex;
+  justify-content: left;
+  font-size: 12px;
+ 
+}
+
+/* Vertical black line */
+.pdf-info-divider {
+  width: 2px;
+  background-color: black;
+  height: auto;
+  margin: 0 10px;
+}
+
+.pdf-info-left, .pdf-info-right {
+  flex: 1;
+  justify-content: left;
+}
+
+/* Table */
+.pdf-item-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.pdf-item-table th, .pdf-item-table td {
+  text-align: center;
+  border: 1px solid black;
+  padding: 8px;
+}
+
+.pdf-item-table th {
+  background-color: white;
+  font-weight: bold;
+}
+
+/* Footer */
+.pdf-invoice-footer {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.pdf-amount-in-words {
+  font-size: 12px;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.pdf-total {
+  text-align: right;
+}
+
+.pdf-grand-total {
+  font-size: 16px;
+  color: red;
+}
+
+.pdf-signatures {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 700;
+}
+.pdf-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.pdf-terms {
+  flex: 1;
+  text-align: left;
+}
+
+.pdf-total {
+  flex: 1;
+  text-align: right;
+}
+
+.pdf-grand-total {
+  font-size: 16px;
+  color: red;
+  font-weight: bold;
+}
+.pdf-certification-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.pdf-certification {
+  flex: 1;
+  text-align: justify;
+}
+
+.pdf-empty-space {
+  flex: 1;
+}

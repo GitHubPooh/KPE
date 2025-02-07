@@ -6,8 +6,8 @@ const InvoiceHeader = ({ data }) => {
     <div className="pdf-invoice-header">
       <div className="pdf-invoice-title">{data.title}</div>
       <div className="pdf-invoice-subtitle">{data.subtitle}</div>
-      <hr className="pdf-divider" />
-      <div className="pdf-invoice-info d-flex align-items-stretch">
+      <hr className="pdf-divider-thick" />
+      <div className="pdf-invoice-info">
         <div className="pdf-info-left">
           <b>{data.left.name}</b><br />
           {data.left.address}<br />
@@ -16,9 +16,10 @@ const InvoiceHeader = ({ data }) => {
             State Name: <span>{data.state.name}</span> &nbsp;&nbsp;&nbsp; State Code: <span>{data.state.code}</span>
           </div>
         </div>
-        <div className="pdf-info-right d-flex justify-content-space-between">
+        <div className="pdf-info-divider"></div>
+        <div className="pdf-info-right">
           <div className="pdf-info-item">
-            <b>Invoice No:</b> {data.invoiceNo} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>Invoice No:</b> {data.invoiceNo} &nbsp;&nbsp;&nbsp;
             <b>Invoice Date:</b> {data.invoiceDate}
           </div>
         </div>
@@ -29,76 +30,77 @@ const InvoiceHeader = ({ data }) => {
 
 const InvoiceTable = ({ products, emptyRowCount }) => {
   return (
-    <div>
-      <table className="pdf-item-table">
-        <thead>
-          <tr>
-            <th>SN</th>
-            <th>Particulars</th>
-            <th>Qty</th>
-            <th>Rate</th>
-            <th>GST (%)</th>
-            <th>Amount</th>
+    <table className="pdf-item-table">
+      <thead>
+        <tr>
+          <th>SN</th>
+          <th>Particulars</th>
+          <th>Qty</th>
+          <th>Rate</th>
+          <th>GST (%)</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {products.map((product, i) => (
+          <tr key={i}>
+            <td>{i + 1}</td>
+            <td>{product.productName}</td>
+            <td>{product.qty}</td>
+            <td>{product.rate}</td>
+            <td>{product.tax}</td>
+            <td>{product.amount}</td>
           </tr>
-        </thead>
-        <tbody>
-          {products.map((product, i) => (
-            <tr key={i}>
-              <td>{i + 1}</td>
-              <td>{product.productName}</td>
-              <td>{product.qty}</td>
-              <td>{product.rate}</td>
-              <td>{product.tax}</td>
-              <td>{product.amount}</td>
-            </tr>
-          ))}
-          {[...Array(emptyRowCount)].map((_, index) => (
-            <tr key={index}>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <hr className="pdf-divider" />
-    </div>
+        ))}
+        {[...Array(emptyRowCount)].map((_, index) => (
+          <tr key={index} className="empty-row">
+            <td colSpan="6">&nbsp;</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 
 const InvoiceFooter = ({ totalAmount, amountInWords, otherAmount }) => {
   return (
-    <div>
-      <div className="d-flex justify-content-space-between">
-        <div className="pdf-amount-in-words">
-          <div>Amount Chargeable (in words):</div>
-          <div><b>{amountInWords}</b></div>
+    <div className="pdf-invoice-footer">
+      <div className="pdf-amount-in-words">
+         <b>Amount Chargeable :</b> {amountInWords}
+       </div>
+      <div className="pdf-footer-row">
+        <div className="pdf-terms">
+          <b>Terms and Conditions:</b> <p>Order once taken will not be cancelled</p>
         </div>
-        <div className="pdf-total-amount">
-          <div><b>SubTotal:</b></div>
-          <div><b>{totalAmount}</b></div>
+        <div className="pdf-total">
+          <div><b>SubTotal:</b> {totalAmount}</div>
+          <div><b>Other Charges:</b> {otherAmount}</div>
+          <div className="pdf-grand-total"><b>Grand Total:</b> {totalAmount}</div>
         </div>
       </div>
-      <hr className="pdf-divider" />
-      <div className="d-flex justify-content-space-between">
-        <div><b>Other Amount:</b></div>
-        <div><b>{otherAmount}</b></div>
+
+      {/* Certification section aligned to LHS only */}
+      <div className="pdf-certification-wrapper">
+        <div className="pdf-certification">
+          <p>
+            I/We hereby certify that our registration certificate under the GST Act 2017 is in force
+            on the date on which the sale of the goods specified in this Tax Invoice is made by me/us,
+            and that the transaction of sale covered by this Tax Invoice has been effected by me/us
+            and it shall be accounted for the turnover of sales while filling the return and the due tax.
+            If any, payable on the sale has been paid or shall be paid.
+          </p>
+        </div>
+        <div className="pdf-empty-space"></div>
       </div>
-      <div className="d-flex justify-content-space-between">
-        <div><b>Grand Total:</b></div>
-        <div><b>{totalAmount}</b></div>
-      </div>
-      <hr className="pdf-divider" />
-      <div>
-        <h6><b>CREDIT</b></h6>
+
+      <div className="pdf-signatures">
+        <div>Receiver Signature</div>
+        <div>Authorized Signature</div>
       </div>
     </div>
   );
 };
+
 
 const InvoiceComponent = ({ products }) => {
   const invoiceData = {
@@ -114,7 +116,7 @@ const InvoiceComponent = ({ products }) => {
       code: "08"
     },
     invoiceNo: "1033",
-    invoiceDate: "18-Jan-2025"
+    invoiceDate: "07/02/2025"
   };
 
   const emptyRowCount = 3;
@@ -123,10 +125,16 @@ const InvoiceComponent = ({ products }) => {
   const otherAmount = "0.00";
 
   return (
-    <div className="pdf-invoice-content">
-      <InvoiceHeader data={invoiceData} />
-      <InvoiceTable products={products} emptyRowCount={emptyRowCount} />
-      <InvoiceFooter totalAmount={totalAmount} amountInWords={amountInWords} otherAmount={otherAmount} />
+    <div className="pdf-page">
+      <div className="pdf-border-outer">
+        <div className="pdf-border-inner">
+          <div className="pdf-invoice-content">
+            <InvoiceHeader data={invoiceData} />
+            <InvoiceTable products={products} emptyRowCount={emptyRowCount} />
+            <InvoiceFooter totalAmount={totalAmount} amountInWords={amountInWords} otherAmount={otherAmount} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
