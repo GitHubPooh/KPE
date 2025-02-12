@@ -1,28 +1,97 @@
-/* Set A4 size */
+.pdf-invoice-container {
+  width: 210mm;
+  margin: auto;
+}
+
+/* Page size for A4 */
 .pdf-page {
   width: 210mm;
   height: 297mm;
-  margin: auto;
+  page-break-after: always;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Outer border */
 .pdf-border-outer {
   width: 100%;
   height: 100%;
-  border: 2px solid black;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Inner border */
 .pdf-border-inner {
   width: 95%;
   height: 95%;
-  border: 2px solid black;
+}
+.pdf-company-details {
+  border: 1px solid black;
+  text-align: center;
+  background-color: white;
+}
+
+.pdf-invoice-title {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 5px;
+  margin: 5px;
+}
+
+.pdf-invoice-subtitle,.pdf-invoice-gstNo {
+  font-size: 14px;
+  color: black;
+  padding: 5px;
+  margin: 5px;
+}
+.pdf-box-border {
+  border: 1px solid black;
+  padding: 10px;
+  margin:00px;
+  margin-top:-35px;
+}
+
+.pdf-item-table {
+  width: 100%;
+  border-collapse: collapse; 
+}
+
+.pdf-item-table th {
+  background-color: white;
+  font-weight: bold;
+}
+
+.pdf-item-table td {
+  text-align: center;
+ 
+}
+/* Footer */
+.pdf-invoice-footer {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.pdf-certification {
+  text-align: justify;
+  margin-top: 10px;
+}
+
+.pdf-signatures {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.pdf-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }
 
 /* Header */
@@ -30,37 +99,11 @@
   margin-bottom: 20px;
 }
 
-.pdf-invoice-title {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.pdf-invoice-subtitle {
-  font-size: 14px;
-  color:black;
-}
-
-/* Thick black horizontal line */
-.pdf-divider-thick {
-  border: 1px solid black;
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
 /* Invoice details */
 .pdf-invoice-info {
   display: flex;
   justify-content: left;
   font-size: 12px;
- 
-}
-
-/* Vertical black line */
-.pdf-info-divider {
-  width: 2px;
-  background-color: black;
-  height: auto;
-  margin: 0 10px;
 }
 
 .pdf-info-left, .pdf-info-right {
@@ -90,21 +133,22 @@
 .pdf-invoice-footer {
   margin-top: 20px;
   font-size: 14px;
+  position: relative;
 }
 
 .pdf-amount-in-words {
-  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   font-style: italic;
-  margin-bottom: 10px;
+  border:1px solid black;
+  padding: 1%;
 }
 
-.pdf-total {
-  text-align: right;
-}
-
-.pdf-grand-total {
-  font-size: 16px;
-  color: red;
+.pdf-grand-total-right {
+  margin-left: auto; /* Pushes it to the right */
+  font-weight: bold;
 }
 
 .pdf-signatures {
@@ -118,7 +162,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
+  padding: 1%;
+  border:1px solid black;
+  margin-top: -1px;
 }
 
 .pdf-terms {
@@ -130,23 +176,42 @@
   flex: 1;
   text-align: right;
 }
+.pdf-grand-total-wrapper {
+  display: inline-block;
+  position: relative;
+}
 
 .pdf-grand-total {
-  font-size: 16px;
-  color: red;
-  font-weight: bold;
+  display: inline-block;
+  border-top: 3px double black;
+  border-bottom: 3px double black;
+  padding: 2px 5px;
 }
 .pdf-certification-wrapper {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .pdf-certification {
-  flex: 1;
-  text-align: justify;
+  width: 60%; /* Adjust width as needed */
+  font-size: 11px;
+  padding: 0.5%;
+}
+
+.pdf-signatures {
+  width: 100%;
+  margin-top: auto;
+  padding: 1%;
+  text-align: right;
+  position: relative;
 }
 
 .pdf-empty-space {
   flex: 1;
 }
+body {
+  background-color: #d3d3d3; /* Light Gray */
+}
+
