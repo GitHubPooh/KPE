@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { bottom } from "@popperjs/core";
 
 const numberToWords = (num) => {
   const a = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
@@ -44,9 +45,12 @@ const InvoiceHeader = ({ data }) => {
   );
 };
 
-const InvoiceTable = ({ products,startSerial }) => {
+const InvoiceTable = ({ products, startSerial }) => {
+  const totalRows = 20;
+  const emptyRows = totalRows - products.length;
+
   return (
-    <table className="pdf-item-table" style={{ marginTop: "-20px" }}>
+    <table className="pdf-item-table" style={{ marginTop: "-20px", borderBottom: "1px solid" }}>
       <thead>
         <tr>
           <th style={{ width: "5%" }}>SN</th>
@@ -60,12 +64,22 @@ const InvoiceTable = ({ products,startSerial }) => {
       <tbody>
         {products.map((product, i) => (
           <tr key={i}>
-            <td>{startSerial + i}</td> 
+            <td>{startSerial + i}</td>
             <td>{product.productName}</td>
             <td>{product.qty}</td>
             <td>{product.rate}</td>
             <td>{product.tax}</td>
-            <td>{product.amount}</td>
+            <td style={{ textAlign: "right" }}>{product.amount}</td>
+          </tr>
+        ))}
+        {Array.from({ length: emptyRows }).map((_, i) => (
+          <tr key={i + products.length}>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
           </tr>
         ))}
       </tbody>
@@ -77,7 +91,7 @@ const InvoiceFooter = ({ totalAmount, amountInWords, otherAmount }) => {
   const roundedTotal = parseFloat(totalAmount).toFixed(2);
   const totalInWords = numberToWords(Math.floor(totalAmount)) + " Rupees Only";
   return (
-    <div className="pdf-invoice-footer" style={{ marginTop: "80%" }}>
+    <div className="pdf-invoice-footer" style={{ marginTop: "75px" }}>
       <div className="pdf-amount-in-words">
       <b>Amount Chargeable :</b> {totalInWords}<span className="pdf-grand-total-right">
       <b>Grand Total:</b> {roundedTotal}
@@ -93,19 +107,24 @@ const InvoiceFooter = ({ totalAmount, amountInWords, otherAmount }) => {
           <div className="pdf-grand-total-wrapper"><b>Grand Total:</b> <div className="pdf-grand-total">{roundedTotal}</div></div>
         </div>
       </div>
-      <div className="pdf-certification" >
-        <p>
-          I/We hereby certify that our registration certificate under the GST Act 2017 is in force
-          on the date on which the sale of the goods specified in this Tax Invoice is made by me/us,
-          and that the transaction of sale covered by this Tax Invoice has been effected by me/us
-          and it shall be accounted for the turnover of sales while filling the return and the due tax.
-          If any, payable on the sale has been paid or shall be paid.
-        </p>
-      </div>
-      <div className="pdf-signatures">
-      <div >Receiver Signature</div>
-        <div>Authorized Signature</div>
-      </div>
+      <div className="pdf-certification-wrapper">
+  <div className="pdf-certification">
+    <p>
+      I/We hereby certify that our registration certificate under the GST Act 2017 is in force
+      on the date on which the sale of the goods specified in this Tax Invoice is made by me/us,
+      and that the transaction of sale covered by this Tax Invoice has been effected by me/us
+      and it shall be accounted for the turnover of sales while filling the return and the due tax.
+      If any, payable on the sale has been paid or shall be paid.
+    </p>
+    <div className="pdf-signatures">
+      <div>Receiver Signature</div>
+    </div>
+  </div>
+
+  <div className="pdf-signatures" style={{ textAlign:"right"}}>
+    <div>Authorized Signature</div>
+  </div>
+</div>
     </div>
   );
 };
@@ -159,7 +178,7 @@ const InvoiceComponent = ({ products }) => {
     invoiceDate: "12/02/2025",
   };
 
-  const itemsPerPage = 15;
+  const itemsPerPage = 20;
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   return (
