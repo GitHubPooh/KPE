@@ -58,7 +58,7 @@ const InvoiceTable = ({ products, startSerial }) => {
           <th style={{ width: "10%" }}>Qty</th>
           <th style={{ width: "10%" }}>Rate</th>
           <th style={{ width: "10%" }}>GST(%)</th>
-          <th style={{ width: "20%" }}>Amount</th>
+          <th style={{ width: "20%",textAlign: "right" }}>Amount</th>
         </tr>
       </thead>
       <tbody>
@@ -91,7 +91,7 @@ const InvoiceFooter = ({ totalAmount, amountInWords, otherAmount }) => {
   const roundedTotal = parseFloat(totalAmount).toFixed(2);
   const totalInWords = numberToWords(Math.floor(totalAmount)) + " Rupees Only";
   return (
-    <div className="pdf-invoice-footer" style={{ marginTop: "75px" }}>
+    <div className="pdf-invoice-footer" style={{ marginTop: "633px" }}>
       <div className="pdf-amount-in-words">
       <b>Amount Chargeable :</b> {totalInWords}<span className="pdf-grand-total-right">
       <b>Grand Total:</b> {roundedTotal}
@@ -116,12 +116,12 @@ const InvoiceFooter = ({ totalAmount, amountInWords, otherAmount }) => {
       and it shall be accounted for the turnover of sales while filling the return and the due tax.
       If any, payable on the sale has been paid or shall be paid.
     </p>
-    <div className="pdf-signatures">
+    <div className="pdf-receiver-signature">
       <div>Receiver Signature</div>
     </div>
   </div>
 
-  <div className="pdf-signatures" style={{ textAlign:"right"}}>
+  <div className="pdf-authorized-signature" style={{ textAlign:"right"}}>
     <div>Authorized Signature</div>
   </div>
 </div>
@@ -175,10 +175,10 @@ const InvoiceComponent = ({ products }) => {
       code: "08",
     },
     invoiceNo: "1033",
-    invoiceDate: "12/02/2025",
+    invoiceDate: "14/02/2025",
   };
 
-  const itemsPerPage = 20;
+  const itemsPerPage = 12;
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
   return (

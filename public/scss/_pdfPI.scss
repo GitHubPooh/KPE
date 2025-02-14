@@ -2,6 +2,11 @@
   width: 210mm;
   margin: auto;
 }
+.pdf-invoice-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 /* Page size for A4 */
 .pdf-page {
   width: 210mm;
@@ -10,12 +15,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .pdf-border-outer {
   width: 100%;
   height: 100%;
-  border: 1px solid black;
   padding: 5px;
   margin: 5px;
   display: flex;
@@ -46,21 +51,35 @@
   padding: 5px;
   margin: 5px;
 }
+/* Header */
+.pdf-invoice-header {
+  margin-bottom: 20px;
+}
 .pdf-box-border {
-  border: 1px solid black;
   padding: 10px;
   margin:00px;
-  margin-top:-35px;
+  margin-top:-34px;
+}
+.pdf-info-left {
+  border-left: 1px solid black;
+}
+.pdf-info-right {
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .pdf-item-table {
   width: 100%;
   border-collapse: collapse; 
+ 
+  min-height: 350px; /* Fixed height for the table */
 }
 
 .pdf-item-table th {
   background-color: white;
   font-weight: bold;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
 .pdf-invoice-container {
@@ -70,11 +89,6 @@
   padding: 20px;
 }
 
-.pdf-item-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
 .pdf-item-table th,
 .pdf-item-table td {
   border-left: 1px solid black;
@@ -82,43 +96,15 @@
   font-size: 14px;
 }
 
-.pdf-item-table th {
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-}
-
 .pdf-item-table td:last-child,
 .pdf-item-table th:last-child {
   border-right: 1px solid black;
 }
 
-.pdf-invoice-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  text-align: justify;
-  border-top: 1px solid black;
-}
-
 .pdf-certification-wrapper {
   display: flex;
-  border: 1px solid black; /* Box border */
+  border: 1px solid black; 
   width: 100%;
-}
-
-.pdf-certification {
-  width: 80%;
-  font-size: 11px;
-  border-right: 1px solid black;
-}
-
-.pdf-signatures {
-  width: 20%;
-  text-align: center; 
-}
-/* Header */
-.pdf-invoice-header {
-  margin-bottom: 20px;
 }
 
 /* Invoice details */
@@ -135,9 +121,12 @@
 
 /* Footer */
 .pdf-invoice-footer {
-  margin-top: 20px;
   font-size: 14px;
-  position: relative;
+  position: absolute;
+
+  width: 92.5%;
+  border-top: 1px solid black;
+  background: white;
 }
 
 .pdf-amount-in-words {
@@ -155,20 +144,13 @@
   font-weight: bold;
 }
 
-.pdf-signatures {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
-  font-size: 16px;
-  font-weight: 700;
-}
 .pdf-footer-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1%;
-  border:1px solid black;
-  margin-top: -1px;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .pdf-terms {
@@ -189,7 +171,6 @@
   display: inline-block;
   border-top: 3px double black;
   border-bottom: 3px double black;
-  padding: 2px 5px;
 }
 .pdf-certification-wrapper {
   display: flex;
@@ -199,23 +180,27 @@
 }
 
 .pdf-certification {
-  width: 60%; /* Adjust width as needed */
-  font-size: 11px;
-  padding: 0.5%;
+  width: 65%; /* Adjust width as needed */
+  font-size: 12px;
+  padding: 10px;
+  border-right: 1px solid black;
 }
 
-.pdf-signatures {
-  width: 100%;
-  margin-top: auto;
-  padding: 1%;
+.pdf-receiver-signature {
+  margin-top: 10px;
   text-align: right;
-  position: relative;
+  font-weight: bold;
+  font-size: large;
 }
 
+.pdf-authorized-signature {
+  width: 30%; /* Pushes it to extreme right */
+  padding: 13px;
+  text-align: right;
+  margin-top: 17%;
+  font-size: large;
+  font-weight: bold;
+}
 .pdf-empty-space {
   flex: 1;
 }
-body {
-  background-color: #d3d3d3; /* Light Gray */
-}
-
